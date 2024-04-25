@@ -1,14 +1,19 @@
 #!/usr/bin/python3
 """This module defines a class User"""
 from backend.models.base_model import BaseModel, Base
-from backend.models import storage_type
+from os import getenv 
 from sqlalchemy import Column, String
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 class User(BaseModel, Base):
 	"""This class defines a user by various attributes"""
-	if storage_type == "db":
+	if  getenv("STORAGE_MET") == "db":
 		__tablename__ = "users"
+		id = Column(String(60), primary_key=True)
 		email = Column(String(500), nullable=False)
 		password = Column(String(30), nullable=False)
 		first_name = Column(String(100), nullable=False)

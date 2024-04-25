@@ -11,6 +11,9 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from dotenv import load_dotenv
+
+load_dotenv()
 
 classes = {"Image": Image, "User": User}
 
@@ -25,12 +28,12 @@ class DBStorage:
         USER = getenv('USER')
         PWD = getenv('PWD')
         HOST = getenv('HOST')
-        STORAGE = getenv('STORAGE_MET')
+        DBNAME = getenv('DBNAME')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                       format(USER,
                                              PWD,
                                              HOST,
-                                             STORAGE))
+                                             DBNAME))
 
     def all(self, cls=None):
         """query on the current database session"""

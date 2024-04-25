@@ -5,10 +5,13 @@ from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
 from os import getenv
+from dotenv import load_dotenv
+
+load_dotenv()
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
-if getenv("STORAGE MET") == "db":
+if getenv("STORAGE_MET") == "db":
 	Base = declarative_base()
 else:
 	Base = object
@@ -16,7 +19,6 @@ else:
 class BaseModel:
 	"""A base class for all hbnb models"""
 	if getenv("STORAGE MET") == "db":
-		id = Column(String(60), primary_key=True)
 		created_at = Column(DateTime, default=datetime.utcnow)
 		updated_at = Column(DateTime, default=datetime.utcnow)
 		
