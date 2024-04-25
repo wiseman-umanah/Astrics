@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """This module defines a class User"""
-from backend.models.base_model import BaseModel
+from backend.models.base_model import BaseModel, Base
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
 	"""This class defines a user by various attributes"""
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
