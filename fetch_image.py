@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Fetches the new image from NASA API
 and saves to database
@@ -9,12 +10,10 @@ from os import getenv
 from dotenv import load_dotenv
 from backend.models.image import Image
 
-
 load_dotenv()
 
 key = getenv("API_KEY")
 link = getenv("NASA_LINK")
-print(key, link)
 r = requests.get(f"{link}?api_key={key}")
 
 def get_images_des(link=None):
@@ -27,12 +26,12 @@ def get_images_des(link=None):
 	new_dict["image_url"] = response["url"]
 	new_dict["image_title"] = response["title"]
 	new_dict["description"] = response["explanation"]
-	# print(new_dict)
 	instance = Image(**new_dict)
-	# print(instance.id)
+	print(instance.id)
 	instance.save()
+	
 
-schedule.every(24).hours.do(get_images_des(r))
+schedule.every().day.at("06:30").do(lambda: get_images_des(r))
 
 while True:
 	schedule.run_pending()

@@ -7,6 +7,7 @@ import backend.models
 from backend.models.base_model import Base
 from backend.models.user import User
 from backend.models.image import Image
+from backend.models.admin import Admin
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
@@ -15,7 +16,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-classes = {"Image": Image, "User": User}
+classes = {"Admin": Admin, "Image": Image, "User": User}
 
 
 class DBStorage:

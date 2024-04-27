@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class User(BaseModel, Base):
+class Admin(BaseModel, Base):
 	"""This class defines a user by various attributes"""
 	if  getenv("STORAGE_MET") == "db":
 		__tablename__ = "admins"

@@ -2,7 +2,7 @@
 """This module defines a class User"""
 from backend.models.base_model import BaseModel, Base
 from os import getenv 
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, Boolean
 from dotenv import load_dotenv
 
 
@@ -18,6 +18,7 @@ class User(BaseModel, Base):
 		password = Column(String(30), nullable=False)
 		first_name = Column(String(100), nullable=False)
 		last_name = Column(String(100), nullable=False)
+		subscribed = Column(Boolean, unique=False, default=True)
 	else:
 		def __init__(self, *args, **kwargs):
 			super().__init__(*args, **kwargs)
@@ -25,4 +26,5 @@ class User(BaseModel, Base):
 			self.password = ""
 			self.first_name = ""
 			self.last_name = ""
+			self.subscribed = True
 
