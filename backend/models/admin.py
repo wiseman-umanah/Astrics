@@ -2,8 +2,9 @@
 """This module defines a class Admins"""
 from backend.models.base_model import BaseModel, Base
 from os import getenv 
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, DateTime
 from dotenv import load_dotenv
+from datetime import datetime
 
 
 load_dotenv()
@@ -18,6 +19,7 @@ class Admin(BaseModel, Base):
 		password = Column(String(30), nullable=False)
 		first_name = Column(String(100), nullable=False)
 		last_name = Column(String(100), nullable=False)
+		created_at = Column(DateTime, default=datetime.utcnow)
 	else:
 		def __init__(self, *args, **kwargs):
 			super().__init__(*args, **kwargs)

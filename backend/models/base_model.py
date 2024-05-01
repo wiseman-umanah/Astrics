@@ -18,9 +18,6 @@ else:
 
 class BaseModel:
 	"""A base class for all hbnb models"""
-	if getenv("STORAGE MET") == "db":
-		created_at = Column(DateTime, default=datetime.utcnow)
-		updated_at = Column(DateTime, default=datetime.utcnow)
 		
 	def __init__(self, *args, **kwargs):
 		"""Instatntiates a new model"""

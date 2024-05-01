@@ -2,8 +2,9 @@
 """This module defines a class User"""
 from backend.models.base_model import BaseModel, Base
 from os import getenv 
-from sqlalchemy import Column, String, Boolean
+from sqlalchemy import Column, String, Boolean, DateTime
 from dotenv import load_dotenv
+from datetime import datetime
 
 
 load_dotenv()
@@ -18,6 +19,7 @@ class User(BaseModel, Base):
 		password = Column(String(30), nullable=False)
 		first_name = Column(String(100), nullable=False)
 		last_name = Column(String(100), nullable=False)
+		created_at = Column(DateTime, default=datetime.utcnow)
 		subscribed = Column(Boolean, unique=False, default=True)
 	else:
 		def __init__(self, *args, **kwargs):

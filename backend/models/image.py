@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """The image model"""
 from backend.models.base_model import BaseModel, Base
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, DateTime
 from os import getenv
 from dotenv import load_dotenv
-
+from datetime import datetime
 
 load_dotenv()
 
@@ -16,6 +16,7 @@ class Image(BaseModel, Base):
 		image_url = Column(String(250), nullable=False)
 		image_title = Column(String(250), nullable=False)
 		description = Column(String(2000))
+		created_at = Column(DateTime, default=datetime.utcnow)
 	else:
 		def __init__(self, *args, **kwargs):
 			super().__init__(*args, **kwargs)
