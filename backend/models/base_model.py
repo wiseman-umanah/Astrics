@@ -60,6 +60,8 @@ class BaseModel:
 						  (str(type(self)).split('.')[-1]).split('\'')[0]})
 		if "_sa_instance_state" in dictionary:
 			del dictionary["_sa_instance_state"]
+		if "password" in dictionary:
+			del dictionary["password"]
 		return dictionary
 
 	def delete(self):

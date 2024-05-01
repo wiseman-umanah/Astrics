@@ -6,9 +6,10 @@ from datetime import datetime
 from backend.models import storage
 from backend.models.user import User
 from backend.models.image import Image
+from backend.models.admin import Admin
 import shlex  # for splitting the line along spaces except in double quotes
 
-classes = {"Image": Image, "User": User}
+classes = {"Image": Image, "User": User, "Admin": Admin}
 
 
 class AstricsDash(cmd.Cmd):
