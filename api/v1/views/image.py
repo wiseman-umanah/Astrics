@@ -1,26 +1,29 @@
+#!/usr/bin/python3
+"""This module controls all functionality for image development"""
 from flask import abort, jsonify, make_response, request
 from backend.models.image import Image
 from backend.models import storage
-from api.v1.views import api_views
+from api.v1.views import app_views
 
 
-@api_views.route('/images', method=['GET'], strict_slashes=False)
+@app_views.route('/images', methods=['GET'], strict_slashes=False)
 def get_images():
 	"""Returns all images available in database"""
-	list_image = {}
-	image = storage.all(Image)
-	if not image:
+	list_image = []
+	images = storage.all(Image).values()
+	if not images:
 		abort(404)
-	list_image["images"] = image
+	for image in images:
+		list_image.append(image.to_dict())
 	return jsonify(list_image)
 
 
-@api_views.route('/images/<image_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/images/<image_id>', methods=['GET'], strict_slashes=False)
 def get_image_id(image_id):
 	"""Retrieves an image object based on the id"""
-	list_image = {}
+	list_image = []
 	image = storage.get(Image, image_id)
 	if not image:
 		abort(404)
-	list_image["images"] = image
+	list_image.append(image.to_dict())
 	return jsonify(list_image)

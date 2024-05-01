@@ -1,31 +1,36 @@
+#!/usr/bin/python3
+"""This module controls all functionality for user development"""
 from flask import abort, jsonify, make_response, request
 from backend.models.user import User
 from backend.models import storage
-from api.v1.views import api_views
+from api.v1.views import app_views
 
 
-@api_views.route('/users', method=['GET'], strict_slashes=False)
+@app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_users():
 	"""Returns all users object available"""
-	list_user = {}
-	user = storage.all(User)
-	if not user:
+	list_user = []
+	users = storage.all(User).values()
+	if not users:
 		abort(404)
-	list_user["users"] = user
+	for user in users:
+		list_user.append(user.to_dict())
 	return jsonify(list_user)
 
-@api_views.route('/users/sub', method=['GET'], strict_slashes=False)
+@app_views.route('/users/sub', methods=['GET'], strict_slashes=False)
 def get_sub_users():
 	"""Returns all users object available"""
-	list_user = {}
-	user = storage.all(User)
-	if not user:
+	list_user = []
+	users = storage.all(User).values()
+	if not users:
 		abort(404)
-	subs = [i["subscribed"] == "True" for i in user]
-	list_user["users"] = subs
+	for user in users:
+		temp = user.to_dict()
+		if temp["subscribed"] == True:
+			list_user.append(temp)
 	return jsonify(list_user)
 
-@api_views.route('/users', methods=['POST'], strict_slashes=False)
+@app_views.route('/users', methods=['POST'], strict_slashes=False)
 def add_user():
 	"""Adds a new user to database"""
 	data = request.get_json()
@@ -43,12 +48,12 @@ def add_user():
 	instance.save()
 	return make_response(jsonify(instance.to_dict()), 201)
 
-@api_views.route('/users/<user_id>', method=['GET'], strict_slashes=False)
+@app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 def get_users_id(user_id):
 	"""Returns all users object available based on id"""
-	list_user = {}
-	image = storage.get(User, user_id)
-	if not image:
+	list_user = []
+	user = storage.get(User, user_id)
+	if not user:
 		abort(404)
-	list_user["user"] = image
+	list_user.append(user.to_dict())
 	return jsonify(list_user)
