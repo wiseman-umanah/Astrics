@@ -1,0 +1,35 @@
+.dev-section {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.dev-about {
+	width: 40%;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, .2);
+	border-radius: 20px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+}
+
+.dev-intro {
+	display: flex;
+	align-items: center;
+	gap: 0 50px;
+	margin: 10px auto;
+	padding-bottom: 10px;
+	border-bottom: 2px solid rgba(255, 255, 255, .2);
+}
+
+.dev-pic {
+	width: 70px;
+	border-radius: 50%;
+	height: 70px;
+}
+
+.dev-desc {
+	margin: 10px auto;
+	overflow-y: scroll;
+	padding: 0 10px;
+}

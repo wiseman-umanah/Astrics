@@ -1,0 +1,22 @@
+* {
+	margin: 0;
+}
+body {
+	background: url("../images/pexels-photo-1169754.jpeg") no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 100vh;
+	margin: 0;
+	font-family: Roboto
+}
+
+a {
+	text-decoration: none;
+	color: whitesmoke;
+}
+
+main {
+	color: white;
+	max-width: 80%;
+	margin: 30px auto;
+}
