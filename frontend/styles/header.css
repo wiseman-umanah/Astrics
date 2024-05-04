@@ -11,12 +11,18 @@ header {
 	align-items: center;
 	
 }
+
 header div {
 	margin-left: 30px;
 }
+
 nav {
 	display: flex;
 	justify-content: space-between;
 	gap: 48px;
 	margin-right: 30px;
+}
+
+nav div:hover {
+	opacity: 0.5;
 }
