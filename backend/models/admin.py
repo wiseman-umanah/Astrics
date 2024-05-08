@@ -20,6 +20,7 @@ class Admin(BaseModel, Base):
 		first_name = Column(String(100), nullable=False)
 		last_name = Column(String(100), nullable=False)
 		created_at = Column(DateTime, default=datetime.utcnow)
+		description = Column(String(2048), nullable=False)
 	else:
 		def __init__(self, *args, **kwargs):
 			super().__init__(*args, **kwargs)

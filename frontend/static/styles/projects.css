@@ -1,0 +1,27 @@
+.project-sections {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+}
+
+.project-overview {
+	width: 40%;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, .2);
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px 10px;
+}
+
+h3 {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+p { overflow-y: auto; }
+
+.project-overview a {
+	text-decoration: underline;
+}

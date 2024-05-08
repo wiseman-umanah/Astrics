@@ -1,5 +1,6 @@
 * {
 	margin: 0;
+	box-sizing: border-box;
 }
 body {
 	background: url("../images/pexels-photo-1169754.jpeg") no-repeat;
@@ -7,7 +8,7 @@ body {
 	background-size: cover;
 	min-height: 100vh;
 	margin: 0;
-	font-family: Roboto
+	font-family: Roboto;
 }
 
 a {
@@ -18,9 +19,27 @@ a {
 main {
 	color: white;
 	max-width: 80%;
-	margin: 30px auto;
+	margin: 90px auto;
 }
 
 .com-logo {
 	width: 64px;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	background: #565656;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-track { 
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #b0b0b0;
 }

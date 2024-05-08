@@ -1,4 +1,16 @@
+.introduction {
+	height: 100vh;
+}
+.introduction h1 {
+	font-size: 30px;
+	margin-bottom: 20px;
+	text-align: center;
+}
 
+.introduction p {
+	font-size: 25px;
+	margin-bottom: 30px;
+}
 .image-of-day {
 	width: 100%;
 	height: 500px;

@@ -3,15 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>About</title>
-	<link rel="stylesheet" href="styles/general.css">
-	<link rel="stylesheet" href="styles/header.css">
-	<link rel="stylesheet" href="styles/about.css">
+	<title>ABOUT</title>
+	<link rel="stylesheet" type="text/css" href="../static/styles/general.css">
+	<link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+	<link rel="stylesheet" type="text/css" href="../static/styles/about.css">
 </head>
 <body>
 	<header>
 		<div>
-			<a href="#"><b>ASTRICS</b></a>
+			<a href="#"><img src="../static/images/logo.png" class="com-logo"></a>
 		</div>
 		<nav>
 			<div>
@@ -29,22 +29,50 @@
 		</nav>
 	</header>
 	<main>
+		<section class="introduction">
+			<h1>About Astrics</h1>
+			<p>
+			Much appreciation to the developers of Astrics, whose dedication and skill have brought this visionary project to life. Through their hard work and commitment, we are able to offer this unique educational tool that makes the wonders of the cosmos accessible to students and enthusiasts around the world.
+			</p>
+
+			<h1>Why Explore with Astrics?</h1>
+			<ul>
+				<li>Daily Images from NASA: Each day, we deliver stunning astronomical images sourced from NASA's vast archives. These images capture everything from the intricate structures of distant galaxies to the dynamic atmospheres of our solar system’s planets, each accompanied by insightful educational content. </li>
+			
+				<li>Educational Insights: Every image is paired with detailed explanations and scientific context, crafted to inspire and educate. Our goal is to make learning about astronomy as engaging as it is enlightening. </li>
+
+				<li>User-Friendly Interface: Astrics is designed to ensure that everyone, regardless of their technological skill level, can easily navigate and enjoy our vast resources. </li>
+			</ul>
+			
+			<h1>Our Vision</h1>
+
+			<p>
+			At Astrics, we are driven by the belief that education through exploration can inspire a lifelong passion for science and discovery. We strive to bridge the gap between academic knowledge and public curiosity by providing a platform that is both informative and captivating.
+			</p>
+			
+			<h1>Join Us on This Stellar Journey</h1>
+
+			<p>
+				StarSight is more than just an app; it's a portal to the universe. Whether you are a student eager to learn more about astronomy, an educator in search of rich visual materials, or a space enthusiast who loves stargazing, our platform is crafted for you. Every new image is a new opportunity to learn and marvel at the beauty that lies beyond our Earth.
+			</p>
+		</section>
 		<section class="dev-section">
-			<div class="dev-about">
-				<div class="dev-intro">
-					<div>
-						<img src="images/space.jpg" class="dev-pic">
+			{% for admin in admins %}
+				<div class="dev-about">
+					<div class="dev-intro">
+						<div>
+							<img src="../static/images/Wiseman.jpg" class="dev-pic">
+						</div>
+						<div>
+							<h3>{{ admin.first_name }} {{ admin.last_name }}</h3>
+							<h4>{{ admin.field }}</h4>
+						</div>
 					</div>
-					<div>
-						<h3>Wiseman Umanah</h3>
-						<h4>FullStack Engineer</h4>
+					<div class="dev-desc">
+						{{ admin.description }}
 					</div>
 				</div>
-				<div class="dev-desc">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-				</div>
-			</div>
+			{% endfor %}
 		</section>
 	</main>
 </body>
