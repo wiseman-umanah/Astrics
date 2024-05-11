@@ -16,10 +16,9 @@ class User(BaseModel, Base):
 	if  getenv("STORAGE_MET") == "db":
 		__tablename__ = "users"
 		id = Column(String(60), primary_key=True)
-		email = Column(String(500), nullable=False)
-		password = Column(String(1024), nullable=False)
-		first_name = Column(String(100), nullable=False)
-		last_name = Column(String(100), nullable=False)
+		email = Column(String(200), nullable=False)
+		password = Column(String(200), nullable=False)
+		username = Column(String(100), nullable=False, unique=True)
 		created_at = Column(DateTime, default=datetime.utcnow)
 		subscribed = Column(Boolean, unique=False, default=True)
 	else:
@@ -31,8 +30,3 @@ class User(BaseModel, Base):
 			self.last_name = ""
 			self.subscribed = True
 
-	def __setattr__(self, name, value):
-		"""sets a password with md5 encryption"""
-		if name == "password":
-			value = md5(value.encode()).hexdigest()
-		super().__setattr__(name, value)

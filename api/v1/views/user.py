@@ -40,10 +40,8 @@ def add_user():
 		abort(404, description="Missing email")
 	elif "password" not in data:
 		abort(404, description="Missing password")
-	elif "first_name" not in data:
+	elif "username" not in data:
 		abort(404, description="Missing first_name")
-	elif "last_name" not in data:
-		abort(404, description="Missing last_name")
 	instance = User(**data)
 	instance.save()
 	return make_response(jsonify(instance.to_dict()), 201)
