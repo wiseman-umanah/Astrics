@@ -132,4 +132,4 @@ def astrics_register():
 
 if __name__ == "__main__":
 	""" Main Function """
-	app.run()
+	app.run(host="0.0.0.0")
