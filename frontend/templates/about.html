@@ -11,21 +11,13 @@
 <body>
 	<header>
 		<div>
-			<a href="#"><img src="../static/images/logo.png" class="com-logo"></a>
+			<a href="{{ url_for ('astrics') }}"><img src="../static/images/logo.png" class="com-logo"></a>
 		</div>
 		<nav>
-			<div>
-				<a href="#"><b>HOME</b></a>
-			</div>
-			<div>
-				<a href="#"><b>ABOUT US</b></a>
-			</div>
-			<div>
-				<a href="#"><b>OUR PROJECTS </b></a>
-			</div>
-			<div>
-				<a href="#"><b>CONTACT US</b></a>
-			</div>
+			<div><a href="{{ url_for ('astrics') }}"><b>HOME</b></a></div>
+			<div><a href="{{ url_for ('astrics_about') }}"><b>ABOUT US</b></a></div>
+			<div><a href="{{ url_for ('astrics_projects') }}"><b>OUR PROJECTS </b></a></div>
+			<div><a href="{{ url_for ('astrics_contact') }}"><b>CONTACT US</b></a></div>
 		</nav>
 	</header>
 	<main>
@@ -53,7 +45,7 @@
 			<h1>Join Us on This Stellar Journey</h1>
 
 			<p>
-				StarSight is more than just an app; it's a portal to the universe. Whether you are a student eager to learn more about astronomy, an educator in search of rich visual materials, or a space enthusiast who loves stargazing, our platform is crafted for you. Every new image is a new opportunity to learn and marvel at the beauty that lies beyond our Earth.
+				Astrics is more than just an app; it's a portal to the universe. Whether you are a student eager to learn more about astronomy, an educator in search of rich visual materials, or a space enthusiast who loves stargazing, our platform is crafted for you. Every new image is a new opportunity to learn and marvel at the beauty that lies beyond our Earth.
 			</p>
 		</section>
 		<section class="dev-section">

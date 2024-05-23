@@ -25,3 +25,20 @@ p { overflow-y: auto; }
 .project-overview a {
 	text-decoration: underline;
 }
+
+@media only screen and (min-width: 1800px) {
+	main {
+		max-width: 90%;
+	}
+	h3,
+	p {
+		font-size: 2.5rem;
+	}
+}
+
+@media only screen and (max-width: 760px) {
+	h3,
+       	p {
+		font-size: 0.6rem;
+	}
+}

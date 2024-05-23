@@ -58,7 +58,7 @@ def astrics():
 		img.append(image.to_dict())
 
 	return render_template('home.html',
-						   images=img,
+                images=img[::-1],
 						   cache_id=uuid.uuid4())
 
 
@@ -132,4 +132,4 @@ def astrics_register():
 
 if __name__ == "__main__":
 	""" Main Function """
-	app.run(host="0.0.0.0")
+	app.run(host="0.0.0.0", port=5000)

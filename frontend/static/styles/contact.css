@@ -71,3 +71,20 @@ textarea::placeholder {
 	border-radius: 50%;
 	padding: 10px;
 }
+
+
+@media only screen and (max-width: 760px) {
+	.introduction h1,
+       .introduction p,
+	.message-us h3 {
+		font-size: 0.6rem;
+	}
+
+	.message-us {
+		width: 250px;
+		padding: 15px 20px;
+	}
+	.send-img {
+		width: 32px;
+	}
+}

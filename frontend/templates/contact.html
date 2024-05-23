@@ -12,21 +12,13 @@
 <body>
 	<header>
 		<div>
-			<a href="#"><img src="../static/images/logo.png" class="com-logo"></a>
+			<a href="{{ url_for ('astrics') }}"><img src="../static/images/logo.png" class="com-logo"></a>
 		</div>
 		<nav>
-			<div>
-				<a href="#"><b>HOME</b></a>
-			</div>
-			<div>
-				<a href="#"><b>ABOUT US</b></a>
-			</div>
-			<div>
-				<a href="#"><b>OUR PROJECTS </b></a>
-			</div>
-			<div>
-				<a href="#"><b>CONTACT US</b></a>
-			</div>
+			<div><a href="{{ url_for ('astrics') }}"><b>HOME</b></a></div>
+			<div><a href="{{ url_for ('astrics_about') }}"><b>ABOUT US</b></a></div>
+			<div><a href="{{ url_for ('astrics_projects') }}"><b>OUR PROJECTS </b></a></div>
+			<div><a href="{{ url_for ('astrics_contact') }}"><b>CONTACT US</b></a></div>
 		</nav>
 	</header>
 	<main>
