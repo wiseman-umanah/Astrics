@@ -1,3 +1,5 @@
+![logo](https://github.com/wiseman-umanah/Astrics/assets/126745459/4f1cd8f8-c8f2-42ac-8b3f-7604652b1b4f)
+
 # Astrics
 
 Welcome to Astrics, your daily gateway to the universe. This web application delivers breathtaking astronomical images provided by NASA each day, aimed at students and space enthusiasts for educational purposes.
