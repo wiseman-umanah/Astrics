@@ -15,6 +15,7 @@ Welcome to Astrics, your daily gateway to the universe. This web application del
 - [Authors](#authors)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
+- [Demo](#demo)
 
 ## Features
 
@@ -78,4 +79,10 @@ See also the list of [AUTHORS](https://github.com/wiseman-umanah/Astrics/blob/ma
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
+
+## Demo
+
+https://github.com/wiseman-umanah/Astrics/assets/126745459/5a379e4a-609f-46cc-ae03-044a022892c9
+
+
 
