@@ -2,42 +2,29 @@
 """
 Contains the class DBStorage
 """
-
-import backend.models
 from backend.models.base_model import Base
 from backend.models.user import User
 from backend.models.image import Image
-from backend.models.admin import Admin
 from os import getenv
-import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from dotenv import load_dotenv
 
 load_dotenv()
 
-classes = {"Admin": Admin, "Image": Image, "User": User}
-
+classes = {"Image": Image, "User": User}
 
 class DBStorage:
-    """interaacts with the MySQL database"""
+    """Interacts with the MySQL database"""
     __engine = None
     __session = None
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        USER = getenv('USER')
-        PWD = getenv('PWD')
-        HOST = getenv('HOST')
-        DBNAME = getenv('DBNAME')
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(USER,
-                                             PWD,
-                                             HOST,
-                                             DBNAME))
+        self.__engine = create_engine(getenv("DB_LINK"))
 
     def all(self, cls=None):
-        """query on the current database session"""
+        """Query on the current database session"""
         new_dict = {}
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
@@ -45,58 +32,47 @@ class DBStorage:
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
-        return (new_dict)
+        return new_dict
 
     def new(self, obj):
-        """add the object to the current database session"""
+        """Add the object to the current database session"""
         self.__session.add(obj)
 
     def save(self):
-        """commit all changes of the current database session"""
+        """Commit all changes of the current database session"""
         self.__session.commit()
 
     def delete(self, obj=None):
-        """delete from the current database session obj if not None"""
+        """Delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
-        """reloads data from the database"""
+        """Reloads data from the database"""
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
 
     def close(self):
-        """call remove() method on the private session attribute"""
+        """Call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self, cls, id):
+    def get(self, cls, email):
         """
-        Returns the object based on the class name and its ID, or
+        Returns the object based on the class name and its email, or
         None if not found
         """
         if cls not in classes.values():
             return None
-
-        all_cls = backend.models.storage.all(cls)
-        for value in all_cls.values():
-            if (value.id == id):
-                return value
-
-        return None
+        return self.__session.query(cls).filter_by(email=email).first()
 
     def count(self, cls=None):
-        """
-        count the number of objects in storage
-        """
-        all_class = classes.values()
-
-        if not cls:
-            count = 0
-            for clas in all_class:
-                count += len(backend.models.storage.all(clas).values())
+        """Count the number of objects in storage"""
+        count = 0
+        if cls:
+            count = self.__session.query(cls).count()
         else:
-            count = len(backend.models.storage.all(cls).values())
-
+            for clas in classes.values():
+                count += self.__session.query(clas).count()
         return count

@@ -5,14 +5,12 @@ Contains the FileStorage class
 
 import json
 from backend.models.base_model import BaseModel
+from backend.models.user import User
 from backend.models.image import Image
-from backend.models.admin import Admin
-from backend.models.user import User
-from backend.models.user import User
 
 
-classes = {"Admin": Admin, "BaseModel": BaseModel,
-           "Image": Image, "User": User}
+classes = {"BaseModel": BaseModel, "User": User,
+           "Image": Image}
 
 
 class FileStorage:
