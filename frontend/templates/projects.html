@@ -1,57 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PROJECTS</title>
-	<link rel="icon" href="../static/images/logo.ico" type="image/x-icon"/>
-	<link rel="stylesheet" type="text/css" href="../static/styles/general.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/header.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/projects.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrics | Projects Page</title>
+    <link rel="icon" href="../static/images/logo-no-background.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="../static/styles/general.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/header.css">
+    <link rel="stylesheet" href="../static/styles/projectspage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/footer.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../static/scripts/home-page.js"></script>
+    
 </head>
 <body>
-	<header>
-		<div>
-			<a href="{{ url_for ('astrics') }}"><img src="../static/images/logo.png" class="com-logo"></a>
-		</div>
-		<nav>
-			<div><a href="{{ url_for ('astrics') }}"><b>HOME</b></a></div>
-			<div><a href="{{ url_for ('astrics_about') }}"><b>ABOUT US</b></a></div>
-			<div><a href="{{ url_for ('astrics_projects') }}"><b>OUR PROJECTS </b></a></div>
-			<div><a href="{{ url_for ('astrics_contact') }}"><b>CONTACT US</b></a></div>
-		</nav>
-	</header>
-	<main>
-		<section class="project-sections">
-			<div class="project-overview">
-				<h3>THE SIMPLE SHELL</h3>
-				<p>
-					Shell is a user interface to use the services of a computer. It can be a command-line interface –the one we will build- or graphical user interface, like regular software such as Windows Office.
-					<br><br>See more of the project <a href="https://github.com/wiseman-umanah/simple_shell">HERE</a>
-				</p>
-			</div>
-			<div class="project-overview">
-				<h3>THE MONTY PROJECT</h3>
-				<p>
-					Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). It relies on a unique stack, with specific instructions to manipulate it. The goal of this project is to create an interpreter for Monty ByteCodes files.
-					<br><br>See more of the project <a href="https://github.com/wiseman-umanah/monty">HERE</a>
-				</p>
-			</div>
-			<div class="project-overview">
-				<h3>THE AIRBNB PROJECT (CONSOLE)</h3>
-				<p>
-					The AirBnB Clone: Console is a simple yet powerful interface that allows users to create, update and destroy instances with unique IDs. With a user-friendly CLI, it provides a convenient way to harness the details of users with specific and unique IDs based on their class in a database file.
-					<br><br>See more of the project <a href="https://github.com/wiseman-umanah/AirBnB_clone">HERE</a>
-				</p>
-			</div>
-			<div class="project-overview">
-				<h3>THE AIRBNB PROJECT (FINAL DEPLOY)</h3>
-				<p>
-					The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
-					<br><br>See more of the project <a href="https://github.com/wiseman-umanah/AirBnB_clone_v4">HERE</a>
-				</p>
-			</div>
-		</section>
-	</main>
+    <header>
+        <div class="header_logo"><a href="{{ url_for('astrics_home') }}"><img src="../static/images/logo-no-background.png"></a></div>
+        <div class="nav-menu"><i class='bx bx-menu'></i>
+            <i class='bx bx-x' style='color:#ffffff'  ></i></div>
+        <nav class="nav-bar">
+            <ul class="nav_links">
+                <li><a href="{{ url_for('astrics_home') }}">HOME</a></li>
+                <li><a href="{{ url_for('astrics_about') }}">ABOUT US</a></li>
+                <li><a href="{{ url_for('astrics_projects') }}" style="color: rgb(193, 30, 30);">OUR PROJECTS</a></li>
+                <li><a href="{{ url_for('astrics_contact') }}">CONTACT US</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="projects-intro">
+            <p>DISCOVER OTHER PROJECTS FROM US</p>
+        </section>
+        <section class="projects">
+            <div class="projects-section">
+                <div class=img style="background: url('../static/images/terminal.png'); background-repeat: no-repeat; background-position: center;
+                background-size: 100%;"></div>
+                <div>
+                    <h3>THE AIRBNB PROJECT (CONSOLE)</h3>
+                    <p>
+                        The AirBnB Clone: Console is a simple yet powerful interface that allows users to create, update and destroy instances with unique IDs. With a user-friendly CLI, it provides a convenient way to harness the details of users with specific and unique IDs based on their class in a database file.<br><br>
+                        See more of the project <a href="#">HERE</a>
+                    </p>
+                </div>
+            </div>
+            <div class="projects-section">
+                <div class=img style="background: url('../static/images/shell.jpeg'); background-repeat: no-repeat; background-position: center;
+                background-size: 100%;"></div>
+                <div>
+                    <h3>THE SIMPLE SHELL</h3>
+                    <p>
+                        Shell is a user interface to use the services of a computer. It can be a command-line interface –the one we will build- or graphical user interface, like regular software such as Windows Office.<br><br>See more of the project <a href="#">HERE</a>
+                    </p>
+                </div>
+            </div>
+            <div class="projects-section">
+                <div class=img style="background: url('../static/images/monty.png'); background-repeat: no-repeat; background-position: center;
+                background-size: 100%;"></div>
+                <div>
+                    <h3>THE MONTY PROJECT</h3>
+                    <p>
+                        Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). It relies on a unique stack, with specific instructions to manipulate it. The goal of this project is to create an interpreter for Monty ByteCodes files.<br><br>
+                        See more of the project <a href="#">HERE</a>
+                    </p>
+                </div>
+            </div>
+            <div class="projects-section">
+                <div class=img style="background: url('../static/images/AirBnB.png'); background-repeat: no-repeat; background-position: center;
+                background-size: 100%;"></div>
+                <div>
+                    <h3>THE AIRBNB PROJECT (FINAL DEPLOY)</h3>
+                    <p>
+                        The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.<br><br>
+                        See more of the project <a href="#">HERE</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>copyright &copy; 2024</p>
+        <ul class="socials">
+            <li>
+                <a href="https://www.facebook.com/profile.php?id=61560236266196"><i class='bx bxl-facebook-circle' style='color:rgb(193,30,30)'></i></a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/astrics550/"></a><i class='bx bxl-instagram'></i>
+            </li>
+            <li>
+                <a href="https://x.com/AstricsSpace"></a><i class='bx bxl-twitter'></i>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

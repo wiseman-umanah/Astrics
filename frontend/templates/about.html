@@ -1,72 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>ABOUT</title>
-	<link rel="icon" href="../static/images/logo.ico" type="image/x-icon"/>
-	<link rel="stylesheet" type="text/css" href="../static/styles/general.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/header.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/about.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrics | About Page</title>
+    <link rel="icon" href="../static/images/logo-no-background.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="../static/styles/general.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/header.css">
+    <link rel="stylesheet" href="../static/styles/aboutpage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/footer.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../static/scripts/home-page.js"></script>
+    
 </head>
 <body>
-	<header>
-		<div>
-			<a href="{{ url_for ('astrics') }}"><img src="../static/images/logo.png" class="com-logo"></a>
-		</div>
-		<nav>
-			<div><a href="{{ url_for ('astrics') }}"><b>HOME</b></a></div>
-			<div><a href="{{ url_for ('astrics_about') }}"><b>ABOUT US</b></a></div>
-			<div><a href="{{ url_for ('astrics_projects') }}"><b>OUR PROJECTS </b></a></div>
-			<div><a href="{{ url_for ('astrics_contact') }}"><b>CONTACT US</b></a></div>
-		</nav>
-	</header>
-	<main>
-		<section class="introduction">
-			<h1>About Astrics</h1>
-			<p>
-			Much appreciation to the developers of Astrics, whose dedication and skill have brought this visionary project to life. Through their hard work and commitment, we are able to offer this unique educational tool that makes the wonders of the cosmos accessible to students and enthusiasts around the world.
-			</p>
-
-			<h1>Why Explore with Astrics?</h1>
-			<ul>
-				<li>Daily Images from NASA: Each day, we deliver stunning astronomical images sourced from NASA's vast archives. These images capture everything from the intricate structures of distant galaxies to the dynamic atmospheres of our solar system’s planets, each accompanied by insightful educational content. </li>
-			
-				<li>Educational Insights: Every image is paired with detailed explanations and scientific context, crafted to inspire and educate. Our goal is to make learning about astronomy as engaging as it is enlightening. </li>
-
-				<li>User-Friendly Interface: Astrics is designed to ensure that everyone, regardless of their technological skill level, can easily navigate and enjoy our vast resources. </li>
-			</ul>
-			
-			<h1>Our Vision</h1>
-
-			<p>
-			At Astrics, we are driven by the belief that education through exploration can inspire a lifelong passion for science and discovery. We strive to bridge the gap between academic knowledge and public curiosity by providing a platform that is both informative and captivating.
-			</p>
-			
-			<h1>Join Us on This Stellar Journey</h1>
-
-			<p>
-				Astrics is more than just an app; it's a portal to the universe. Whether you are a student eager to learn more about astronomy, an educator in search of rich visual materials, or a space enthusiast who loves stargazing, our platform is crafted for you. Every new image is a new opportunity to learn and marvel at the beauty that lies beyond our Earth.
-			</p>
-		</section>
-		<section class="dev-section">
-			{% for admin in admins %}
-				<div class="dev-about">
-					<div class="dev-intro">
-						<div>
-							<img src="../static/images/Wiseman.jpg" class="dev-pic">
-						</div>
-						<div>
-							<h3>{{ admin.first_name }} {{ admin.last_name }}</h3>
-							<h4>{{ admin.field }}</h4>
-						</div>
-					</div>
-					<div class="dev-desc">
-						{{ admin.description }}
-					</div>
-				</div>
-			{% endfor %}
-		</section>
-	</main>
+    <header>
+        <div class="header_logo"><a href="{{ url_for('astrics_home') }}"><img src="../static/images/logo-no-background.png"></a></div>
+        <div class="nav-menu"><i class='bx bx-menu'></i>
+            <i class='bx bx-x' style='color:#ffffff'  ></i></div>
+        <nav class="nav-bar">
+            <ul class="nav_links">
+                <li><a href="{{ url_for('astrics_home') }}">HOME</a></li>
+                <li><a href="{{ url_for('astrics_about') }}" style="color: rgb(193, 30, 30);">ABOUT US</a></li>
+                <li><a href="{{ url_for('astrics_projects') }}">OUR PROJECTS</a></li>
+                <li><a href="{{ url_for('astrics_contact') }}">CONTACT US</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="our-purpose sec">
+            <h1>OUR PURPOSE</h1>
+            <p class="purpose-p">At Astrics, we are driven by the belief that education through exploration can inspire a lifelong passion for science and discovery. We strive to bridge the gap between academic knowledge and public curiosity by providing a platform that is both informative and captivating.</p>
+            <div class="purpose"></div>
+        </section>
+        <section class="sec">
+            <h1>Why Explore with Astrics?</h1>
+            <ul class="astrics-reasons">
+                <li>Daily Images from NASA: Each day, we deliver stunning astronomical images sourced from NASA's vast archives. These images capture everything from the intricate structures of distant galaxies to the dynamic atmospheres of our solar system’s planets, each accompanied by insightful educational content.
+                </li>
+                <li>
+                    Educational Insights: Every image is paired with detailed explanations and scientific context, crafted to inspire and educate. Our goal is to make learning about astronomy as engaging as it is enlightening.
+                </li>
+                <li>
+                    User-Friendly Interface: Astrics is designed to ensure that everyone, regardless of their technological skill level, can easily navigate and enjoy our vast resources.
+                </li>
+            </ul>
+        </section>
+        <section class="dev-section sec">
+            <h1>MEET THE DEVELOPMENT TEAM</h1>
+            <p>We are proud to introduce the talented and dedicated team behind Astrics. Our diverse group of developers has worked tirelessly to bring this visionary project to life, ensuring that the wonders of the cosmos are accessible to students, researchers, and astronomy enthusiasts worldwide. Their combined expertise, creativity, and commitment have been the driving force behind Astrics' success</p>
+            <div class="dev-wrapper">
+                <div class="dev">
+                    <div class="dev-img">
+                        <img src="../static/images/wiseman.png">
+                    </div>
+                    <div class="dev-desc">
+                        <div>Wiseman Umanah</div>
+                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
+                    </div>
+                </div>
+                <div class="dev">
+                    <div class="dev-img">
+                        <img src="../static/images/wiseman.png">
+                    </div>
+                    <div class="dev-desc">
+                        <div>Wiseman Umanah</div>
+                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
+                    </div>
+                </div>
+                <div class="dev">
+                    <div class="dev-img">
+                        <img src="../static/images/wiseman.png">
+                    </div>
+                    <div class="dev-desc">
+                        <div>Wiseman Umanah</div>
+                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
+                    </div>
+                </div>
+                <div class="dev">
+                    <div class="dev-img">
+                        <img src="../static/images/wiseman.png">
+                    </div>
+                    <div class="dev-desc">
+                        <div>Wiseman Umanah</div>
+                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
+                    </div>
+                </div>
+                <div class="dev">
+                    <div class="dev-img">
+                        <img src="../static/images/wiseman.png">
+                    </div>
+                    <div class="dev-desc">
+                        <div>Wiseman Umanah</div>
+                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
+                    </div>
+                </div>
+                <div class="dev">
+                    <div class="dev-img">
+                        <img src="../static/images/wiseman.png">
+                    </div>
+                    <div class="dev-desc">
+                        <div>Wiseman Umanah</div>
+                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
+                    </div>
+                </div>
+                <div class="dev">
+                    <div class="dev-img">
+                        <img src="../static/images/wiseman.png">
+                    </div>
+                    <div class="dev-desc">
+                        <div>Wiseman Umanah</div>
+                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
+                    </div>
+                </div>
+                <div class="dev">
+                    <div class="dev-img">
+                        <img src="../static/images/wiseman.png">
+                    </div>
+                    <div class="dev-desc">
+                        <div>Wiseman Umanah</div>
+                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>copyright &copy; 2024</p>
+        <ul class="socials">
+            <li>
+                <a href="https://www.facebook.com/profile.php?id=61560236266196"><i class='bx bxl-facebook-circle' style='color:rgb(193,30,30)'></i></a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/astrics550/"></a><i class='bx bxl-instagram'></i>
+            </li>
+            <li>
+                <a href="https://x.com/AstricsSpace"></a><i class='bx bxl-twitter'></i>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

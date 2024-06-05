@@ -1,47 +1,81 @@
 header {
-	backdrop-filter: blur(5px);
-	box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-	border-radius: 10px;
-	background: transparent;
-	width: 100%;
-	color: #ffffff;
-	height: 70px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	position: fixed;
-	z-index: 2;
-	top: 0;
+    background: var(--back-color);
+    display: flex;
+    height: 60px;
+    border-bottom: 2px solid rgb(193, 30, 30);
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 10;
 }
 
-header div {
-	margin-left: 30px;
+.header_logo img{
+    width: 40px;
+    cursor: pointer;
 }
 
-nav {
-	display: flex;
-	justify-content: space-between;
-	margin-right: 30px;
+.nav-menu {
+    position: relative;
+    height: 100%;
+    width: 60px;
 }
 
-nav div:hover {
-	opacity: 0.5;
+.bx-menu,
+.bx-x {
+    font-size: 30px;
+    font-weight: bold;
+    color:var(--white);
+    position: absolute;
+    right: 25%;
+    top: 25%;
+}
+.bx-x {
+    display: none;
 }
 
-@media only screen and (max-width: 760px) {
-	nav div {
-		font-size: 6px;
-	}
-	header {
-		height: 50px;
-	}
+.nav-bar {
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    padding: 10px;
+    /* width: 200px; */
+    background: var(--back-color);
+    border: 1px solid white;
+    display: none;
 }
 
-@media only screen and (min-width:1200px) {
-	header {
-		height: 100px;
-	}
-	nav div {
-		font-size: 1.5rem;
-	}
+.nav_links {
+    padding: 10px 0;
+    gap: 2rem;
+    list-style: none;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.nav_links a:hover {
+    opacity: 0.8;
+}
+@media only screen and (min-width: 760px) {
+    .nav-menu {
+        display: none;
+    }
+    .nav-bar {
+        position: unset;
+        border: none;
+        display: block;
+        background-color: transparent;
+    }
+    .nav_links {
+        flex-direction: row;
+        background-color: transparent;
+    }
 }

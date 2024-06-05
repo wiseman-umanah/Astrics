@@ -1,68 +1,22 @@
+:root {
+    --back-color: black;
+    --white: white;
+}
 * {
-	margin: 0;
-	box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 body {
-	background: url("../images/pexels-photo-1169754.jpeg") no-repeat;
-	background-position: center;
-	background-size: cover;
-	min-height: 100vh;
-	margin: 0;
-	font-family: Roboto;
+    background: black;
+    color: var(--white);
+    font-family: "Jaro", sans-serif;
 }
-
 a {
-	text-decoration: none;
-	color: whitesmoke;
-}
-
-main {
-	color: white;
-	max-width: 80%;
-	margin: 90px auto;
-}
-
-.com-logo {
-	width: 64px;
+    text-decoration: none;
+    color: var(--white);
 }
 
 ::-webkit-scrollbar {
-	width: 10px;
-	background: #565656;
-	border-radius: 10px;
+    display: none;
 }
-
-::-webkit-scrollbar-track { 
-	border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: #b0b0b0;
-}
-
-@media only screen  and (max-width: 760px) {
-	main {
-		max-width: 95%;
-	}
-
-	::-webkit-scrollbar {
-		width: 5px;
-	}
-	.com-logo {
-		width: 32px;
-	}
-}
-
-@media only screen and (min-width: 1200px) {
-	.com-logo {
-		width: 70px;
-	}
-	main {
-		margin-top: 120px;
-	}
-}
-

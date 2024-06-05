@@ -1,46 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>CONTACT</title>
-	<link rel="icon" href="../static/images/logo.ico" type="image/x-icon"/>
-	<link rel="stylesheet" type="text/css" href="../static/styles/general.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/header.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/contact.css">
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrics | Contact Page</title>
+    <link rel="icon" href="../static/images/logo-no-background.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="../static/styles/general.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/header.css">
+    <link rel="stylesheet" href="../static/styles/contactpage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/footer.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../static/scripts/home-page.js"></script>
+    
 </head>
 <body>
-	<header>
-		<div>
-			<a href="{{ url_for ('astrics') }}"><img src="../static/images/logo.png" class="com-logo"></a>
-		</div>
-		<nav>
-			<div><a href="{{ url_for ('astrics') }}"><b>HOME</b></a></div>
-			<div><a href="{{ url_for ('astrics_about') }}"><b>ABOUT US</b></a></div>
-			<div><a href="{{ url_for ('astrics_projects') }}"><b>OUR PROJECTS </b></a></div>
-			<div><a href="{{ url_for ('astrics_contact') }}"><b>CONTACT US</b></a></div>
-		</nav>
-	</header>
-	<main>
-		<section class="introduction">
-			<h1>Your Feedback Matters</h1>
-			<p>
-				We are continually looking to improve and expand Astrics’s offerings. Your feedback is invaluable to us, helping to shape the future of this app. For questions, suggestions, or comments, please reach out to us 
-			</p>
-		</section>
-		<section class="message-us">
-			<form action="mailto:astrics550@gmail.com" method="POST" enctype="text/plain" name="EmailForm">
-				<h3>Send Us A Message</h3>
-				<div class="input-box">
-					<input type="text" placeholder="Name" id="name" required>
-					<i class='bx bxs-contact'></i>
-				</div>
-					<textarea placeholder="Write Your Message Here!"></textarea>
-				</div>
-				<input type="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAUBJREFUSEu9lTEvREEUhb/T6egQlYKQSBQqJf+AhkQiQcEv2RBRadiWhEq0IlEpRKNdopOgUpKIOHaSKdaza2ffGpO85CVz7/nm3jf3PJF5KbM+/wuwfQZMAbvhkfTSbYXfKrD9CAxG0df6+z6wLempLKgIOAIWC2LvwAGwKem+U1ARsA7stRD5BE6AiqSbVFARMArcJiSfx4ou2sX+uEW2Q78H2iXG/esAAk4luVlOM8AQsAqsAMOJoBqwBRxK+mjMaTkHtsPeLLAGzNVP2pMAewB2gKqktxCfNGi2+4AlYAOYSADVJI13AugFlmM1kwmAK0nTvwJii2ai6Pyftch23o9s+xnoT2hDCOnsmtoeAe4SxMsNWn3IslvFMbCQ0+wabSLYdTXadbDxUqtodpfAWLYfTqkjtklKsopuwNkBXzrJdhmApYC1AAAAAElFTkSuQmCC" value="Send" class="send-img">
-			</form>
-		</section>
-	</main>
+    <header>
+        <div class="header_logo"><a href="{{ url_for('astrics_home') }}"><img src="../static/images/logo-no-background.png"></a></div>
+        <div class="nav-menu"><i class='bx bx-menu'></i>
+            <i class='bx bx-x' style='color:#ffffff'  ></i></div>
+        <nav class="nav-bar">
+            <ul class="nav_links">
+                <li><a href="{{ url_for('astrics_home') }}">HOME</a></li>
+                <li><a href="{{ url_for('astrics_about') }}">ABOUT US</a></li>
+                <li><a href="{{ url_for('astrics_projects') }}">OUR PROJECTS</a></li>
+                <li><a href="{{ url_for('astrics_contact') }}" style="color: rgb(193, 30, 30);">CONTACT US</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="contact-intro">
+            <h2>Your Feedback Matters</h2>
+            <p>
+                We are continually looking to improve and expand Astrics’s offerings. Your feedback is invaluable to us, helping to shape the future of this app. For questions, suggestions, or comments, please reach out to us
+            </p>
+            <div class="message-us">
+                <form action="mailto:astrics550@gmail.com" method="POST" enctype="text/plain" name="EmailForm">
+                    <h3>Send Us A Message</h3>
+                    <div class="input-box">
+                        <input type="text" placeholder="Name" id="name" required="">
+                        <i class="bx bxs-contact"></i>
+                    </div>
+                        <textarea placeholder="Write Your Message Here!"></textarea>
+                    
+                    <input type="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAUBJREFUSEu9lTEvREEUhb/T6egQlYKQSBQqJf+AhkQiQcEv2RBRadiWhEq0IlEpRKNdopOgUpKIOHaSKdaza2ffGpO85CVz7/nm3jf3PJF5KbM+/wuwfQZMAbvhkfTSbYXfKrD9CAxG0df6+z6wLempLKgIOAIWC2LvwAGwKem+U1ARsA7stRD5BE6AiqSbVFARMArcJiSfx4ou2sX+uEW2Q78H2iXG/esAAk4luVlOM8AQsAqsAMOJoBqwBRxK+mjMaTkHtsPeLLAGzNVP2pMAewB2gKqktxCfNGi2+4AlYAOYSADVJI13AugFlmM1kwmAK0nTvwJii2ai6Pyftch23o9s+xnoT2hDCOnsmtoeAe4SxMsNWn3IslvFMbCQ0+wabSLYdTXadbDxUqtodpfAWLYfTqkjtklKsopuwNkBXzrJdhmApYC1AAAAAElFTkSuQmCC" value="Send" class="send-img">
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>copyright &copy; 2024</p>
+        <ul class="socials">
+            <li>
+                <a href="https://www.facebook.com/profile.php?id=61560236266196"><i class='bx bxl-facebook-circle' style='color:rgb(193,30,30)'></i></a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/astrics550/"></a><i class='bx bxl-instagram'></i>
+            </li>
+            <li>
+                <a href="https://x.com/AstricsSpace"></a><i class='bx bxl-twitter'></i>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

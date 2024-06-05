@@ -1,0 +1,82 @@
+main {
+    margin: 80px auto;
+    width: 90%;
+}
+
+h1 {
+    margin: 30px 0;
+}
+
+.purpose-p {
+    width: 70%;
+}
+
+.purpose {
+    background: url('../images/Alone.jpg');
+    background-position: center;
+    background-size: 100%;
+    height: 300px;
+    margin-top: 40px;
+    border-radius: 10px;
+}
+
+.astrics-reasons {
+    padding: 0;
+    list-style: none;
+}
+
+.astrics-reasons li {
+    margin-bottom: 10px;
+}
+
+.dev-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+.dev {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(193, 30, 30);
+    border-radius: 10px;
+    margin: 10px auto;
+}
+.dev-img {
+    background-color: rgb(193, 30, 30);
+    width: 100%;
+    padding: 0 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.dev-img img {
+    width: 100%;
+}
+
+.dev-desc {
+    display: flex;
+    padding: 10px 0;
+}
+.bx-tada {
+    background-color: rgb(0, 132, 255);
+    padding: 2px;
+    margin-left: 5px;
+    border-radius: 50%;
+}
+.sec {
+    margin-top: 100px;
+}
+
+
+@media only screen and (min-width: 760px) {
+    .dev-wrapper {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .dev-img {
+        width: 200px;
+    }
+}

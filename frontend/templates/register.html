@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Register Page</title>
-	<link rel="icon" href="../static/images/logo.ico" type="image/x-icon"/>
-	<link rel="stylesheet" href="../static/styles/login.css">
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrics | Register</title>
+    <link rel="icon" href="../static/images/logo-no-background.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="../static/styles/general.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/header.css">
+    <link rel="stylesheet" href="../static/styles/reg-logpage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/footer.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../static/scripts/home-page.js"></script>
+    
 </head>
-	<body>
-		<main>
-			<form method="post" action="{{ url_for('astrics_register') }}"> <!-- Ensure the action points to the Flask route handling registration -->
-				<h3>Astrics Signup</h3>
-				<div class="input-box">
-					<input type="text" placeholder="username" name="username" id="username" required>
-					<i class='bx bxs-contact'></i>
-				</div>
-				<div class="input-box">
-					<input type="email" placeholder="email" name="email" id="email" required>
-					<i class='bx bxs-envelope'></i>
-				</div>
-				<div class="input-box">
-					<input type="password" placeholder="password" name="password" id="password" required>
-					<i class='bx bxs-lock-alt' ></i>
-				</div>
-				<input type="submit" class="login-btn" name="submit" id="submit-btn">
-				<a href="{{ url_for ('astrics_login') }}" class="login">Log In</a>
-			</form>
-		</main>
-	</body>
+<body>
+    <header>
+        <div class="header_logo"><a href="{{ url_for('astrics_home') }}"><img src="../static/images/logo-no-background.png"></a></div>
+        <div>Register Your Account and Enjoy!!</div>
+    </header>
+    <main>
+        <form method="post" action="{{ url_for('astrics_register') }}">
+            <h3>Astrics Signup</h3>
+            <div class="input-box">
+                <input type="text" placeholder="username" name="username" id="username" required="">
+                <i class="bx bxs-contact"></i>
+            </div>
+            <div class="input-box">
+                <input type="email" placeholder="email" name="email" id="email" required="">
+                <i class="bx bxs-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="password" name="password" id="password" required="">
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+            <input type="submit" class="login-btn" name="submit" id="submit-btn">
+            <a href="{{ url_for ('astrics_login') }}" class="login">Log In</a>
+        </form>
+    </main>
+    <footer>
+        <p>copyright &copy; 2024</p>
+        <ul class="socials">
+            <li>
+                <a href="https://www.facebook.com/profile.php?id=61560236266196"><i class='bx bxl-facebook-circle' style='color:rgb(193,30,30)'></i></a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/astrics550/"></a><i class='bx bxl-instagram'></i>
+            </li>
+            <li>
+                <a href="https://x.com/AstricsSpace"></a><i class='bx bxl-twitter'></i>
+            </li>
+        </ul>
+    </footer>
+</body>
 </html>
