@@ -9,6 +9,8 @@ import requests
 from os import getenv
 from dotenv import load_dotenv
 from backend.models.image import Image
+from backend.sendmail import send_email
+from backend.save_to_file import save_image_to_file
 
 load_dotenv()
 
@@ -28,8 +30,9 @@ def get_images_des(link=None):
 	new_dict["description"] = response["explanation"]
 	instance = Image(**new_dict)
 	print(instance.id)
+	send_email(new_dict["image_url"])
 	instance.save()
-	
+	save_image_to_file(instance)
 
 schedule.every().day.at("06:30").do(lambda: get_images_des(r))
 
