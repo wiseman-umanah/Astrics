@@ -30,11 +30,12 @@ def get_images_des(link=None):
 	new_dict["description"] = response["explanation"]
 	instance = Image(**new_dict)
 	print(instance.id)
-	send_email(new_dict["image_url"])
+	send_email(new_dict["image_url"], new_dict["description"], new_dict["image_title"])
 	instance.save()
 	save_image_to_file(instance)
 
-schedule.every().day.at("06:30").do(lambda: get_images_des(r))
+schedule.every(2).seconds.do(lambda: get_images_des(r))
+# schedule.every().day.at("06:30").do(lambda: get_images_des(r))
 
 while True:
 	schedule.run_pending()

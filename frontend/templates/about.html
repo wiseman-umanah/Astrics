@@ -54,78 +54,18 @@
             <h1>MEET THE DEVELOPMENT TEAM</h1>
             <p>We are proud to introduce the talented and dedicated team behind Astrics. Our diverse group of developers has worked tirelessly to bring this visionary project to life, ensuring that the wonders of the cosmos are accessible to students, researchers, and astronomy enthusiasts worldwide. Their combined expertise, creativity, and commitment have been the driving force behind Astrics' success</p>
             <div class="dev-wrapper">
-                <div class="dev">
-                    <div class="dev-img">
-                        <img src="../static/images/wiseman.png">
+                {% for a in admin %}
+                    <div class="dev">
+                        <div class="dev-img">
+                            <img src="{{ a.dev_pic }}">
+                        </div>
+                        <div class="dev-desc">
+                            <div>{{ a.dev_name }}</div>
+                            <a href="{{ a.dev_linkedin}}"><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></a>
+                        </div>
+                        <div>{{ a.dev_role }}</div>
                     </div>
-                    <div class="dev-desc">
-                        <div>Wiseman Umanah</div>
-                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
-                    </div>
-                </div>
-                <div class="dev">
-                    <div class="dev-img">
-                        <img src="../static/images/wiseman.png">
-                    </div>
-                    <div class="dev-desc">
-                        <div>Wiseman Umanah</div>
-                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
-                    </div>
-                </div>
-                <div class="dev">
-                    <div class="dev-img">
-                        <img src="../static/images/wiseman.png">
-                    </div>
-                    <div class="dev-desc">
-                        <div>Wiseman Umanah</div>
-                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
-                    </div>
-                </div>
-                <div class="dev">
-                    <div class="dev-img">
-                        <img src="../static/images/wiseman.png">
-                    </div>
-                    <div class="dev-desc">
-                        <div>Wiseman Umanah</div>
-                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
-                    </div>
-                </div>
-                <div class="dev">
-                    <div class="dev-img">
-                        <img src="../static/images/wiseman.png">
-                    </div>
-                    <div class="dev-desc">
-                        <div>Wiseman Umanah</div>
-                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
-                    </div>
-                </div>
-                <div class="dev">
-                    <div class="dev-img">
-                        <img src="../static/images/wiseman.png">
-                    </div>
-                    <div class="dev-desc">
-                        <div>Wiseman Umanah</div>
-                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
-                    </div>
-                </div>
-                <div class="dev">
-                    <div class="dev-img">
-                        <img src="../static/images/wiseman.png">
-                    </div>
-                    <div class="dev-desc">
-                        <div>Wiseman Umanah</div>
-                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
-                    </div>
-                </div>
-                <div class="dev">
-                    <div class="dev-img">
-                        <img src="../static/images/wiseman.png">
-                    </div>
-                    <div class="dev-desc">
-                        <div>Wiseman Umanah</div>
-                        <div><i class='bx bxl-linkedin bx-flip-vertical bx-tada' style='color:#ffffff'  ></i></div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </section>
     </main>

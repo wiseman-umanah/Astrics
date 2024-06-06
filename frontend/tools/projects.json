@@ -1,0 +1,26 @@
+[
+    {
+        "project_image": "../static/images/terminal.png",
+        "project_title": "THE AIRBNB PROJECT (CONSOLE)",
+        "project_description": "The AirBnB Clone: Console is a simple yet powerful interface that allows users to create, update and destroy instances with unique IDs. With a user-friendly CLI, it provides a convenient way to harness the details of users with specific and unique IDs based on their class in a database file.",
+        "project_link": "https://github.com/wiseman-umanah/AirBnB_clone.git"
+    },
+    {
+        "project_image": "../static/images/shell.jpeg",
+        "project_title": "THE SIMPLE SHELL",
+        "project_description": "Shell is a user interface to use the services of a computer. It can be a command-line interface –the one we will build- or graphical user interface, like regular software such as Windows Office.",
+        "project_link": "https://github.com/wiseman-umanah/simple_shell.git"
+    },
+    {
+        "project_image": "./static/images/monty.png",
+        "project_title": "THE MONTY PROJECT",
+        "project_description": "Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). It relies on a unique stack, with specific instructions to manipulate it. The goal of this project is to create an interpreter for Monty ByteCodes files.",
+        "project_link": "https://github.com/wiseman-umanah/monty.git"
+    },
+    {
+        "project_image": "../static/images/AirBnB.png",
+        "project_title": "THE AIRBNB PROJECT (FINAL DEPLOY)",
+        "project_description": "The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.",
+        "project_link": "https://github.com/wiseman-umanah/AirBnB_clone_v4.git"
+    }
+]

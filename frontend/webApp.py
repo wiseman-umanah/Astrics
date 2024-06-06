@@ -5,7 +5,7 @@ from flask import Flask, render_template, url_for, redirect, request
 from flask_login import LoginManager, login_user, logout_user
 from os import getenv
 from dotenv import load_dotenv
-from backend.models import db, storage, User, Image  # Import models and storage
+from backend.models import db, storage, User
 from hashlib import md5
 import os
 import json
@@ -38,28 +38,30 @@ def close_db(error):
 @app.route('/home', strict_slashes=False)
 def astrics_home():
     # Load images from file.json
-    img = load_images_from_file()
+    img = load_data_from_file(r"frontend/tools/image.json")
     return render_template('home.html', images=img[::-1], cache_id=uuid.uuid4())
 
-def load_images_from_file():
+def load_data_from_file(filename):
     """Load images from file.json"""
-    images = []
-    if os.path.exists("image.json"):
-        with open("image.json", "r") as file:
+    data = []
+    if os.path.exists(filename):
+        with open(filename, "r") as file:
             try:
-                images = json.load(file)
+                data = json.load(file)
             except json.JSONDecodeError:
-                images = []
-    return images
+                data = []
+    return data
 
 @app.route('/about', strict_slashes=False)
 def astrics_about():
-    # Assuming there is an Admin model
-    return render_template('about.html')
+    adm = load_data_from_file("frontend/tools/dev.json")
+    print(adm)
+    return render_template('about.html', admin=adm)
 
 @app.route('/projects', strict_slashes=False)
 def astrics_projects():
-    return render_template('projects.html')
+    pro = load_data_from_file(r"frontend/tools/projects.json")
+    return render_template('projects.html', projects=pro)
 
 @app.route('/contact', strict_slashes=False)
 def astrics_contact():

@@ -36,49 +36,19 @@
             <p>DISCOVER OTHER PROJECTS FROM US</p>
         </section>
         <section class="projects">
-            <div class="projects-section">
-                <div class=img style="background: url('../static/images/terminal.png'); background-repeat: no-repeat; background-position: center;
-                background-size: 100%;"></div>
-                <div>
-                    <h3>THE AIRBNB PROJECT (CONSOLE)</h3>
-                    <p>
-                        The AirBnB Clone: Console is a simple yet powerful interface that allows users to create, update and destroy instances with unique IDs. With a user-friendly CLI, it provides a convenient way to harness the details of users with specific and unique IDs based on their class in a database file.<br><br>
-                        See more of the project <a href="#">HERE</a>
-                    </p>
+            {% for p in projects %}
+                <div class="projects-section">
+                    <div class=img style="background: url('{{ p.project_image }}'); background-repeat: no-repeat; background-position: center;
+                    background-size: 100%;"></div>
+                    <div>
+                        <h3>{{ p.project_title }}</h3>
+                        <p>
+                            {{p.project_description }}<br><br>
+                            See more of the project <a href="{{ p.project_link }}">HERE</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="projects-section">
-                <div class=img style="background: url('../static/images/shell.jpeg'); background-repeat: no-repeat; background-position: center;
-                background-size: 100%;"></div>
-                <div>
-                    <h3>THE SIMPLE SHELL</h3>
-                    <p>
-                        Shell is a user interface to use the services of a computer. It can be a command-line interface –the one we will build- or graphical user interface, like regular software such as Windows Office.<br><br>See more of the project <a href="#">HERE</a>
-                    </p>
-                </div>
-            </div>
-            <div class="projects-section">
-                <div class=img style="background: url('../static/images/monty.png'); background-repeat: no-repeat; background-position: center;
-                background-size: 100%;"></div>
-                <div>
-                    <h3>THE MONTY PROJECT</h3>
-                    <p>
-                        Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). It relies on a unique stack, with specific instructions to manipulate it. The goal of this project is to create an interpreter for Monty ByteCodes files.<br><br>
-                        See more of the project <a href="#">HERE</a>
-                    </p>
-                </div>
-            </div>
-            <div class="projects-section">
-                <div class=img style="background: url('../static/images/AirBnB.png'); background-repeat: no-repeat; background-position: center;
-                background-size: 100%;"></div>
-                <div>
-                    <h3>THE AIRBNB PROJECT (FINAL DEPLOY)</h3>
-                    <p>
-                        The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.<br><br>
-                        See more of the project <a href="#">HERE</a>
-                    </p>
-                </div>
-            </div>
+            {% endfor %}
         </section>
     </main>
     <footer>

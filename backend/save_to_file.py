@@ -10,8 +10,8 @@ def save_image_to_file(new_image):
     new_image_dict = new_image.to_dict()
 
     # Read existing data from file if it exists
-    if os.path.exists("image.json"):
-        with open("file.json", "r") as file:
+    if os.path.exists("frontend/tools/image.json"):
+        with open("frontend/tools/image.json", "r") as file:
             try:
                 existing_data = json.load(file)
             except json.JSONDecodeError:
@@ -23,7 +23,7 @@ def save_image_to_file(new_image):
     existing_data.append(new_image_dict)
 
     # Write combined data back to file.json
-    with open("image.json", "w") as file:
+    with open("frontend/tools/image.json", "w") as file:
         json.dump(existing_data, file, indent=4)
 
     return new_image_dict

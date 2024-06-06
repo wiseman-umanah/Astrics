@@ -23,25 +23,17 @@ users = storage.all(User).values()
 users = [(x.to_dict())["email"] for x in users]
 
 
-def send_email(image_link):	
-	msg_text = """
-				Hello World, We are glad that this message reached you.
-				 
-				It's a new day with a beautiful view of the space around.
-				This message is delivered to you because of your spevial interest in space, we love you and wish you a good health
-				
+def send_email(image_link, description, title):	
+	msg_text = """%s
+				%s 
 				%s
 				
-				Astrics Corp.""" % (image_link)
+				Astrics Space.""" % (title, description, image_link)
 
-	msg_html = '''<html><head></head><body><h1>Hello World!!</h1>
-				<p>We are glad that this message reached you. ☺
-				 
-				It\'s a new day with a beautiful view of the space around.
-				This message is delivered to you because of your spevial interest in space, we love you and wish you a good health
-				
-				🚀</p>
-				<img src="%s"/><h3>Astrics Corp</h3></body></html>''' % (image_link)
+	msg_html = '''<html><head></head><body><h1>%s</h1>
+				<p>%s</p>
+				<img src="%s"/>
+				<h3>Astrics Space</h3></body></html>''' % (title, description, image_link)
 
 	
 	with smtplib.SMTP(gmail_server, gmail_port) as server:
