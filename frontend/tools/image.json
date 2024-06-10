@@ -43,5 +43,14 @@
         "id": "3247f385-1020-4db5-a5e1-9bb9b268c2d7",
         "created_at": "2024-06-09T06:18:47.989127",
         "__class__": "Image"
+    },
+    {
+        "image_url": "https://apod.nasa.gov/apod/image/2406/LionNeb_Badr_960.jpg",
+        "image_title": "Sh2-132: The Lion Nebula",
+        "description": "Is the Lion Nebula the real ruler of the constellation Cepheus?  This powerful feline appearing nebula is powered by two massive stars, each with a mass over 20 times greater than our Sun.  Formed from shells of ionized gas that have expanded, the nebula's energetic matter not only glows, but is dense enough to contract gravitationally and form stars.  The angular size of the Lion Nebula, officially named Sh2-132,  is slightly greater than that of the full moon.  The gaseous iconic region resides about 10,000 light years away in a constellation named after the King of Aethopia in Greek mythology.   Your Sky Surprise: What picture did APOD feature on your birthday? (post 1995)",
+        "updated_at": "2024-06-10T04:13:13.735716",
+        "id": "623cd55d-4131-427e-80c3-9d0009746786",
+        "created_at": "2024-06-10T04:13:13.741224",
+        "__class__": "Image"
     }
 ]
