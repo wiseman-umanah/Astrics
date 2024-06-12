@@ -61,5 +61,14 @@
         "id": "384321f3-10bf-4d81-a819-de9225512da4",
         "created_at": "2024-06-11T06:21:55.292944",
         "__class__": "Image"
+    },
+    {
+        "image_url": "https://apod.nasa.gov/apod/image/2406/AuroraKarkonosze_Koszela_1080.jpg",
+        "image_title": "Aurora over Karkonosze Mountains",
+        "description": "It was the first time ever. At least, the first time this photographer had ever seen aurora from his home mountains.  And what a spectacular aurora it was. The Karkonosze Mountains in Poland are usually too far south to see any auroras.  But on the amazing night of May 10 - 11, purple and green colors lit up much of the night sky, a surprising spectacle that  also appeared over many mid-latitude locations around the Earth.  The featured image is a composite of six vertical exposures taken during the auroral peak. The futuristic buildings on the right are part of a meteorological observatory located on the highest peak of the Karkonosze Mountains.  The purple color is primarily due to Sun-triggered, high-energy electrons impacting nitrogen molecules in Earth's atmosphere.  Our Sun is reaching its maximum surface activity over the next two years, and although many more auroras are predicted, most will occur over regions closer to the Earth's poles.",
+        "updated_at": "2024-06-12T07:19:32.983514",
+        "id": "4038a1c9-c10b-43cf-b230-111ce4ceb0f4",
+        "created_at": "2024-06-12T07:19:32.985684",
+        "__class__": "Image"
     }
 ]
