@@ -42,7 +42,7 @@ def send_email(image_link, description, title):
 		
 		msg = MIMEMultipart()
 		msg["Subject"] = "Picture Of The Day"
-		msg["From"] = formataddr(("You and Space", f"{my_email}"))
+		msg["From"] = formataddr(("Sunday Space Talk 😁️", f"{my_email}"))
 		msg["To"] = my_email
 		msg.preamble = "Served from Astrics"
 
