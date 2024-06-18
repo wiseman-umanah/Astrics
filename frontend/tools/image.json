@@ -106,5 +106,14 @@
         "id": "f03337e8-1218-42a2-8f7f-3c96e6a90660",
         "created_at": "2024-06-16T14:48:01.452641",
         "__class__": "Image"
+    },
+    {
+        "image_url": "https://apod.nasa.gov/apod/image/2406/GiganticJets_Xuanhua_960.jpg",
+        "image_title": "Gigantic Jets over Himalayan Mountains",
+        "description": "Yes, but can your thunderstorm do this? Pictured here are gigantic jets shooting up from a thunderstorm last week toward the Himalayan Mountains in China and Bhutan. The composite image captured four long jets that occurred only minutes apart. Gigantic jets, documented only in this century, are a type of lightning discharge that occurs between some thunderstorms and the Earth's ionosphere high above them.  They are an unusual type of lightning that is much different from regular cloud-to-cloud and cloud-to-ground lightning. The bottoms of gigantic jets appear similar to a  cloud-to-above strike called blue jets, while the tops appear similar to upper-atmosphere red sprites. Although the mechanism and trigger that cause gigantic jets remains a topic of research, it is clear that the jets reduce charge imbalance between different parts of Earth's atmosphere.  A good way to look for gigantic jets is to watch a powerful but distant thunderstorm from a clear location.",
+        "updated_at": "2024-06-18T07:28:21.727361",
+        "id": "0d3e6753-4d79-4a76-8e0f-450b7ca4c149",
+        "created_at": "2024-06-18T07:28:21.733410",
+        "__class__": "Image"
     }
 ]
