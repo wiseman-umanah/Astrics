@@ -115,5 +115,14 @@
         "id": "0d3e6753-4d79-4a76-8e0f-450b7ca4c149",
         "created_at": "2024-06-18T07:28:21.733410",
         "__class__": "Image"
+    },
+    {
+        "image_url": "https://apod.nasa.gov/apod/image/2406/AraDragons_Taylor_960.jpg",
+        "image_title": "NGC 6188: Dragons of Ara",
+        "description": "Do dragons fight on the altar of the sky?  Although it might appear that way, these dragons are illusions made of thin gas and dust. The emission nebula NGC 6188, home to the glowing clouds, is found about 4,000 light years away near the edge of a large molecular cloud, unseen at visible wavelengths, in the southern constellation Ara (the Altar). Massive, young stars of the embedded Ara OB1 association were formed in that region only a few million years ago, sculpting the dark shapes and powering the nebular glow with stellar winds and intense ultraviolet radiation. The recent star formation itself was likely triggered by winds and supernova explosions from previous generations of massive stars, that swept up and compressed the molecular gas. This impressively detailed image spans over 2 degrees (four full Moons), corresponding to over 150 light years at the estimated distance of NGC 6188.",
+        "updated_at": "2024-06-19T05:34:57.516884",
+        "id": "bb64276d-b479-4b63-a64a-d592bd4c30e7",
+        "created_at": "2024-06-19T05:34:57.522021",
+        "__class__": "Image"
     }
 ]
