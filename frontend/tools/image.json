@@ -160,5 +160,14 @@
         "id": "ff8b8499-3b18-447f-9a12-a27a33886bde",
         "created_at": "2024-06-23T06:15:31.145703",
         "__class__": "Image"
+    },
+    {
+        "image_url": "https://apod.nasa.gov/apod/image/2406/Doodad_PughSung_1080.jpg",
+        "image_title": "The Dark Doodad Nebula",
+        "description": "What is that strange brown ribbon on the sky?  When observing the star cluster NGC 4372, observers frequently take note of an unusual dark streak nearby running about three degrees in length. The streak, actually a long molecular cloud, has become known as the Dark Doodad Nebula.  (Doodad is slang for a thingy or a whatchamacallit.)  Pictured here, the Dark Doodad Nebula sweeps across the center of a rich and colorful starfield.  Its dark color comes from a high concentration of interstellar dust that preferentially scatters visible light.  The globular star cluster NGC 4372 is visible as the fuzzy white spot on the far left, while the bright blue star gamma Muscae is seen to the cluster's upper right. The Dark Doodad Nebula can be found with strong binoculars toward the southern constellation of the Fly (Musca).",
+        "updated_at": "2024-06-25T13:43:14.876532",
+        "id": "0939dfdd-055b-40b1-b25b-46ce7381894f",
+        "created_at": "2024-06-25T13:43:14.879163",
+        "__class__": "Image"
     }
 ]

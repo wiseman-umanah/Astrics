@@ -41,7 +41,7 @@ def send_email(image_link, description, title):
 		server.login(my_email, password_key)
 		
 		msg = MIMEMultipart()
-		msg["Subject"] = "Sunday Update"
+		msg["Subject"] = "Daily Update"
 		msg["From"] = formataddr(("From Astrics Space", f"{my_email}"))
 		msg["To"] = my_email
 		msg.preamble = "Served from Astrics"
