@@ -169,5 +169,14 @@
         "id": "0939dfdd-055b-40b1-b25b-46ce7381894f",
         "created_at": "2024-06-25T13:43:14.879163",
         "__class__": "Image"
+    },
+    {
+        "image_url": "https://www.youtube.com/embed/fisAZYNwDgk?rel=0",
+        "image_title": "Timelapse: Aurora, SAR, and the Milky Way",
+        "description": "What's happening in the sky this unusual night? Most striking in the featured 4.5-hour 360-degree panoramic video, perhaps, is the pink and purple aurora. That's because this night, encompassing May 11, was famous for its auroral skies around the world. As the night progresses, auroral bands shimmer, the central band of our Milky Way Galaxy rises, and stars shift as the Earth rotates beneath them.  Captured here simultaneously is a rare red band running above the aurora: a SAR arc, seen to change only slightly. The flashing below the horizon is caused by passing cars, while the moving spots in the sky are satellites and airplanes.  The featured video was captured from Xinjiang, China with four separate cameras.",
+        "updated_at": "2024-06-26T23:22:17.373704",
+        "id": "4ebc2cfa-c9f3-480d-bcb8-1be4eea08e98",
+        "created_at": "2024-06-26T23:22:17.382089",
+        "__class__": "Image"
     }
 ]
