@@ -67,7 +67,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) f
 
 ## Demo
 
-https://github.com/wiseman-umanah/Astrics/Astrics_vid
+[https://github.com/wiseman-umanah/Astrics/Astrics_vid](https://github.com/wiseman-umanah/Astrics/blob/master/Astrics_vid.mp4)
 
 
 
