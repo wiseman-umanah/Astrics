@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Astrics | Login{% endblock %}
+
+{% block note %}
+	<div>Login and Keep Working</div>
+{% endblock %}
+
+{% block css %}
+    <link href="{% static 'css/reg-logpage.css' %}" rel="stylesheet">
+    <link href="{% static 'css/logpage.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/home-page.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h3>Astrics Login</h3>
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="input-box">
+        {{ form.username }}
+        <i class="bx bxs-envelope"></i>
+    </div>
+    <div class="input-box">
+        {{ form.password}}
+        <i class="bx bxs-lock-alt"></i>
+    </div>
+	{% if messages %}
+		{% for message in messages %}
+			<p class="error-list">{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+
+    <div class="rem-forget">
+        <label><input type="checkbox" name="remember" {% if request.COOKIES.remember %}checked{% endif %}>Remember me</label>
+        <a href="{% url 'password_reset' %}" style="color: rgb(193, 30, 30);">Forgot Password?</a>
+    </div>
+    <button type="submit" class="login-btn" id="submit-btn">Login</button>
+    <div class="register-link">
+        <p>Don't have an account? <a href="{% url 'signup' %}">Register</a></p>
+    </div>
+</form>
+{% endblock %}

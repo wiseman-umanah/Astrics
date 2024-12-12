@@ -1,0 +1,13 @@
+body {
+    background: url('../images/skysearch.jpg') no-repeat;
+    background-size: 100%;
+    background-position: center;
+	background-color: black;
+}
+
+.error-list {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 35px;
+    text-align: center;
+}

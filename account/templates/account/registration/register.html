@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Astrics | Signup{% endblock %}
+
+{% block note %}
+    <div>Signup and Explore with Astrics</div>
+{% endblock %}
+
+{% block css %}
+    <link href="{% static 'css/register.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/home-page.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h3>Astrics Signup</h3>
+<form method="POST" action="{% url 'signup' %}">
+    {% csrf_token %}
+    <div class="input-container">
+        <div class="input-box">
+            {{ form.first_name }}
+            <i class='bx bx-user-circle'></i>
+        </div>
+        <div class="input-box">
+            {{ form.last_name }}
+            <i class='bx bx-user-circle'></i>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <div class="input-box">
+            {{ form.username }}
+            <i class='bx bx-user-circle'></i>
+			{% if form.username.errors %}
+				{% for error in form.username.errors %}
+					<p style="color: red; text-align: center">{{ error }}</p>
+				{% endfor %}
+			{% endif %}
+        </div>
+        <div class="input-box">
+            {{ form.email }}
+            <i class='bx bxs-envelope'></i>
+			{% if form.email.errors %}
+				{% for error in form.email.errors %}
+					<p style="color: red; text-align: center">{{ error }}</p>
+				{% endfor %}
+			{% endif %}
+        </div>
+    </div>
+
+    <div class="input-container">
+        <div class="input-box">
+            {{ form.password }}
+            <i class='bx bxs-key' ></i>
+        </div>
+        <div class="input-box">
+            {{ form.password2 }}
+            <i class="bx bxs-lock-alt"></i>
+			{% if form.password2.errors %}
+				{% for error in form.password2.errors %}
+					<p style="color: red; text-align: center">{{ error }}</p>
+				{% endfor %}
+			{% endif %}
+        </div>
+    </div>
+
+	<ul>
+		<li>
+			<a href="#"><i class='bx bxl-google' style='color:#ff0000; font-size: 2.5rem;'  ></i></a>
+		</li>
+		<li>
+			<a href="#"><i class='bx bxl-facebook-circle' style='color:#006bff; font-size: 2.5rem;'  ></i></a>
+		</li>
+		<li>
+			<a href="#"><i class='bx bxl-twitter' style='color:#67beee; font-size: 2.5rem;'  ></i></a>
+		</li>
+	</ul>
+    <button type="submit" class="login-btn" id="submit-btn">Submit</button>
+    <div class="register-link">
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</form>
+{% endblock %}

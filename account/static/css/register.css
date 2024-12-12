@@ -1,0 +1,46 @@
+main {
+    width: 50%;
+}
+
+
+/* Input Field Container */
+.input-container {
+    display: flex;
+    gap: 10px;
+}
+
+ul {
+	list-style: none;
+	display: flex;
+	gap: 15%;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+
+@media (max-width: 768px) {
+    .input-container {
+        display: block;
+    }
+    .input-box {
+        width: 100%;
+    }
+    main {
+		margin: 20px 0 70px 0;
+        width: 80%;
+        padding: 20px;
+    }
+    main h3 {
+        font-size: 1.3rem;
+    }
+    .input-box input {
+        font-size: 14px;
+        padding: 8px 50px 8px 15px;
+    }
+    main .login-btn {
+        height: 40px;
+        font-size: 14px;
+    }
+}
+

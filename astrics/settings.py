@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-30e7l20evdtl@8apoogpn^9l-5o-$vf^o)00v)b#3_vnij(u=!'
+SECRET_KEY = os.getenv('SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'account.apps.AccountConfig',
 	'space.apps.SpaceConfig',
+	'social_django',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,27 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# for authentication
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+
+# redirection
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv('EMAIL')
+EMAIL_HOST_PASSWORD = os.getenv('PWD_KEY')
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL', 'support@astrics.com')
+
+
+AUTHENTICATION_BACKENDS = (
+	'social_core.backends.google.GoogleOAuth2',
+	'django.contrib.auth.backends.ModelBackend',
+	'account.authenticate.EmailAuthBackend',
+)
