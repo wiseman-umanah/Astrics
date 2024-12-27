@@ -33,6 +33,20 @@ class UserProfileEdit(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
+	profile_pic_id = forms.CharField( 
+		required=False, 
+		widget=forms.TextInput(attrs={
+			'readonly': 'readonly', 
+		})
+	)
+	
+	cover_pic_id = forms.CharField(
+		required=False, 
+		widget=forms.TextInput(attrs={
+			'readonly': 'readonly', 
+		})
+	)
+
 	profile_pic = forms.ImageField(widget=forms.FileInput(
 		attrs= { 'id': 'id_profile_pic',
 		  		'style': 'display: none;',
@@ -45,6 +59,12 @@ class UserProfileForm(forms.ModelForm):
 	class Meta:
 		model = UserProfile
 		fields = ('profile_pic', 'cover_pic')
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		if self.instance:
+			self.fields['profile_pic_id'].initial = self.instance.profile_pic
+			self.fields['cover_pic_id'].initial = self.instance.cover_pic
 
 	def save(self, commit=True):
 		user_profile = super().save(commit=False)

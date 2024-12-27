@@ -41,7 +41,6 @@ def user_login(request):
 def user_registration(request):
 	if request.method == 'POST':
 		user_form = RegisterForm(request.POST)
-		print(dir(user_form))
 		if user_form.is_valid():
 			new_user = user_form.save(commit=False)
 			new_user.email = user_form.clean_email()
