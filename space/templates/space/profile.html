@@ -11,108 +11,119 @@
 {% endblock %}
 
 {% block content %}
-	<div class="edit-user-password">
-		<h4>Change Your Password</h4>
-		<div class="input-box">
-			<input type=text placeholder="Old Password">
+	{% if request.user == user %}
+		<div class="edit-user-password">
+			<h4>Change Your Password</h4>
+			<div class="input-box">
+				<input type=text placeholder="Old Password">
+			</div>
+			<div class="input-box">
+				<input type=text placeholder="New Password">
+			</div>
+			<div class="input-box">
+				<input type=text placeholder="Confirm New Password">
+			</div>
+			<button>Submit</button>
 		</div>
-		<div class="input-box">
-			<input type=text placeholder="New Password">
-		</div>
-		<div class="input-box">
-			<input type=text placeholder="Confirm New Password">
-		</div>
-		<button>Submit</button>
-	</div>
 
-	<form class="edit-section" method="POST"
-		action="{% url 'profile' username=user.username %}"
-		enctype='multipart/form-data'
-	>
-	{% csrf_token %}
-		<div class="edit-pic">
-			<h4>Edit Cover Picture</h4>
-			<div class="edit">
-				<label for="id_cover_pic">
-                    <i class="bx bx-edit" style="color:#ffffff"></i>
-                    <img src="{% static 'images/skysearch.jpg' %}" alt="Cover Picture" id="cover-tag">
-                </label>
-				{{ pic_form.cover_pic }}
-			</div>
-		</div>
-		<div class="edit-pic">
-			<h4>Edit Profile Picture</h4>
-			<div class="edit">
-				<label for="id_profile_pic">
-                    <i class="bx bx-edit" style="color:#ffffff"></i>
-                    <img src="{% static 'images/skysearch.jpg' %}" alt="Cover Picture" id="profile-tag">
-                </label>
-				{{ pic_form.profile_pic }}
-			</div>
-		</div>
-		<div class="edit-user-details">
-			<div class="input-box">
-				{{ form.first_name }}
-			</div>
-			<div class="input-box">
-				{{ form.last_name }}
-			</div>
-			<div class="input-box">
-				{{ form.username }}
-			</div>
-			<div class="input-box">
-				{{ form.email }}
-			</div>
-		</div>
-		<span id="change-password">Change your password</span>
-		<button type="submit">
-			Save Edit
-		</button>
-	</form>
-	<div class="image-div">
-		<img src="{% static 'images/skysearch.jpg' %}">
-	</div>
-	<div class="container">
-		<div class="user-details">
-			<div class="profile-div">
-				<img src="{% static 'images/skysearch.jpg' %}">
-			</div>
-			<div class="user-data">
-				<div>
-					<h2>{{ user.first_name }} {{ user.last_name}}  ({{ user.username }})</h2>
-					0 followers 0 following
+		<form class="edit-section" method="POST"
+			action="{% url 'profile' username=user.username %}"
+			enctype='multipart/form-data'
+		>
+		{% csrf_token %}
+			<div class="edit-pic">
+				<h4>Edit Cover Picture</h4>
+				<div class="edit">
+					<label for="id_cover_pic">
+						<i class="bx bx-edit" style="color:#ffffff"></i>
+						<img src="{% static 'images/skysearch.jpg' %}" alt="Cover Picture" id="cover-tag">
+					</label>
+					{{ pic_form.cover_pic }}
 				</div>
-				<button id="editProfile">
-					Edit Profile
-				</button>
 			</div>
+			<div class="edit-pic">
+				<h4>Edit Profile Picture</h4>
+				<div class="edit">
+					<label for="id_profile_pic">
+						<i class="bx bx-edit" style="color:#ffffff"></i>
+						<img src="{% static 'images/skysearch.jpg' %}" alt="Cover Picture" id="profile-tag">
+					</label>
+					{{ pic_form.profile_pic }}
+				</div>
+			</div>
+			<div class="edit-user-details">
+				<div class="input-box">
+					{{ form.first_name }}
+				</div>
+				<div class="input-box">
+					{{ form.last_name }}
+				</div>
+				<div class="input-box">
+					{{ form.username }}
+				</div>
+				<div class="input-box">
+					{{ form.email }}
+				</div>
+			</div>
+			<span id="change-password">Change your password</span>
+			<button type="submit">
+				Save Edit
+			</button>
+		</form>
+	{% endif %}
+		<div class="image-div">
+			<img src="{% static 'images/skysearch.jpg' %}">
 		</div>
-		<div class="section1">
-			<div class="favorites fav">
-				<div>
-					<h3>Favorites</h3>
-					<span><a href="#"></a>See More</a></span>
+		<div class="container">
+			<div class="user-details">
+				<div class="profile-div">
+					<img src="{% static 'images/skysearch.jpg' %}">
 				</div>
-				No favorites available, try saving some posts.
-			</div>
-			<div class="section2">
-				<div class="favorites ">
-					<h3>New Post</h3>
-					<input type="text">
-				</div>
-				<div class="favorites">
+				<div class="user-data">
 					<div>
-						<h3>Posts</h3>
+						<h2>{{ user.first_name }} {{ user.last_name}}  ({{ user.username }})</h2>
+						0 followers 0 following
 					</div>
+					{% if request.user == user %}
+						<button id="editProfile">
+							Edit Profile
+						</button>
+					{% else %}
+						<button>
+							Follow
+						</button>
+					{% endif %}
+				</div>
+			</div>
+			<div class="section1">
+				<div class="favorites fav">
 					<div>
-						
+						<h3>Favorites</h3>
+						<span><a href="#"></a>See More</a></span>
+					</div>
+					No favorites available, try saving some posts.
+				</div>
+				<div class="section2">
+					<div class="favorites ">
+						<h3>New Post</h3>
+						<input type="text">
+					</div>
+					<div class="favorites">
+						<div>
+							<h3>Posts</h3>
+						</div>
+						<div>
+							
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 {% endblock %}
 
-{% block script %}
-	<script src="{% static 'js/profile.js' %}"></script>
-{% endblock %}
+{% comment %} refix this for user viewing another account  {% endcomment %}
+{% if request.user == user %} 
+	{% block script %}
+		<script src="{% static 'js/profile.js' %}"></script>
+	{% endblock %}
+{% endif %}
