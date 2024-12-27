@@ -1,6 +1,5 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from django.template.loader import render_to_string
 from . import views
 
 

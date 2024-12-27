@@ -1,10 +1,11 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.views import PasswordResetConfirmView
 from . forms import CustomPasswordForm
 from datetime import timedelta
+from . models import UserProfile
 
 
 
@@ -27,7 +28,7 @@ def user_login(request):
 					else:
 						request.session.set_expiry(0)
 
-					return HttpResponse('This is ok')
+					return redirect('profile', username='wiseman')
 				else:
 					messages.error(request, 'Your account is disabled.')
 			else:
@@ -48,6 +49,8 @@ def user_registration(request):
 				user_form.cleaned_data['password']
 			)
 			new_user.save()
+
+			UserProfile.objects.create(user=new_user)
 			return HttpResponse('Account successfully created')
 	else:
 		user_form = RegisterForm()

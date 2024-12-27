@@ -2,8 +2,6 @@ main {
     width: 50%;
 }
 
-
-/* Input Field Container */
 .input-container {
     display: flex;
     gap: 10px;

@@ -1,6 +1,7 @@
 :root {
     --back-color: black;
     --white: white;
+	--primary: rgb(193, 30, 30);
 }
 * {
     padding: 0;

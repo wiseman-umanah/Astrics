@@ -1,13 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib import messages
 from django.contrib.auth.forms import SetPasswordForm
 
 
 class LoginForm(forms.Form):
 	username = forms.CharField(min_length=2, required=True,
 							widget=forms.TextInput(attrs={
-								'placeholder': 'Enter your Username'
+								'placeholder': 'Enter your Username or Email'
 							}))
 	password = forms.CharField(widget=forms.PasswordInput(attrs={
 		'placeholder': 'Enter your password'}), required=True)
@@ -67,4 +66,3 @@ class CustomPasswordForm(SetPasswordForm):
 			'minlength': '8',
 			'maxlength': '16',
 		})
-	
