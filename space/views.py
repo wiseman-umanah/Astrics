@@ -23,7 +23,7 @@ class Profile(View):
 		return render(request, self.template_name, {
 			'form': form,
 			'pic_form': pic_form,
-			'user': user
+			'user_profile': user
 		})
 
 	def post(self, request, username):
@@ -45,5 +45,5 @@ class Profile(View):
 		return render(request, self.template_name, {
 			'form': form,
 			'pic_form': pic_form,
-			'user': user
+			'user_profile': user
 		})

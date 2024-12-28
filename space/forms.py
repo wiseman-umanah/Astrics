@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django import forms
 from account.models import UserProfile
 from . models import FileModel
-from utils.utils import ( upload_file_to_appwrite,
+from utils.files import ( upload_file_to_appwrite,
 						 cleanup_unnecessary_file,
 						 calculate_file_hash )
 
