@@ -51,6 +51,12 @@ class RegisterForm(forms.ModelForm):
 		if User.objects.filter(email=email).exists():
 			raise forms.ValidationError("A user with this email already exist")
 		return email
+	
+	def clean_username(self):
+		username = self.cleaned_data['username']
+		if User.objects.filter(username=username).exists():
+			raise forms.ValidationError("A user with this username already exist")
+		return username
 
 class CustomPasswordForm(SetPasswordForm):
 	def __init__(self, *args, **kwargs):
