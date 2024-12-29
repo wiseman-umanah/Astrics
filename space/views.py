@@ -38,6 +38,7 @@ class Profile(View):
 			pic_form.save(request.user)
 			messages.success(request, 'Profile updated successfully')
 		else:
+			print(form.errors)
 			messages.error(request, 'Error updating your profile')
 
 		return render(request, self.template_name, {

@@ -58,23 +58,13 @@ class UserProfileForm(forms.Form):
 		}), 
 		required=False
 	)
-
-	def clean_profile_pic(self):
-		profile_pic = self.cleaned_data['profile_pic']
-		if profile_pic.size > 10 * 1024 * 1024:
-				raise forms.ValidationError("Profile Image must be less than 10MB.")
-		return profile_pic
-	
-	def clean_cover_pic(self):
-		cover_pic = self.cleaned_data['cover_pic']
-		if cover_pic.size > 10 * 1024 * 1024:
-				raise forms.ValidationError("Cover Image must be less than 10MB.")
-		return cover_pic
 	
 	def save(self, user):
 		user_profile, created = UserProfile.objects.get_or_create(user=user)
 		
 		if profile_pic:= self.cleaned_data.get('profile_pic'):
+			if profile_pic.size > 10 * 1024 * 1024:
+				raise forms.ValidationError("Profile Image must be less than 10MB.")
 			file_hash = calculate_file_hash(profile_pic)
 
 			existing_file = FileModel.objects.filter(hash=file_hash).first()
@@ -88,6 +78,8 @@ class UserProfileForm(forms.Form):
 				user_profile.profile_pic_id = file_id
 		
 		if cover_pic:= self.cleaned_data.get('cover_pic'):
+			if cover_pic.size > 10 * 1024 * 1024:
+				raise forms.ValidationError("Cover Image must be less than 10MB.")
 			file_hash = calculate_file_hash(cover_pic)
 
 			existing_file = FileModel.objects.filter(hash=file_hash).first()
