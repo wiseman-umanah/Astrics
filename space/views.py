@@ -18,7 +18,7 @@ class Profile(View):
 		user_profile = UserProfile.objects.get(user=user)
 
 		form = UserProfileEdit(instance=user)
-		pic_form = UserProfileForm(instance=user_profile)
+		pic_form = UserProfileForm()
 
 		return render(request, self.template_name, {
 			'form': form,
@@ -31,15 +31,13 @@ class Profile(View):
 		user_profile = UserProfile.objects.get(user=user)
 
 		form = UserProfileEdit(instance=user, data=request.POST, files=request.FILES)
-		pic_form = UserProfileForm(instance=user_profile, data=request.POST, files=request.FILES)
+		pic_form = UserProfileForm(data=request.POST, files=request.FILES)
 
 		if form.is_valid() and pic_form.is_valid():
 			form.save()
-			pic_form.save()
+			pic_form.save(request.user)
 			messages.success(request, 'Profile updated successfully')
 		else:
-			print(f'forms: {form.errors}')
-			print(f'pic forms: {pic_form.errors}')
 			messages.error(request, 'Error updating your profile')
 
 		return render(request, self.template_name, {

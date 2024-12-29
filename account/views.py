@@ -28,7 +28,7 @@ def user_login(request):
 					else:
 						request.session.set_expiry(0)
 
-					return redirect('profile', username='wiseman')
+					return redirect('profile', username=user.username)
 				else:
 					messages.error(request, 'Your account is disabled.')
 			else:
