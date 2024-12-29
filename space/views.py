@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from . forms import UserProfileEdit, UserProfileForm
 from django.contrib import messages
-from account.models import UserProfile
 from django.views import View
 from django.utils.decorators import method_decorator
 
@@ -15,7 +14,6 @@ class Profile(View):
 	
 	def get(self, request, username):
 		user = get_object_or_404(User, username=username, is_active=True)
-		user_profile = UserProfile.objects.get(user=user)
 
 		form = UserProfileEdit(instance=user)
 		pic_form = UserProfileForm()
@@ -28,9 +26,8 @@ class Profile(View):
 
 	def post(self, request, username):
 		user = get_object_or_404(User, username=username, is_active=True)
-		user_profile = UserProfile.objects.get(user=user)
 
-		form = UserProfileEdit(instance=user, data=request.POST, files=request.FILES)
+		form = UserProfileEdit(instance=user, data=request.POST)
 		pic_form = UserProfileForm(data=request.POST, files=request.FILES)
 
 		if form.is_valid() and pic_form.is_valid():
@@ -38,7 +35,6 @@ class Profile(View):
 			pic_form.save(request.user)
 			messages.success(request, 'Profile updated successfully')
 		else:
-			print(form.errors)
 			messages.error(request, 'Error updating your profile')
 
 		return render(request, self.template_name, {

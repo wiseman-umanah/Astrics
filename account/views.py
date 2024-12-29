@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
-from django.contrib.auth.views import PasswordResetConfirmView
+from django.contrib.auth.views import PasswordResetConfirmView, PasswordChangeView
 from . forms import CustomPasswordForm
 from datetime import timedelta
 from . models import UserProfile
-
+from django.contrib.auth import update_session_auth_hash
+from django.urls import reverse_lazy
 
 
 def user_login(request):
@@ -59,13 +60,31 @@ def user_registration(request):
 
 
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
-    form_class = CustomPasswordForm
+	form_class = CustomPasswordForm
 
-    def form_valid(self, form):
-        return super().form_valid(form)
+	def form_valid(self, form):
+		return super().form_valid(form)
 
-    def form_invalid(self, form):
-        # Log form errors to help with debugging
-        print("Form Errors:", form.errors)
-        return self.render_to_response(self.get_context_data(form=form))
+	def form_invalid(self, form):
+		# Log form errors to help with debugging
+		print("Form Errors:", form.errors)
+		return self.render_to_response(self.get_context_data(form=form))
 
+
+class CustomPasswordChangeView(PasswordChangeView):
+	template_name = 'account/registration/password_change.html'
+	
+	def get_success_url(self):
+		return reverse_lazy("profile", args=[self.request.user.username])
+
+	def form_valid(self, password_form):
+		password_form.save()
+
+		update_session_auth_hash(self.request, password_form.user)
+		return super().form_valid(password_form)
+
+	def form_invalid(self, password_form):
+		# Log form errors to help with debugging
+		print("Form Errors:", password_form.errors)
+		return self.render_to_response(self.get_context_data(password_form=password_form))
+	

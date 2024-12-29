@@ -14,20 +14,8 @@
 {% block content %}
 	{% with user=user_profile %}
 		{% if request.user == user %}
-			<div class="edit-user-password">
-				<h4>Change Your Password</h4>
-				<div class="input-box">
-					<input type=text placeholder="Old Password">
-				</div>
-				<div class="input-box">
-					<input type=text placeholder="New Password">
-				</div>
-				<div class="input-box">
-					<input type=text placeholder="Confirm New Password">
-				</div>
-				<button>Submit</button>
-			</div>
-
+			{% include 'account/registration/password_change.html' with password_form=password_form %}
+			
 			<form class="edit-section" method="POST"
 				action="{% url 'profile' username=user.username %}"
 				enctype='multipart/form-data'
