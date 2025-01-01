@@ -3,6 +3,7 @@ from django import forms
 from account.models import UserProfile
 from . models import FileModel
 from utils.files import ( upload_file_to_appwrite,
+						 cleanup_unnecessary_file,
 						 calculate_file_hash )
 
 
@@ -69,9 +70,11 @@ class UserProfileForm(forms.Form):
 			existing_file = FileModel.objects.filter(hash=file_hash).first()
 			if existing_file:
 				existing_file.reference_count += 1
+				cleanup_unnecessary_file(user_profile.profile_pic_id)
 				existing_file.save()
 				user_profile.profile_pic_id = existing_file.file_id
 			else:
+				cleanup_unnecessary_file(user_profile.profile_pic_id)
 				profile_pic.seek(0)
 				file_id = upload_file_to_appwrite(profile_pic.read(), filename=profile_pic.name)
 				user_profile.profile_pic_id = file_id
@@ -84,9 +87,11 @@ class UserProfileForm(forms.Form):
 			existing_file = FileModel.objects.filter(hash=file_hash).first()
 			if existing_file:
 				existing_file.reference_count += 1
+				cleanup_unnecessary_file(user_profile.cover_pic_id)
 				existing_file.save()
 				user_profile.cover_pic_id = existing_file.file_id
 			else:
+				cleanup_unnecessary_file(user_profile.cover_pic_id)
 				cover_pic.seek(0)
 				file_id = upload_file_to_appwrite(cover_pic.read(), filename=cover_pic.name)
 				user_profile.cover_pic_id = file_id

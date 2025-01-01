@@ -47,4 +47,3 @@ def cleanup_unnecessary_file(file_id):
 			old_pic.delete()
 		else:
 			old_pic.save()
-			
