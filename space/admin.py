@@ -6,3 +6,5 @@ from . models import FileModel
 @admin.register(FileModel)
 class FileAdmin(admin.ModelAdmin):
 	fields = ('file_id', 'hash', 'reference_count')
+	list_display = ('file_id', 'reference_count')
+	

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'account.apps.AccountConfig',
 	'space.apps.SpaceConfig',
+	'system.apps.SystemConfig',
 	'social_django',
 ]
 

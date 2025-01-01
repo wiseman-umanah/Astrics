@@ -5,3 +5,6 @@ class FileModel(models.Model):
 	hash = models.CharField(max_length=64, unique=True)
 	reference_count = models.IntegerField(default=0)
 	
+
+	def __str__(self):
+		return f'{self.file_id}: {self.reference_count}'

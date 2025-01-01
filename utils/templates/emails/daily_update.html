@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ content.title }}</title>
+</head>
+<body>
+    <h1>{{ content.title }}</h1>
+    <p>Hello, {{ username }}</p>
+    <p>Today's new astronomical content is here!</p>
+    <h2>{{ content.title }}</h2>
+    <p>{{ content.description }}</p>
+    {% if content.media_type == "image" %}
+        <img src="{{ content.content_url }}" alt="{{ content.title }}" style="width:100%;max-width:600px;">
+    {% elif content.media_type == "video" %}
+        <p><a href="{{ content.content_url }}">Watch the video</a></p>
+    {% endif %}
+    {% comment %} <p><a href="https://your-platform.com/content/{{ content.id }}">View on our platform</a></p> {% endcomment %}
+    <p>Regards,<br>Astrics</p>
+</body>
+</html>
