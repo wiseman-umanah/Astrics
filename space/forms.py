@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django import forms
 from account.models import UserProfile
 from . models import FileModel
-from django.contrib.auth.forms import PasswordChangeForm
 from utils.files import ( upload_file_to_appwrite,
 						 cleanup_unnecessary_file,
 						 calculate_file_hash )
@@ -96,3 +95,12 @@ class UserProfileForm(forms.Form):
 
 		user_profile.save()
 		return user_profile
+
+
+class AdminUserProfileForm(forms.ModelForm):
+	profile_pic = forms.ImageField(required=False)
+	cover_pic = forms.ImageField(required=False)
+
+	class Meta:
+		model = UserProfile
+		fields = ("user", "profile_pic_id", "cover_pic_id")
