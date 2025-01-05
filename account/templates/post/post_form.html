@@ -1,0 +1,23 @@
+<form method="POST" enctype="multipart/form-data" class="newpost" action="{% url 'account:post' %}">
+	{% csrf_token %}	
+	
+	<div class="media-preview"></div>
+	<div class="input-box">
+		{{ post_form.title }}
+	</div>
+	<div class="input-box">
+		{{ post_form.description }}
+	</div>
+	<div class="media-section">
+		<div style="position: relative;">
+			<label class="media" for="id_media_file">
+				<i class='bx bxs-movie-play' style='color:#c61212'  ></i>
+				<span>Picture/Video</span>
+			</label>
+			{{ post_form.media_file }}
+		</div>
+		<div>
+			<button>Post</button>
+		</div>
+	</div>
+</form>
