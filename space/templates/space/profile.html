@@ -3,6 +3,7 @@
 {% load static %}
 {% load space_extras %}
 
+
 {% block title %}
 	Astrics | {{ user_profile.username }}
 {% endblock %}
@@ -17,7 +18,7 @@
 			{% include 'account/registration/password_change.html' with password_form=password_form %}
 			
 			<form class="edit-section" method="POST"
-				action="{% url 'profile' username=user.username %}"
+				action="{% url 'space:profile' username=user.username %}"
 				enctype='multipart/form-data'
 			>
 				{% csrf_token %}
@@ -120,30 +121,7 @@
 						
 						<div class="posts">
 							<h3>Posts</h3>
-							<div>
-								<h4>The Twisted Disk of NGC 4753</h4>
-								<small>January 24th, 2025</small>
-								<div>
-									<img src="{% static 'images/skysearch.jpg' %}">
-								</div>
-								<div class="interactions">
-									<div>
-										<small>Love</small>
-										<i class='bx bx-heart'></i>
-									</div>
-									<div>
-										<small>Comment</small>
-										<i class='bx bxs-message-rounded-dots' style='color:#f80000' ></i>
-									</div>
-									<div>
-										<small>Share</small>
-										<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
-									</div>
-									<div>
-										<small>0 loves. 0 comments</small>
-									</div>
-								</div>
-							</div>
+							{% include "posts/list_posts.html" with posts=posts username=user_profile.username %}
 						</div>
 					</div>
 				</div>
@@ -152,8 +130,10 @@
 {% endblock %}
 
 {% comment %} refix this for user viewing another account  {% endcomment %}
-{% if request.user == user %} 
-	{% block script %}
+{% block script %}
+	{% if request.user == user %} 
 		<script src="{% static 'js/profile.js' %}"></script>
-	{% endblock %}
-{% endif %}
+	{% endif %}
+	<script src="{% static 'js/post_scroll.js' %}"></script>
+{% endblock %}
+

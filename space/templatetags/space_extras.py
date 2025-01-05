@@ -17,4 +17,10 @@ def get_pic_link(user, type=0):
 		return f'{url}/files/{user.profile.profile_pic_id}/view?project={getenv("PROJECT_ID")}'
 	else:
 		return f'{url}/files/676bd2d3000e5e2003ae/view?project={getenv("PROJECT_ID")}'
+
+
+@register.filter
+def get_media(file_id):
+	if file_id:
+		return f'{url}/files/{file_id}/view?project={getenv("PROJECT_ID")}'
 	

@@ -1,0 +1,76 @@
+{% load space_extras %}
+
+{% for post in posts %}
+	<div class="post-container">
+		<div class="post-details">
+			<a href="{{ post.user.get_absolute_url }}">
+				<div class="profile-div-small">
+					<img src="{{ post.user|get_pic_link:1 }}" alt="Profile Picture">
+				</div>
+			</a>
+			<div>
+				{% if post.title %}
+					<h4>{{ post.title }}</h4>
+				{% endif %}
+				<small>{{ post.created_at }} | <a href="{{ post.user.get_absolute_url }}"> {{ post.user.username }} </a></small>
+			</div>
+		</div>
+		{% if post.description %}
+			<div>
+				{{ post.description }}
+			</div>
+		{% endif %}
+		{% if post.media_type == "image" %}
+			<div class="post-media">
+				<img src="{{ post.file_id|get_media }}">
+			</div>	
+		{% elif post.media_type == "video" %}
+			<div class="post-media">
+				<video src="{{ post.file_id|get_media }}" controls muted>
+			</div>	
+		{% endif %}
+			
+		<div class="interactions">
+			<div>
+				<small>Love</small>
+				<i class='bx bx-heart'></i>
+			</div>
+			<div>
+				<small>Comment</small>
+				<i class='bx bxs-message-rounded-dots' style='color:#f80000' ></i>
+			</div>
+			<div>
+				<small>Share</small>
+				<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
+			</div>
+			<div>
+				<small>0 loves. 0 comments</small>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+	<script>
+    let page = 1;
+    let empty_page = false;
+    let block_request = false;
+    let username = '{{ username }}';
+
+    $(window).scroll(function() {
+		console.log('wow')
+        let margin = $(document).height() - $(window).height() - 200;
+        if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+            block_request = true;
+            page += 1;
+            console.log(page);
+            
+            $.get(username + '/posts/?page=' + page, function(data) {
+                if (data == '') {
+                    empty_page = true;
+                } else {
+                    block_request = false;
+                    $('.posts').append(data);
+                }
+            })
+        }
+    });
+</script>

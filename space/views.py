@@ -2,10 +2,17 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from . forms import UserProfileEdit, UserProfileForm, UserPostForm
+from . forms import ( UserProfileEdit,
+					 UserProfileForm,
+					 UserPostForm )
 from django.contrib import messages
 from django.views import View
 from django.utils.decorators import method_decorator
+from account.models import Post
+from django.core.paginator import ( Paginator,
+								   EmptyPage,
+								   PageNotAnInteger )
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -18,12 +25,15 @@ class Profile(View):
 		form = UserProfileEdit(instance=user)  
 		pic_form = UserProfileForm()
 		post_form = UserPostForm()
+		
+		posts = Post.objects.filter(user=user)[:3]
 
 		return render(request, self.template_name, {
 			'form': form,
 			'pic_form': pic_form,
 			'post_form': post_form,
-			'user_profile': user
+			'user_profile': user,
+			'posts': posts
 		})
 
 	def post(self, request, username):
@@ -55,3 +65,29 @@ class Profile(View):
 			'post_form': post_form,
 			'user_profile': user
 		})
+
+
+
+
+@login_required
+def post_list(request, username=None):
+	if username:
+		user = get_object_or_404(User, username=username)
+		posts = Post.objects.filter(user=user)
+	else:
+		posts = Post.objects.all()
+	paginator = Paginator(posts, 4)
+	page = request.GET.get('page')
+	
+	try:
+		posts = paginator.page(page)
+	except PageNotAnInteger:
+		posts = paginator.page(1)
+	except EmptyPage:
+		print(paginator.num_pages)
+		posts = ""
+	
+	if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+		return render(request, 'posts/list_posts.html', {'posts': posts})
+	
+	return render(request, 'posts/list_posts.html', {'posts': posts})

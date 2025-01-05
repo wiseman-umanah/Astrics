@@ -113,7 +113,12 @@ img {
 	width: 150px;
 }
 
+.profile-div-small{
+	height: 50px;
+	width: 50px;
+}
 .profile-div,
+.profile-div-small,
 .edit {
 	border-radius: 50%;
 	border: 2px var(--white) solid;
@@ -275,6 +280,7 @@ button {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-top: 20px;
 }
 
 .interactions div {
@@ -282,6 +288,28 @@ button {
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
+}
+
+.post-container {
+	background-color: rgb(26, 26, 26);
+	padding: 20px;
+	border-radius: 10px;
+	margin-bottom: 30px;
+}
+
+.post-details {
+	display: flex;
+	gap: 30px;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.post-media {
+	border-radius: 20px;
+	height: 400px;
+	overflow: hidden;
+	margin-top: 20px;
 }
 
 @media only screen and (min-width: 700px) {
