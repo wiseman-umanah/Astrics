@@ -35,7 +35,7 @@ def user_login(request):
 					else:
 						request.session.set_expiry(0)
 
-					return redirect('profile', username=user.username)
+					return redirect('space:profile', username=user.username)
 				else:
 					messages.error(request, 'Your account is disabled.')
 			else:
@@ -57,7 +57,7 @@ def user_registration(request):
 			new_user.save()
 
 			UserProfile.objects.create(user=new_user)
-			return redirect('profile', username=new_user.username)
+			return redirect('space:profile', username=new_user.username)
 	else:
 		user_form = RegisterForm()
 	return render(request,
