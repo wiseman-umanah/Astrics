@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
@@ -8,6 +8,12 @@ from datetime import timedelta
 from . models import UserProfile
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse_lazy
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.generic.edit import FormView
+from space.forms import UserPostForm
+
 
 
 def user_login(request):
@@ -51,7 +57,7 @@ def user_registration(request):
 			new_user.save()
 
 			UserProfile.objects.create(user=new_user)
-			return HttpResponse('Account successfully created')
+			return redirect('profile', username=new_user.username)
 	else:
 		user_form = RegisterForm()
 	return render(request,
@@ -87,4 +93,25 @@ class CustomPasswordChangeView(PasswordChangeView):
 		# Log form errors to help with debugging
 		print("Form Errors:", password_form.errors)
 		return self.render_to_response(self.get_context_data(password_form=password_form))
+
+
+@method_decorator(login_required, name='dispatch')
+class CreatePostView(FormView):
+	template_name = 'post/post_form.html'
+	form_class = UserPostForm
+
+	def get_success_url(self):
+		return reverse_lazy("profile", args=[self.request.user.username])
+	
+	def form_valid(self, post_form):
+		post = post_form.save(commit=False)
+		post.user = self.request.user
+		post.save()
+
+		return super().form_valid(post_form)
+
+	def form_invalid(self, post_form):
+		# Log form errors to help with debugging
+		print("Form Errors:", post_form.errors)
+		return self.render_to_response(self.get_context_data(post_form=post_form))
 	

@@ -20,7 +20,7 @@
 				action="{% url 'profile' username=user.username %}"
 				enctype='multipart/form-data'
 			>
-			{% csrf_token %}
+				{% csrf_token %}
 				<div class="edit-pic">
 					<h4>Edit Cover Picture</h4>
 					<div class="edit">
@@ -116,16 +116,33 @@
 						No favorites available, try saving some posts.
 					</div>
 					<div class="section2">
-						<div class="favorites ">
-							<h3>New Post</h3>
-							<input type="text">
-						</div>
-						<div class="favorites">
+						{% include "post/post_form.html" with post_form=post_form %}
+						
+						<div class="posts">
+							<h3>Posts</h3>
 							<div>
-								<h3>Posts</h3>
-							</div>
-							<div>
-								
+								<h4>The Twisted Disk of NGC 4753</h4>
+								<small>January 24th, 2025</small>
+								<div>
+									<img src="{% static 'images/skysearch.jpg' %}">
+								</div>
+								<div class="interactions">
+									<div>
+										<small>Love</small>
+										<i class='bx bx-heart'></i>
+									</div>
+									<div>
+										<small>Comment</small>
+										<i class='bx bxs-message-rounded-dots' style='color:#f80000' ></i>
+									</div>
+									<div>
+										<small>Share</small>
+										<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
+									</div>
+									<div>
+										<small>0 loves. 0 comments</small>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

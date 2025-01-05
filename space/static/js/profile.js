@@ -1,6 +1,5 @@
 
 $(document).ready(function () {
-	console.log("hello");
     $('#editProfile').on('click', function (e) {
         e.stopPropagation();
         if ($('.edit-section').css('display') === 'none') {
@@ -76,6 +75,39 @@ $(document).ready(function () {
 				reader.readAsDataURL(file);
 			} else {
 				alert("Please select a valid image file.");
+			}
+		}
+	});
+
+	$('.newpost_description').on('input', function (e) {
+		$(this).css('height' , 'auto');
+		$(this).css('height' , this.scrollHeight + 'px');
+	});
+
+	$('#id_media_file').on('change', function (e) {
+		if (this.files && this.files[0]) {
+			var file = this.files[0];
+			if (file.type.startsWith('image/')) { 
+				var reader = new FileReader();
+	
+				reader.onload = function (e) {
+					$('.media-preview').html($('<img />', { src: e.target.result }));
+				};
+				reader.readAsDataURL(file);
+			} else if (file.type.startsWith('video/')) { 
+				var reader = new FileReader();
+	
+				reader.onload = function (e) {
+					$('.media-preview').html($('<video />', { src: e.target.result,
+						controls: true,
+						autoplay: true,
+						loop: true,
+						muted: true }))
+				};
+				
+				reader.readAsDataURL(file);
+			} else {
+				alert("Please select a valid image/video file.");
 			}
 		}
 	});

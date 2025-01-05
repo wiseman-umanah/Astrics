@@ -69,16 +69,21 @@ main {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Placeholder Styling */
+
 .input-box input::placeholder {
     color: var(--white);
-    opacity: 0.8; /* Slightly dim placeholder text */
+    opacity: 0.8;
 }
 
-/* Input Field Focus Effect */
+
 .input-box input:focus {
     border-color: rgb(193, 30, 30);
     box-shadow: 0 0 5px rgb(193, 30, 30);
+}
+
+.media-preview {
+    overflow: hidden;
+	border-radius: 20px;
 }
 
 .image-div {
@@ -90,11 +95,17 @@ main {
 	border-bottom-left-radius: 20px;
 }
 
+video {
+	width: 100%;
+    height: 100%;
+	object-fit: cover;
+}
+
 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: filter 0.3s ease; /* Smooth transition for brightness on hover */
+    transition: filter 0.3s ease;
 }
 
 .profile-div {
@@ -150,11 +161,60 @@ button {
 	cursor: pointer;
 }
 
-.favorites {
+
+
+.favorites,
+.newpost,
+.posts {
 	border: 2px rgb(193, 30, 30) solid;
 	border-radius: 10px;
 	padding: 10px 15px;
 	margin-bottom: 10px;
+}
+
+.newpost {
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+	gap: 20px;
+}
+
+.media-section {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.media {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	gap: 10px;
+}
+
+.newpost_description {
+	width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 10px 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newpost_description::placeholder {
+    color: white;
+    opacity: 0.8;
+}
+
+
+.newpost_description:focus {
+    border-color: rgb(193, 30, 30);
+    box-shadow: 0 0 5px rgb(193, 30, 30);
 }
 
 .favorites div {
@@ -162,6 +222,15 @@ button {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.fav {
+	max-height: 300px;
+}
+
+.posts h3 {
+	border-bottom: 2px rgb(193, 30, 30) solid;
+	margin-bottom: 30px;
 }
 
 .container {
@@ -197,6 +266,24 @@ button {
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.section1 {
+	margin-bottom: 100px;
+}
+
+.interactions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.interactions div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
 @media only screen and (min-width: 700px) {
 	
 	.profile-div {

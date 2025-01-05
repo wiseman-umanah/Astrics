@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from account.models import UserProfile
+from account.models import UserProfile, Post
 from . models import FileModel
 from utils.files import ( upload_file_to_appwrite,
 						 cleanup_unnecessary_file,
@@ -78,6 +78,10 @@ class UserProfileForm(forms.Form):
 				profile_pic.seek(0)
 				file_id = upload_file_to_appwrite(profile_pic.read(), filename=profile_pic.name)
 				user_profile.profile_pic_id = file_id
+				FileModel.objects.create(
+										hash=file_hash,
+							 			file_id=file_id,
+							 			reference_count=1)
 		
 		if cover_pic:= self.cleaned_data.get('cover_pic'):
 			if cover_pic.size > 10 * 1024 * 1024:
@@ -95,6 +99,10 @@ class UserProfileForm(forms.Form):
 				cover_pic.seek(0)
 				file_id = upload_file_to_appwrite(cover_pic.read(), filename=cover_pic.name)
 				user_profile.cover_pic_id = file_id
+				FileModel.objects.create(
+										hash=file_hash,
+							 			file_id=file_id,
+							 			reference_count=1)
 		
 
 		user_profile.save()
@@ -107,4 +115,71 @@ class AdminUserProfileForm(forms.ModelForm):
 
 	class Meta:
 		model = UserProfile
-		fields = ("user", "profile_pic_id", "cover_pic_id")
+		fields = ("user", "profile_pic_id", "cover_pic_id", "follows")
+
+
+class UserPostForm(forms.ModelForm):
+	media_file = forms.FileField(
+		widget=forms.FileInput(attrs={
+			'id': 'id_media_file',
+			'style': 'display: none;',
+		}),required=False)
+
+	class Meta:
+		model = Post
+		fields = ("title", "description",)
+	
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+
+		self.fields['description'].widget.attrs.update({
+			'placeholder': 'Write your post here',
+			'class': 'newpost_description',
+			'rows': "1"
+		})
+		self.fields['title'].widget.attrs.update({
+			'placeholder': 'Title (optional)',
+		})
+	
+	def clean_media_file(self):
+		media_file = self.cleaned_data.get("media_file")
+
+		if media_file:
+			print(media_file.size)
+			if media_file.size > 10 * 1024 * 1024:
+				raise forms.ValidationError("Media File must less than 10MB")
+		
+		return media_file
+			
+	def save(self, commit=True):
+		instance = super().save(commit=False)
+		media_file = self.cleaned_data.get("media_file")
+
+		if media_file:
+			if media_file.content_type.startswith('image'):
+				instance.media_type = "image"
+			elif media_file.content_type.startswith("video"):
+				instance.media_type = "video"
+			else:
+				raise forms.ValidationError("Only Pictures and Videos of 10MB are Allowed")
+			file_hash = calculate_file_hash(media_file)
+
+			existing_file = FileModel.objects.filter(hash=file_hash).first()
+			if existing_file:
+				existing_file.reference_count += 1
+				existing_file.save()
+				instance.file_id = existing_file.file_id
+			else:
+				media_file.seek(0)
+				file_id = upload_file_to_appwrite(media_file.read(), filename=media_file.name)
+				instance.file_id = file_id
+				FileModel.objects.create(
+										hash=file_hash,
+							 			file_id=file_id,
+							 			reference_count=1)
+		else:
+			instance.media_type = 'text'
+		
+		if commit:
+			instance.save()
+		return instance
