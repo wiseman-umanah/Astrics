@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -9,7 +9,8 @@ from . forms import ( UserProfileEdit,
 from django.contrib import messages
 from django.views import View
 from django.utils.decorators import method_decorator
-from account.models import Post
+from account.models import ( Post, Like,
+							Comment, Favorite )
 from django.core.paginator import ( Paginator,
 								   EmptyPage,
 								   PageNotAnInteger )
@@ -85,7 +86,6 @@ def post_list(request, username=None):
 	except PageNotAnInteger:
 		posts = paginator.page(1)
 	except EmptyPage:
-		print(paginator.num_pages)
 		posts = ""
 	
 	if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -96,11 +96,24 @@ def post_list(request, username=None):
 
 @login_required
 def follow_unfollow(request, username):
-	other_user = get_object_or_404(User, username=username)
+	try:
+		other_user = get_object_or_404(User, username=username)
+	except Http404:
+		return JsonResponse({'status': 'error',
+					   'message': 'The user to be followed does not exist'})
+	
 	user = request.user
 	
-	action = request.GET.get('action')
+	action = request.GET.get('action').lower()
 
+	if not action:
+		return JsonResponse({'status': 'error',
+					   'message': 'Missing action parameter'})
+
+	if action not in ['unfollow', "follow"]:
+		return JsonResponse({'status': 'error',
+					   'message': 'Invalid action. Allowed action [unfollow, follow]'})
+	
 	if user.username != username:
 		if action == "unfollow":
 			user.profile.follows.remove(other_user.profile)
@@ -108,3 +121,34 @@ def follow_unfollow(request, username):
 			user.profile.follows.add(other_user.profile)
 	
 	return JsonResponse({'status': 'success'})
+
+
+@login_required
+def like_unlike(request):
+	post_id = request.GET.get('post_id')
+	action = request.GET.get('action').lower()
+
+	if not post_id or not action:
+		return JsonResponse({'status': 'error', 'message': 'Missing valid paramters'})
+	try:
+		post = get_object_or_404(Post, id=post_id)
+	except Http404:
+		return JsonResponse({'status': 'error',
+					   'message': f'The Post with id {post_id} with does not Exist'})
+
+
+	if action not in ['like', 'unlike']:
+		return JsonResponse({'status': 'error',
+					   'message': 'Invalid action. Allowed action include [like, unlike]'})
+	
+	if action == "like":
+		new_like = Like.objects.create(post=post,
+					  user=request.user)
+		new_like.save()
+
+	elif action == "unlike":
+		old_like = Like.objects.get(post=post, user=request.user)
+		old_like.delete()
+
+	return JsonResponse({'status': 'successful'})
+
