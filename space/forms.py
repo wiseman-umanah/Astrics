@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
-from account.models import UserProfile, Post
+from account.models import ( UserProfile, Post,
+							Comment)
 from . models import FileModel
 from utils.files import ( upload_file_to_appwrite,
 						 cleanup_unnecessary_file,
@@ -183,3 +184,18 @@ class UserPostForm(forms.ModelForm):
 		if commit:
 			instance.save()
 		return instance
+
+
+class CommentForm(forms.ModelForm):
+	class Meta:
+		model = Comment
+		fields = ('content',)
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+	
+		self.fields['content'].widget.attrs.update({
+			'placeholder': 'Share your thoughts',
+			'class': 'newpost_description',
+			'rows': '1'
+		})

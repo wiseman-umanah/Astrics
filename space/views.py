@@ -151,4 +151,3 @@ def like_unlike(request):
 		old_like.delete()
 
 	return JsonResponse({'status': 'successful'})
-
