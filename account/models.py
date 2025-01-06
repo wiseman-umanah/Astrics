@@ -42,3 +42,23 @@ class Post(models.Model):
 
 	def get_absolute_url(self):
 		pass
+
+
+class Like(models.Model):
+	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
+	user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="liked_posts")
+	liked_at = models.DateTimeField(auto_now_add=True)
+
+
+
+class Comment(models.Model):
+	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+	user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="commented_posts")
+	content = models.TextField()
+	comment_on = models.DateTimeField(auto_now_add=True)
+
+
+class Favorite(models.Model):
+	user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="favorites")
+	post = models.ForeignKey(Post, on_delete=models.CASCADE)
+	favorite_at = models.DateTimeField(auto_now_add=True)
