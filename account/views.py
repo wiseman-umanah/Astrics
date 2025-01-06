@@ -8,7 +8,6 @@ from datetime import timedelta
 from . models import UserProfile
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse_lazy
-from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import FormView

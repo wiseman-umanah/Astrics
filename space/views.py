@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -91,3 +92,19 @@ def post_list(request, username=None):
 		return render(request, 'posts/list_posts.html', {'posts': posts})
 	
 	return render(request, 'posts/list_posts.html', {'posts': posts})
+
+
+@login_required
+def follow_unfollow(request, username):
+	other_user = get_object_or_404(User, username=username)
+	user = request.user
+	
+	action = request.GET.get('action')
+
+	if user.username != username:
+		if action == "unfollow":
+			user.profile.follows.remove(other_user.profile)
+		elif action == "follow":
+			user.profile.follows.add(other_user.profile)
+	
+	return JsonResponse({'status': 'success'})
