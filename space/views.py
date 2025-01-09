@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, Http404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from . forms import ( UserProfileEdit,
 					 UserProfileForm,
@@ -11,6 +12,7 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from account.models import ( Post, Like,
 							Comment, Favorite )
+from django.db.models import OuterRef, Exists
 from django.core.paginator import ( Paginator,
 								   EmptyPage,
 								   PageNotAnInteger )
@@ -28,7 +30,8 @@ class Profile(View):
 		pic_form = UserProfileForm()
 		post_form = UserPostForm()
 		
-		posts = Post.objects.filter(user=user)[:3]
+		posts = Post.objects.filter(user=user).annotate(
+			is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user)))[:3]
 
 		return render(request, self.template_name, {
 			'form': form,
@@ -72,12 +75,11 @@ class Profile(View):
 
 
 @login_required
-def post_list(request, username=None):
-	if username:
-		user = get_object_or_404(User, username=username)
-		posts = Post.objects.filter(user=user)
-	else:
-		posts = Post.objects.all()
+def post_list(request, username):
+	user = get_object_or_404(User, username=username)
+	posts = Post.objects.filter(user=user).annotate(
+			is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user)))
+	
 	paginator = Paginator(posts, 4)
 	page = request.GET.get('page')
 	
@@ -124,30 +126,19 @@ def follow_unfollow(request, username):
 
 
 @login_required
-def like_unlike(request):
-	post_id = request.GET.get('post_id')
-	action = request.GET.get('action').lower()
+@csrf_exempt
+def like_unlike(request, post_id):
+	if request.method == "POST":
+		try:
+			post = Post.objects.get(id=post_id)
+		except Http404:
+			return JsonResponse({'status': 'error',
+						'message': f'The Post with id {post_id} with does not Exist'})
 
-	if not post_id or not action:
-		return JsonResponse({'status': 'error', 'message': 'Missing valid paramters'})
-	try:
-		post = get_object_or_404(Post, id=post_id)
-	except Http404:
-		return JsonResponse({'status': 'error',
-					   'message': f'The Post with id {post_id} with does not Exist'})
+		like, created = Like.objects.get_or_create(user=request.user, post=post)
 
+		if not created:
+			like.delete()
+			return JsonResponse({"status": "unliked", "like_count": post.likes.count()})
 
-	if action not in ['like', 'unlike']:
-		return JsonResponse({'status': 'error',
-					   'message': 'Invalid action. Allowed action include [like, unlike]'})
-	
-	if action == "like":
-		new_like = Like.objects.create(post=post,
-					  user=request.user)
-		new_like.save()
-
-	elif action == "unlike":
-		old_like = Like.objects.get(post=post, user=request.user)
-		old_like.delete()
-
-	return JsonResponse({'status': 'successful'})
+		return JsonResponse({"status": "liked", "like_count": post.likes.count()})

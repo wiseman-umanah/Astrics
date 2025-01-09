@@ -31,10 +31,16 @@
 		{% endif %}
 			
 		<div class="interactions">
-			<div>
-				<small>Love</small>
-				<i class='bx bx-heart'></i>
-			</div>
+			{% if post.is_liked %}
+				<button class="reaction-btn" data-post_id="{{ post.id }}">
+					<small>Love</small>
+					<i class='bx bxs-heart'></i>
+			{% else %}
+				<button class="reaction-btn" data-post_id="{{ post.id }}">
+					<small>Love</small>
+					<i class='bx bx-heart'></i>
+			{% endif %}
+				</button>
 			<div>
 				<small>Comment</small>
 				<i class='bx bxs-message-rounded-dots' style='color:#f80000' ></i>
@@ -43,8 +49,8 @@
 				<small>Share</small>
 				<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
 			</div>
-			<div>
-				<small>0 loves. 0 comments</small>
+			<div class="reaction-count">
+				<small>{{ post.likes.count}} love{{ post.likes.count | pluralize }}. 0 comments</small>
 			</div>
 		</div>
 	</div>

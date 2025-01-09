@@ -283,10 +283,18 @@ button {
 	margin-top: 20px;
 }
 
+.reaction-btn {
+	gap: 5px;
+}
+
+.reaction-btn,
 .interactions div {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.interactions div {
 	gap: 10px;
 }
 
