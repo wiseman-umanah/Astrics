@@ -19,8 +19,12 @@
 		
 			<div class="options">
 				<i class='bx bx-dots-vertical-rounded' style='color:#ffffff'  ></i>
-				<div class="options-dropdown">
-					<div>Save</div>
+				<div class="options-dropdown" data-post_id="{{ post.id }}">
+					{% if post.in_favorite %}
+						<div class="save-btn">Remove from Favorite</div>
+					{% else %}
+						<div class="save-btn">Save to Favorite</div>
+					{% endif %}
 				</div>
 			</div>
 		</div>

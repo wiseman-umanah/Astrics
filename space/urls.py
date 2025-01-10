@@ -10,4 +10,5 @@ urlpatterns = [
 	path('<str:username>/relationship/', views.follow_unfollow, name='relationship'),
 	# path('/post')
 	path('post/<int:post_id>/like/', views.like_unlike, name='like-post'),
+	path('post/<int:post_id>/save/', views.save_remove_favorite, name='save_remove'),
 ]

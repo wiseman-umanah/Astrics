@@ -41,5 +41,26 @@ $(document).ready(function () {
 			options.children('.options-dropdown').css('display', 'none');
 			options = null;
 		}
-	})
+	});
+
+	$('.save-btn').on('click', function (e) {
+		e.preventDefault();
+
+		let post_id = $(this).parent(".options-dropdown").data('post_id');
+		console.log(post_id);
+
+		let save_btn = $(this)
+
+		$.ajax({
+			url: 'post/' + post_id + '/save/',
+			method: 'POST',
+			success: function(response) {
+				if (response.status == "added") {
+					save_btn.text('Remove from Favorite')
+				} else if (response.status == "removed") {
+					save_btn.text('Save from Favorite')
+				}
+			}
+		})
+	});
 })

@@ -31,7 +31,10 @@ class Profile(View):
 		post_form = UserPostForm()
 		
 		posts = Post.objects.filter(user=user).annotate(
-			is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user)))[:3]
+			is_liked=Exists(Like.objects.filter(
+				post=OuterRef('pk'), user=request.user))).annotate(
+					in_favorite=Exists(Favorite.objects.filter(
+						post=OuterRef('pk'), user=request.user)))[:3]
 
 		return render(request, self.template_name, {
 			'form': form,
@@ -142,3 +145,22 @@ def like_unlike(request, post_id):
 			return JsonResponse({"status": "unliked", "like_count": post.likes.count()})
 
 		return JsonResponse({"status": "liked", "like_count": post.likes.count()})
+
+
+@login_required
+@csrf_exempt
+def save_remove_favorite(request, post_id):
+	if request.method == "POST":
+		try:
+			post = Post.objects.get(id=post_id)
+		except Http404:
+			return JsonResponse({'status': 'error',
+						'message': f'The Post with id {post_id} with does not Exist'})
+
+	fav, created = Favorite.objects.get_or_create(user=request.user, post=post)
+
+	if not created:
+		fav.delete()
+		return JsonResponse({'status': 'removed', "message": "Post removed from favorite"})
+
+	return JsonResponse({'status': 'added', "message": "Post added to your favorite"})

@@ -327,6 +327,7 @@ button {
 	padding: 10px 20px;
 	border-radius: 5px;
 	position: absolute;
+	min-width: max-content;
 	top: 100%;
 	right: 0;
 	display: none;
