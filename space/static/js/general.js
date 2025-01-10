@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	let options; 
+
 	$('.reaction-btn').on('click', function (e) {
 		e.preventDefault();
 
@@ -17,5 +19,27 @@ $(document).ready(function () {
 				$('.reaction-count').html(`<small>${response.like_count} loves</small>`)
 			}
 		})
+	});
+
+	$('.options').on('click', function(e) {
+		if (options && options[0] !== $(this)[0]) {
+			options.children('.options-dropdown').css('display', 'none');
+		}
+
+		const dropdown = $(this).children('.options-dropdown');
+		const isOpen = dropdown.css('display') === 'block';
+
+		dropdown.css('display', isOpen ? 'none': 'block');
+
+		options = isOpen ? null : $(this);
+
+		e.stopPropagation()
+	})
+
+	$(document).on('click', function (e) {
+		if (options) {
+			options.children('.options-dropdown').css('display', 'none');
+			options = null;
+		}
 	})
 })

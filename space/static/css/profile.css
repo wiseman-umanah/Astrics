@@ -313,6 +313,35 @@ button {
 	margin-bottom: 20px;
 }
 
+.options {
+	position: relative;
+	cursor: pointer;
+}
+
+.options-dropdown {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	padding: 10px 20px;
+	border-radius: 5px;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	display: none;
+}
+
+.options-dropdown div {
+	border-bottom: 1px solid rgb(38, 38, 38);
+}
+
+.post-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .post-media {
 	border-radius: 20px;
 	height: 400px;

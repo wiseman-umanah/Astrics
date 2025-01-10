@@ -43,12 +43,17 @@ class Post(models.Model):
 	def get_absolute_url(self):
 		pass
 
+	def is_liked_by(self, user):
+		return self.likes.filter(user=user).exist()
+
 
 class Like(models.Model):
 	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
 	user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="liked_posts")
 	liked_at = models.DateTimeField(auto_now_add=True)
 
+	class Meta:
+		unique_together = ('post', 'user', )
 
 
 class Comment(models.Model):
