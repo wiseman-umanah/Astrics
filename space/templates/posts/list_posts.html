@@ -1,3 +1,4 @@
+{% load social_share %}
 {% load space_extras %}
 
 {% for post in posts %}
@@ -55,13 +56,16 @@
 						<i class='bx bx-heart'></i>
 				{% endif %}
 				</button>
-				<div>
+				<div class="share-btn">
 					<small>Share</small>
 					<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
+					<div>
+						{% comment %} {% post_to_facebook post.get_absolute_url '<i class="bx bx-facebook" style="color:#ffffff"></i>' %} {% endcomment %}
+					</div>
 				</div>
 			</div>
 			<div class="reaction-count">
-				<small>{{ post.likes.count }} love{{ post.likes.count | pluralize }}. 0 comments</small>
+				<small>{{ post.likes.count }} love{{ post.likes.count | pluralize }} . {{ post.comments.count }} comment{{ post.comments.count | pluralize }}</small>
 			</div>
 		</div>
 		<form class="comment-section" action="{% url 'space:create_comment' post.id %}">

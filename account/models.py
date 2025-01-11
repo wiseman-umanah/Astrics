@@ -41,7 +41,7 @@ class Post(models.Model):
 		return f'Post with id {self.id} created by user {self.user.username}'
 
 	def get_absolute_url(self):
-		pass
+		return reverse('view_post', args=[self.user.username, self.id])
 
 	def is_liked_by(self, user):
 		return self.likes.filter(user=user).exist()
@@ -61,6 +61,10 @@ class Comment(models.Model):
 	user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="commented_posts")
 	content = models.TextField()
 	comment_on = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		unique_together = ('post', 'user')
+		ordering = ('-comment_on',)
 
 
 class Favorite(models.Model):

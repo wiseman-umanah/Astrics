@@ -16,7 +16,7 @@ $(document).ready(function () {
 				} else if (response.status == "unliked") {
 					reaction_btn.html('<small>Love</small> <i class="bx bx-heart">')
 				}
-				reaction_btn.parent('.interactions').children('.reaction-count').html(`<small>${response.like_count} loves</small>`)
+				reaction_btn.closest('.interactions').find('.reaction-count').html(`<small>${response.like_count} loves . ${response.comment_count} comments </small>`);
 			}
 		})
 	});

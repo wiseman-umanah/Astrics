@@ -141,9 +141,9 @@ def like_unlike(request, post_id):
 
 		if not created:
 			like.delete()
-			return JsonResponse({"status": "unliked", "like_count": post.likes.count()})
+			return JsonResponse({"status": "unliked", "like_count": post.likes.count(), "comment_count": post.comments.count()})
 
-		return JsonResponse({"status": "liked", "like_count": post.likes.count()})
+		return JsonResponse({"status": "liked", "like_count": post.likes.count(), "comment_count": post.comments.count()})
 
 
 @login_required
