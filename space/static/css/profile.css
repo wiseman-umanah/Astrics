@@ -222,7 +222,7 @@ button {
     box-shadow: 0 0 5px rgb(193, 30, 30);
 }
 
-.favorites div {
+.favorites .fav-header {
 	border-bottom: 2px rgb(193, 30, 30) solid;
 	display: flex;
 	justify-content: space-between;
@@ -230,7 +230,10 @@ button {
 }
 
 .fav {
-	max-height: 300px;
+	max-height: 310px;
+	display: flex;
+  	flex-direction: column;
+	justify-content: space-between;
 }
 
 .posts h3 {
@@ -348,6 +351,17 @@ button {
 	height: 400px;
 	overflow: hidden;
 	margin-top: 20px;
+}
+
+.user-favs {
+	display: flex;
+	gap: 10px;
+}
+
+.user-favs div {
+	height: 250px;
+	overflow: hidden;
+	border-radius: 10px;
 }
 
 @media only screen and (min-width: 700px) {
