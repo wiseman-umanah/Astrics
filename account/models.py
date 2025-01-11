@@ -70,3 +70,4 @@ class Favorite(models.Model):
 
 	class Meta:
 		unique_together = ('post', 'user')
+		ordering = ('-favorite_at',)

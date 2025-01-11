@@ -120,7 +120,17 @@
 							<h3>Favorites</h3>
 							<span><a href="#"></a>See More</a></span>
 						</div>
-						No favorites available, try saving some posts.
+						{% if favorites %}
+							<div class="user-favs">
+								{% for fav in favorites %}
+									<div>
+										<img src="{{ fav.post.file_id | get_media }}">
+									</div>
+								{% endfor %}								
+							</div>
+						{% else %}
+							No favorites available, try saving some posts.
+						{% endif %}
 					</div>
 					<div class="section2">
 						{% include "post/post_form.html" with post_form=post_form %}

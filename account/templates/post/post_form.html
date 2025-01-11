@@ -1,23 +1,22 @@
-<form method="POST" enctype="multipart/form-data" class="newpost" action="{% url 'account:post' %}">
-	{% csrf_token %}	
-	
+<form method="POST" enctype="multipart/form-data" class="newpost" action="{% url 'space:create_post' %}">	
 	<div class="media-preview"></div>
 	<div class="input-box">
-		{{ post_form.title }}
+		<input type="text" name="title" maxlength="255" placeholder="Title (optional)" id="id_title">
 	</div>
-	<div class="input-box">
-		{{ post_form.description }}
+	<div class="input-box">	
+		<textarea name="description" cols="40" rows="1" placeholder="Write your post here" class="newpost_description" id="id_description"></textarea>
 	</div>
 	<div class="media-section">
 		<div style="position: relative;">
 			<label class="media" for="id_media_file">
-				<i class='bx bxs-movie-play' style='color:#c61212'  ></i>
+				<i class="bx bxs-movie-play" style="color:#c61212"></i>
 				<span>Picture/Video</span>
 			</label>
-			{{ post_form.media_file }}
+			<input type="file" name="media_file" id="id_media_file" style="display: none;"
+			accept="image/*, video/*">
 		</div>
 		<div>
-			<button>Post</button>
+			<button class="post_button">Post</button>
 		</div>
 	</div>
 </form>

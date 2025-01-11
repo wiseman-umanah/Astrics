@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	let options; 
-
-	$('.reaction-btn').on('click', function (e) {
+	
+	$(document).on('click', '.reaction-btn', function (e) {
 		e.preventDefault();
 
 		let post_id = $(this).data('post_id');
@@ -16,12 +16,12 @@ $(document).ready(function () {
 				} else if (response.status == "unliked") {
 					reaction_btn.html('<small>Love</small> <i class="bx bx-heart">')
 				}
-				$('.reaction-count').html(`<small>${response.like_count} loves</small>`)
+				reaction_btn.parent('.interactions').children('.reaction-count').html(`<small>${response.like_count} loves</small>`)
 			}
 		})
 	});
 
-	$('.options').on('click', function(e) {
+	$(document).on('click', '.options', function(e) {
 		if (options && options[0] !== $(this)[0]) {
 			options.children('.options-dropdown').css('display', 'none');
 		}
@@ -43,7 +43,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$('.save-btn').on('click', function (e) {
+	$(document).on('click', '.save-btn', function (e) {
 		e.preventDefault();
 
 		let post_id = $(this).parent(".options-dropdown").data('post_id');
@@ -62,5 +62,27 @@ $(document).ready(function () {
 				}
 			}
 		})
+	});
+
+	$('.post_button').on('submit', function(e) {
+		e.preventDefault();
+
+		const formData = new FormData(this);
+
+		$.ajax({
+			url: 'create_post/',
+			type: 'POST',
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function(response) {
+				if (response.status == 200) {
+					$('.posts').prepend(response.posts);
+				}
+			},
+			error: function(xhr, status, error) {
+				alert('Error uploading media: ' + error);
+			}
+		});
 	});
 })

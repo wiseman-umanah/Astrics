@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, Http404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -28,7 +28,6 @@ class Profile(View):
 
 		form = UserProfileEdit(instance=user)  
 		pic_form = UserProfileForm()
-		post_form = UserPostForm()
 		
 		posts = Post.objects.filter(user=user).annotate(
 			is_liked=Exists(Like.objects.filter(
@@ -36,12 +35,16 @@ class Profile(View):
 					in_favorite=Exists(Favorite.objects.filter(
 						post=OuterRef('pk'), user=request.user)))[:3]
 
+		favorites = Favorite.objects.filter(
+			user=user,
+			post__media_type="image")[:5]
+		
 		return render(request, self.template_name, {
 			'form': form,
 			'pic_form': pic_form,
-			'post_form': post_form,
 			'user_profile': user,
-			'posts': posts
+			'posts': posts,
+			'favorites': favorites
 		})
 
 	def post(self, request, username):
@@ -49,28 +52,22 @@ class Profile(View):
 
 		form = UserProfileEdit(instance=user, data=request.POST)
 		pic_form = UserProfileForm(data=request.POST, files=request.FILES)
-		post_form = UserPostForm(data=request.POST, files=request.FILES)
 
-
+		print("POST Data:", request.POST)
+		print("Files:", request.FILES)
+	
 		if form.is_valid() and pic_form.is_valid():
 			form.save()
 			pic_form.save(request.user)
 			messages.success(request, 'Profile updated successfully')
 		else:
+			print("form", form.errors)
+			print("pic", pic_form.errors)
 			messages.error(request, 'Error updating your profile')
-
-		if post_form.is_valid():
-			post = post_form.save(commit=False)
-			post.user = request.user
-			post.save()
-			messages.success(request, 'Post created successfully')
-		else:
-			messages.error(request, 'Error creating new post')
 
 		return render(request, self.template_name, {
 			'form': form,
 			'pic_form': pic_form,
-			'post_form': post_form,
 			'user_profile': user
 		})
 
@@ -78,6 +75,7 @@ class Profile(View):
 
 
 @login_required
+@csrf_exempt
 def post_list(request, username):
 	user = get_object_or_404(User, username=username)
 	posts = Post.objects.filter(user=user).annotate(
@@ -164,3 +162,20 @@ def save_remove_favorite(request, post_id):
 		return JsonResponse({'status': 'removed', "message": "Post removed from favorite"})
 
 	return JsonResponse({'status': 'added', "message": "Post added to your favorite"})
+
+
+@login_required
+@csrf_exempt
+def create_post(request):
+	if request.method == "POST":
+		form = UserPostForm(request.POST, request.FILES)
+		if form.is_valid():
+			post = form.save(commit=False)
+			post.user = request.user
+			post.save()
+		
+			return redirect('space:profile', username=request.user)
+		else:
+			print("form failed here", form.errors)
+			return JsonResponse({'message': 'Invalid form submission'}, status=400)
+		
