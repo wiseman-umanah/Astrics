@@ -6,7 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from . forms import ( UserProfileEdit,
 					 UserProfileForm,
-					 UserPostForm )
+					 UserPostForm,
+					CommentForm )
 from django.contrib import messages
 from django.views import View
 from django.utils.decorators import method_decorator
@@ -178,4 +179,28 @@ def create_post(request):
 		else:
 			print("form failed here", form.errors)
 			return JsonResponse({'message': 'Invalid form submission'}, status=400)
+
+
+@login_required
+@csrf_exempt
+def create_comment(request, post_id):
+	if request.method == "POST":
+		try:
+			post = get_object_or_404(Post, id=post_id)
+		except Http404:
+			return JsonResponse({'message': 'Post does not exist'}, status=404)
+		print('hey')
+		form = CommentForm(request.POST)
+
+		print(request.POST)
 		
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.user = request.user
+			comment.post = post
+			comment.save()
+			return JsonResponse({'message': 'Comment successful'}, status=200)
+		else:
+			print('comment form error', form.errors)
+			return JsonResponse({'message': 'Invalid form parameters'}, status=400)
+			

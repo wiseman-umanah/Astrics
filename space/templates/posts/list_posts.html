@@ -44,28 +44,32 @@
 		{% endif %}
 			
 		<div class="interactions">
-			{% if post.is_liked %}
-				<button class="reaction-btn" data-post_id="{{ post.id }}">
-					<small>Love</small>
-					<i class='bx bxs-heart'></i>
-			{% else %}
-				<button class="reaction-btn" data-post_id="{{ post.id }}">
-					<small>Love</small>
-					<i class='bx bx-heart'></i>
-			{% endif %}
+			<div>
+				{% if post.is_liked %}
+					<button class="reaction-btn" data-post_id="{{ post.id }}">
+						<small>Love</small>
+						<i class='bx bxs-heart'></i>
+				{% else %}
+					<button class="reaction-btn" data-post_id="{{ post.id }}">
+						<small>Love</small>
+						<i class='bx bx-heart'></i>
+				{% endif %}
 				</button>
-			<div>
-				<small>Comment</small>
-				<i class='bx bxs-message-rounded-dots' style='color:#f80000' ></i>
-			</div>
-			<div>
-				<small>Share</small>
-				<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
+				<div>
+					<small>Share</small>
+					<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
+				</div>
 			</div>
 			<div class="reaction-count">
-				<small>{{ post.likes.count}} love{{ post.likes.count | pluralize }}. 0 comments</small>
+				<small>{{ post.likes.count }} love{{ post.likes.count | pluralize }}. 0 comments</small>
 			</div>
 		</div>
+		<form class="comment-section" action="{% url 'space:create_comment' post.id %}">
+			<div class="input-box">	
+				<textarea name="content" id="id_content" cols="40" rows="1" placeholder="Share your thought here" class="newpost_description"></textarea>
+			</div>
+			<button class="comment-btn" data-post_id="{{ post.id }}">Comment</button>
+		</form>
 	</div>
 {% endfor %}
 	<script>

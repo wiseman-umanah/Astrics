@@ -364,6 +364,13 @@ button {
 	border-radius: 10px;
 }
 
+.comment-section {
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 @media only screen and (min-width: 700px) {
 	
 	.profile-div {

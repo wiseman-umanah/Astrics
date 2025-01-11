@@ -85,4 +85,31 @@ $(document).ready(function () {
 			}
 		});
 	});
+
+	$(document).on('click', '.comment-btn', function (e) {
+		console.log('what')
+		e.preventDefault();
+
+		let post_id = $(this).data('post_id');
+		let form = $(this).closest('form')[0];
+		const formData = new FormData(form);
+
+		$.ajax({
+			url: 'post/' + post_id + '/create_comment',
+			method: 'POST',
+			data: formData,
+			processData: false,
+        	contentType: false,
+			success: function(response, textStatus, xhr) {
+				if (xhr.status == 200) {
+					console.log('Comment successful')
+				} else {
+					console.log('Failed')
+				}
+			},
+			error: function(xhr, status, error) {
+				console.error('AJAX Error: ' + error);
+			}
+		})
+	});
 })

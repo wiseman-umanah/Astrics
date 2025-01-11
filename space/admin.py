@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . models import FileModel
-from account.models import Post
+from account.models import Post, Comment
 from space.forms import UserPostForm
 
 # Register your models here.
@@ -26,4 +26,9 @@ class PostAdmin(admin.ModelAdmin):
 
 	class Meta:
 		ordering = ['-created_at']
-	
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+	readonly_fields = ('post', 'user',)
+	list_display = ('id', 'content', 'comment_on',)
+	search_fields = ('id', 'content',)
