@@ -5,6 +5,7 @@ from . import views
 app_name  = 'space'
 
 urlpatterns = [
+	path('post/', views.get_post, name='post'),
 	path('<str:username>', views.Profile.as_view(), name='profile'),
 	path('<str:username>/posts/', views.post_list, name='posts'),
 	path('<str:username>/relationship/', views.follow_unfollow, name='relationship'),

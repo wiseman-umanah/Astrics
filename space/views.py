@@ -203,4 +203,7 @@ def create_comment(request, post_id):
 		else:
 			print('comment form error', form.errors)
 			return JsonResponse({'message': 'Invalid form parameters'}, status=400)
-			
+
+
+def get_post(request):
+	return render(request, 'posts/post.html')
