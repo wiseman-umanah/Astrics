@@ -10,6 +10,7 @@ urlpatterns = [
 	path('<str:username>/relationship/', views.follow_unfollow, name='relationship'),
 	path('create_post/', views.create_post, name='create_post'),
 	path('<str:username>/post/<int:post_id>', views.get_post, name='view-post'),
+	path('<str:username>/post/<int:post_id>/comments', views.get_comments, name='view-comments'),
 	path('post/<int:post_id>/like/', views.like_unlike, name='like-post'),
 	path('post/<int:post_id>/save/', views.save_remove_favorite, name='save_remove'),
 	path('post/<int:post_id>/create_comment', views.create_comment, name="create_comment"),

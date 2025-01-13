@@ -207,6 +207,7 @@ def create_comment(request, post_id):
 			return JsonResponse({'message': 'Invalid form parameters'}, status=400)
 
 
+@login_required
 def get_post(request, username, post_id):
 	user = get_object_or_404(User, username=username)
 
@@ -216,5 +217,30 @@ def get_post(request, username, post_id):
 						post=OuterRef('pk'), user=request.user)))
 	post = post_annotate.get(id=post_id, user=user)
 	
+	comments = post.comments.all()[:10]
+
 	return render(request, 'posts/post.html', {'post': post,
-											'user': user})
+											'user': user,
+											'comments': comments})
+
+
+@login_required
+@csrf_exempt
+def get_comments(request, username, post_id):
+	user = get_object_or_404(User, username=username)
+
+	post = Post.objects.get(id=post_id, user=user)
+	paginator = Paginator(post.comments.all(), 10)
+	page = request.GET.get('page')
+
+	try:
+		comments = paginator.page(page)
+	except PageNotAnInteger:
+		comments = paginator.page(1)
+	except EmptyPage:
+		comments = ""
+	
+	if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+		return render(request, 'posts/comments.html', {'comments': comments})
+	
+	return render(request, 'posts/comments.html', {'comments': comments})
