@@ -4,11 +4,11 @@ $(document).ready(function () {
 	$(document).on('click', '.reaction-btn', function (e) {
 		e.preventDefault();
 
-		let post_id = $(this).data('post_id');
 		let reaction_btn = $(this)
+		let like_url = $(this).data('like_url');
 
 		$.ajax({
-			url: 'post/' + post_id + '/like/',
+			url: like_url,
 			method: 'POST',
 			success: function(response) {
 				if (response.status == "liked") {

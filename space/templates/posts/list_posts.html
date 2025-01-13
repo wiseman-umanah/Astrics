@@ -29,29 +29,32 @@
 				</div>
 			</div>
 		</div>
-		{% if post.description %}
-			<div>
-				{{ post.description }}
-			</div>
-		{% endif %}
-		{% if post.media_type == "image" %}
-			<div class="post-media">
-				<img src="{{ post.file_id|get_media }}">
-			</div>	
-		{% elif post.media_type == "video" %}
-			<div class="post-media">
-				<video src="{{ post.file_id|get_media }}" controls muted>
-			</div>	
-		{% endif %}
+		<a href="{{ post.get_absolute_url }}">
+			{% if post.description %}
+				<div>
+					{{ post.description }}
+				</div>
+			{% endif %}
+		
+			{% if post.media_type == "image" %}
+				<div class="post-media">
+					<img src="{{ post.file_id|get_media }}">
+				</div>	
+			{% elif post.media_type == "video" %}
+				<div class="post-media">
+					<video src="{{ post.file_id|get_media }}" controls muted>
+				</div>	
+			{% endif %}
+		</a>
 			
 		<div class="interactions">
 			<div>
 				{% if post.is_liked %}
-					<button class="reaction-btn" data-post_id="{{ post.id }}">
+					<button class="reaction-btn" data-post_id="{{ post.id }}" data-like_url="{% url 'space:like-post' post.id %}">
 						<small>Love</small>
 						<i class='bx bxs-heart'></i>
 				{% else %}
-					<button class="reaction-btn" data-post_id="{{ post.id }}">
+					<button class="reaction-btn" data-post_id="{{ post.id }}" data-like_url="{% url 'space:like-post' post.id %}">
 						<small>Love</small>
 						<i class='bx bx-heart'></i>
 				{% endif %}

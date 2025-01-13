@@ -80,7 +80,9 @@ class Profile(View):
 def post_list(request, username):
 	user = get_object_or_404(User, username=username)
 	posts = Post.objects.filter(user=user).annotate(
-			is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user)))
+			is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user))).annotate(
+					in_favorite=Exists(Favorite.objects.filter(
+						post=OuterRef('pk'), user=request.user)))
 	
 	paginator = Paginator(posts, 4)
 	page = request.GET.get('page')
@@ -189,7 +191,7 @@ def create_comment(request, post_id):
 			post = get_object_or_404(Post, id=post_id)
 		except Http404:
 			return JsonResponse({'message': 'Post does not exist'}, status=404)
-		print('hey')
+
 		form = CommentForm(request.POST)
 
 		print(request.POST)
@@ -205,5 +207,14 @@ def create_comment(request, post_id):
 			return JsonResponse({'message': 'Invalid form parameters'}, status=400)
 
 
-def get_post(request):
-	return render(request, 'posts/post.html')
+def get_post(request, username, post_id):
+	user = get_object_or_404(User, username=username)
+
+	post_annotate = Post.objects.annotate(
+		is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user))).annotate(
+					in_favorite=Exists(Favorite.objects.filter(
+						post=OuterRef('pk'), user=request.user)))
+	post = post_annotate.get(id=post_id, user=user)
+	
+	return render(request, 'posts/post.html', {'post': post,
+											'user': user})

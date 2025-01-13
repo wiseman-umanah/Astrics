@@ -123,9 +123,11 @@
 						{% if favorites %}
 							<div class="user-favs">
 								{% for fav in favorites %}
-									<div>
-										<img src="{{ fav.post.file_id | get_media }}">
-									</div>
+									<a href="{{ fav.post.get_absolute_url }}">
+										<div>
+											<img src="{{ fav.post.file_id | get_media }}">
+										</div>
+									</a>
 								{% endfor %}								
 							</div>
 						{% else %}

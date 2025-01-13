@@ -41,7 +41,7 @@ class Post(models.Model):
 		return f'Post with id {self.id} created by user {self.user.username}'
 
 	def get_absolute_url(self):
-		return reverse('view_post', args=[self.user.username, self.id])
+		return reverse('space:view-post', args=[self.user.username, self.id])
 
 	def is_liked_by(self, user):
 		return self.likes.filter(user=user).exist()

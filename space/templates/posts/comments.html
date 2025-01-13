@@ -1,0 +1,23 @@
+{% load space_extras %}
+
+{% for comment in comments %}
+	<div class="post-container">
+		<div class="post-top">
+			<div class="post-details">
+				<div class="profile-div-small">
+					<img src="{{ comment.user | get_pic_link:1 }}">
+				</div>
+				<div>
+					<h4>{{ comment.user.username }}</h4>
+					<small>{{ comment.comment_on }}</small>
+				</div>
+			</div>
+			<div class="options">
+				<i class="bx bx-dots-vertical-rounded" style="color:#FFFFFF"></i>
+			</div>
+		</div>
+		<div>
+			{{ comment.content }}
+		</div>
+	</div>
+{% endfor %}

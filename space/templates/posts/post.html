@@ -1,0 +1,116 @@
+{% extends "base.html"%}
+
+{% load static %}
+{% load space_extras %}
+
+{% block title %} Astrics | {{ post.user.username }} Post {% endblock %}
+
+{% block css %}
+	<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+	<link href="{% static 'css/post_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="profile-preview">
+			{% with main_user=request.user %}
+				<div class="profile-pic-preview">
+					<div class="cover-pic">
+						<img src="{{ main_user | get_pic_link:0 }}">
+					</div>
+					<div class="profile-small-details">
+						<div class="profile-div-small">
+							<img src="{{ main_user | get_pic_link:1 }}">
+						</div>
+						<div>
+							<h3>{{ main_user.username }}</h3>
+						</div>
+					</div>
+				</div>
+			{% endwith %}
+		</div>
+		<div class="post-cont">
+			<div class="post-container">
+				<div class="post-top">
+					<div class="post-details">
+						<div class="profile-div-small">
+							<img src="{{ post.user | get_pic_link:1 }}">
+						</div>
+						<div>
+							{% if post.title %}
+								<h4>{{ post.title }}</h4>
+							{% endif %}
+							<small>{{ post.created_at }} | <a href="{{ post.user.get_absolute_url }}"> {{ post.user.username }} </a></small>
+						</div>
+					</div>
+					<div class="options">
+						<i class='bx bx-dots-vertical-rounded' style='color:#ffffff'  ></i>
+						<div class="options-dropdown" data-post_id="{{ post.id }}">
+							{% if post.in_favorite %}
+								<div class="save-btn">Remove from Favorite</div>
+							{% else %}
+								<div class="save-btn">Save to Favorite</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				{% if post.description %}
+					<div>
+						{{ post.description }}
+					</div>
+				{% endif %}
+				{% if post.media_type == "image" %}
+					<div class="post-media">
+						<img src="{{ post.file_id|get_media }}">
+					</div>	
+				{% elif post.media_type == "video" %}
+					<div class="post-media">
+						<video src="{{ post.file_id|get_media }}" controls muted>
+					</div>	
+				{% endif %}
+
+				<div class="interactions">
+					<div>
+						{% if post.is_liked %}
+							<button class="reaction-btn" data-post_id="{{ post.id }}" data-like_url="{% url 'space:like-post' post.id %}">
+								<small>Love</small>
+								<i class='bx bxs-heart'></i>
+						{% else %}
+							<button class="reaction-btn" data-post_id="{{ post.id }}" data-like_url="{% url 'space:like-post' post.id %}">
+								<small>Love</small>
+								<i class='bx bx-heart'></i>
+						{% endif %}
+						</button>
+						<div class="share-btn">
+							<small>Share</small>
+							<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
+							<div>
+								{% comment %} {% post_to_facebook post.get_absolute_url '<i class="bx bx-facebook" style="color:#ffffff"></i>' %} {% endcomment %}
+							</div>
+						</div>
+					</div>
+					<div class="reaction-count">
+						<small>{{ post.likes.count }} love{{ post.likes.count | pluralize }} . {{ post.comments.count }} comment{{ post.comments.count | pluralize }}</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<form class="new-comment" action="{% url 'space:create_comment' post.id %}">
+				<div class="input-box">	
+					<textarea name="content" id="id_content" cols="40" rows="1" placeholder="Share your thought here" class="newpost_description"></textarea>
+				</div>
+				<button class="comment-btn" data-post_id="{{ post.id }}">Comment</button>
+			</form>
+			
+			<div class="comments">
+				{% include 'posts/comments.html' with comments=post.comments.all %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script src="{% static 'js/general.js' %}"></script>
+{% endblock %}
