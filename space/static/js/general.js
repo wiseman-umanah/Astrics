@@ -64,10 +64,12 @@ $(document).ready(function () {
 		})
 	});
 
-	$('.post_button').on('submit', function(e) {
+	$(document).on('submit', '#newpost-form', function(e) {
 		e.preventDefault();
 
-		const formData = new FormData(this);
+		let form = $(this)[0];
+		const form_action = form.action;
+		let formData = new FormData(form);
 
 		$.ajax({
 			url: 'create_post/',
@@ -75,9 +77,12 @@ $(document).ready(function () {
 			data: formData,
 			contentType: false,
 			processData: false,
-			success: function(response) {
-				if (response.status == 200) {
-					$('.posts').prepend(response.posts);
+			success: function(response, textStatus, xhr) {
+				if (xhr.status == 200) {
+					form.reset();
+					refreshPost();
+				} else {
+					console.log("Form failed")
 				}
 			},
 			error: function(xhr, status, error) {
@@ -85,6 +90,22 @@ $(document).ready(function () {
 			}
 		});
 	});
+
+	function refreshPost() {
+		let url = $('#post-url').val();
+		if (url) {
+			$.ajax({
+				url: url,
+				method: 'GET',
+				success: function(data) {
+					$('.posts').html(data); 
+				},
+				error: function(xhr, status, error) {
+					console.error('Error fetching comments:', error);
+				}
+			});
+		}
+	}
 
 	$(document).on('click', '.comment-btn', function (e) {
 		e.preventDefault();
@@ -103,7 +124,7 @@ $(document).ready(function () {
 			success: function(response, textStatus, xhr) {
 				if (xhr.status == 200) {
 					form.reset();
-					refreshComments(16)
+					refreshComments()
 					console.log('Comment successful')
 				} else {
 					console.log('Failed')

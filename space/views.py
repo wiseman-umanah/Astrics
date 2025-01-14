@@ -176,11 +176,10 @@ def create_post(request):
 			post = form.save(commit=False)
 			post.user = request.user
 			post.save()
-		
-			return redirect('space:profile', username=request.user)
+			return JsonResponse({'message': 'Post successful'}, status=200)
 		else:
-			print("form failed here", form.errors)
-			return JsonResponse({'message': 'Invalid form submission'}, status=400)
+			print('post form error', form.errors)
+			return JsonResponse({'message': 'Invalid form parameters'}, status=400)
 
 
 @login_required
