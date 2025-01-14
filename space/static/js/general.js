@@ -87,21 +87,23 @@ $(document).ready(function () {
 	});
 
 	$(document).on('click', '.comment-btn', function (e) {
-		console.log('what')
 		e.preventDefault();
 
-		let post_id = $(this).data('post_id');
 		let form = $(this).closest('form')[0];
+		const form_action = form.action;
+
 		const formData = new FormData(form);
 
 		$.ajax({
-			url: 'post/' + post_id + '/create_comment',
+			url: form_action,
 			method: 'POST',
 			data: formData,
 			processData: false,
         	contentType: false,
 			success: function(response, textStatus, xhr) {
 				if (xhr.status == 200) {
+					form.reset();
+					refreshComments(16)
 					console.log('Comment successful')
 				} else {
 					console.log('Failed')
@@ -112,4 +114,21 @@ $(document).ready(function () {
 			}
 		})
 	});
+
+	function refreshComments() {
+		let url = $('#url').val();
+		if (url) {
+			$.ajax({
+				url: url,
+				method: 'GET',
+				success: function(data) {
+					$('.comments').html(data); 
+				},
+				error: function(xhr, status, error) {
+					console.error('Error fetching comments:', error);
+				}
+			});
+		}
+	}
+	
 })

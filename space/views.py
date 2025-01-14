@@ -193,8 +193,6 @@ def create_comment(request, post_id):
 			return JsonResponse({'message': 'Post does not exist'}, status=404)
 
 		form = CommentForm(request.POST)
-
-		print(request.POST)
 		
 		if form.is_valid():
 			comment = form.save(commit=False)

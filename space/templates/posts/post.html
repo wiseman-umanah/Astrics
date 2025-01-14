@@ -99,8 +99,9 @@
 		<div>
 			<form class="new-comment" action="{% url 'space:create_comment' post.id %}">
 				<div class="input-box">	
-					<textarea name="content" id="id_content" cols="40" rows="1" placeholder="Share your thought here" class="newpost_description"></textarea>
+					<textarea name="content" id="id_content" cols="40" rows="1" placeholder="Share your thought here" class="newpost_description" required></textarea>
 				</div>
+				<input type="hidden" name="url"  id="url" value="{% url 'space:view-comments' post.user.username post.id %}">
 				<button class="comment-btn" data-post_id="{{ post.id }}">Comment</button>
 			</form>
 			
