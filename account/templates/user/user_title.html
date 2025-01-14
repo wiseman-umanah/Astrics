@@ -1,0 +1,15 @@
+{% load space_extras %}
+
+<div class="profile-pic-preview">
+	<div class="cover-pic">
+		<img src="{{ main_user | get_pic_link:0 }}">
+	</div>
+	<div class="profile-small-details">
+		<div class="profile-div-small">
+			<img src="{{ main_user | get_pic_link:1 }}">
+		</div>
+		<div>
+			<h3>{{ main_user.username }}</h3>
+		</div>
+	</div>
+</div>
