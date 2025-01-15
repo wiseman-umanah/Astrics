@@ -371,6 +371,21 @@ button {
 	align-items: center;
 }
 
+.share-btn {
+	position: relative;
+}
+
+.share-links {
+	position: absolute;
+	display: none;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 5px;
+	background-color: rgb(21, 21, 21);
+	padding: 10px;
+	top: 100%;
+}
+
 @media only screen and (min-width: 700px) {
 	
 	.profile-div {

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	let options; 
+	let options, share; 
 	
 	$(document).on('click', '.reaction-btn', function (e) {
 		e.preventDefault();
@@ -40,6 +40,10 @@ $(document).ready(function () {
 		if (options) {
 			options.children('.options-dropdown').css('display', 'none');
 			options = null;
+		}
+		if (share) {
+			share.children('.share-links').css('display', 'none');
+			share = null;
 		}
 	});
 
@@ -152,4 +156,20 @@ $(document).ready(function () {
 		}
 	}
 	
+	$(document).on('click', '.share-btn', function(e) {
+		if (share && share[0] !== $(this)[0]) {
+			share.children('.share-links').css('display', 'none');
+		}
+
+		const dropdown = $(this).children('.share-links');
+		const isOpen = dropdown.css('display') === 'flex';
+
+		dropdown.css('display', isOpen ? 'none': 'flex');
+
+		share = isOpen ? null : $(this);
+
+		e.stopPropagation()
+	});
+
+	$('.share-links').css('display', 'none')
 })

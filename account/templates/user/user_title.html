@@ -6,9 +6,12 @@
 	</div>
 	<div class="profile-small-details">
 		<div class="profile-div-small">
-			<img src="{{ main_user | get_pic_link:1 }}">
+			<a href="{{ main_user.user_profile.get_absolute_url }}">
+				<img src="{{ main_user | get_pic_link:1 }}">
+			</a>
 		</div>
 		<div>
+			
 			<h3>{{ main_user.username }}</h3>
 		</div>
 	</div>

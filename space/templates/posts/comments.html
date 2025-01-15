@@ -4,9 +4,11 @@
 	<div class="post-container">
 		<div class="post-top">
 			<div class="post-details">
-				<div class="profile-div-small">
-					<img src="{{ comment.user | get_pic_link:1 }}">
-				</div>
+				<a href="{{ comment.user.profile.get_absolute_url }}">
+					<div class="profile-div-small">
+						<img src="{{ comment.user | get_pic_link:1 }}">
+					</div>
+				</a>
 				<div>
 					<h4>{{ comment.user.username }}</h4>
 					<small>{{ comment.comment_on }}</small>

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.urls import reverse
 from django.http import JsonResponse, Http404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -207,14 +208,14 @@ def create_comment(request, post_id):
 @login_required
 def get_post(request, username, post_id):
 	user = get_object_or_404(User, username=username)
-
+						
 	post_annotate = Post.objects.annotate(
 		is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user))).annotate(
 					in_favorite=Exists(Favorite.objects.filter(
 						post=OuterRef('pk'), user=request.user)))
 	post = post_annotate.get(id=post_id, user=user)
 	
-	comments = post.comments.all()[:10]
+	comments = post.comments.all()[:5]
 
 	return render(request, 'posts/post.html', {'post': post,
 											'user': user,
@@ -227,7 +228,7 @@ def get_comments(request, username, post_id):
 	user = get_object_or_404(User, username=username)
 
 	post = Post.objects.get(id=post_id, user=user)
-	paginator = Paginator(post.comments.all(), 10)
+	paginator = Paginator(post.comments.all(), 5)
 	page = request.GET.get('page')
 
 	try:

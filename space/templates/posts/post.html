@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load space_extras %}
+{% load social_share %}
 
 {% block title %} Astrics | {{ post.user.username }} Post {% endblock %}
 
@@ -13,34 +14,22 @@
 {% block content %}
 	<div class="container">
 		<div class="profile-preview">
-			{% with main_user=request.user %}
-				<div class="profile-pic-preview">
-					<div class="cover-pic">
-						<img src="{{ main_user | get_pic_link:0 }}">
-					</div>
-					<div class="profile-small-details">
-						<div class="profile-div-small">
-							<img src="{{ main_user | get_pic_link:1 }}">
-						</div>
-						<div>
-							<h3>{{ main_user.username }}</h3>
-						</div>
-					</div>
-				</div>
-			{% endwith %}
+			{% include 'user/user_title.html' with main_user=request.user %}
 		</div>
 		<div class="post-cont">
 			<div class="post-container">
 				<div class="post-top">
 					<div class="post-details">
-						<div class="profile-div-small">
-							<img src="{{ post.user | get_pic_link:1 }}">
-						</div>
+						<a href="{{ post.user.user_profile.get_absolute_url }}">
+							<div class="profile-div-small">
+									<img src="{{ post.user | get_pic_link:1 }}">
+							</div>
+						</a>
 						<div>
 							{% if post.title %}
 								<h4>{{ post.title }}</h4>
 							{% endif %}
-							<small>{{ post.created_at }} | <a href="{{ post.user.get_absolute_url }}"> {{ post.user.username }} </a></small>
+							<small>{{ post.created_at }} | <a href="{{ post.user.profile.get_absolute_url }}"> {{ post.user.username }} </a></small>
 						</div>
 					</div>
 					<div class="options">
@@ -84,8 +73,12 @@
 						<div class="share-btn">
 							<small>Share</small>
 							<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
-							<div>
-								{% comment %} {% post_to_facebook post.get_absolute_url '<i class="bx bx-facebook" style="color:#ffffff"></i>' %} {% endcomment %}
+							<div class="share-links">
+								{% url 'view-post' post.user.username post.pk as share_url %}
+								{% copy_to_clipboard  share_url "<i class='bx bx-link' style='color:#ff0000'  ></i>" %}
+								{% post_to_facebook share_url "<i class='bx bxl-facebook-circle' style='color:#0085ff'  ></i>" %}
+								{% post_to_twitter post.title share_url "<i class='bx bxl-twitter' style='color:#72afe6'  ></i>" %}
+								{% post_to_whatsapp share_url "<i class='bx bxl-whatsapp' style='color:#3cde2c'  ></i>" %}
 							</div>
 						</div>
 					</div>
