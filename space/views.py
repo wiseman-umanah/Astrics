@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.views import View
 from django.utils.decorators import method_decorator
 from account.models import ( Post, Like,
-							Comment, Favorite )
+							UserProfile, Favorite )
 from django.db.models import OuterRef, Exists
 from django.core.paginator import ( Paginator,
 								   EmptyPage,
@@ -209,6 +209,7 @@ def create_comment(request, post_id):
 def get_post(request, username, post_id):
 	user = get_object_or_404(User, username=username)
 						
+	main_userProfile = get_object_or_404(UserProfile, user=request.user)
 	post_annotate = Post.objects.annotate(
 		is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user))).annotate(
 					in_favorite=Exists(Favorite.objects.filter(
@@ -219,6 +220,7 @@ def get_post(request, username, post_id):
 
 	return render(request, 'posts/post.html', {'post': post,
 											'user': user,
+											'main_userProfile': main_userProfile,
 											'comments': comments})
 
 

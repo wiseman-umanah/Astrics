@@ -2,17 +2,21 @@
 
 <div class="profile-pic-preview">
 	<div class="cover-pic">
-		<img src="{{ main_user | get_pic_link:0 }}">
+		<img src="{{ main_userProfile.user | get_pic_link:0 }}">
 	</div>
 	<div class="profile-small-details">
 		<div class="profile-div-small">
-			<a href="{{ main_user.user_profile.get_absolute_url }}">
-				<img src="{{ main_user | get_pic_link:1 }}">
+			<a href="{{ main_userProfile.get_absolute_url }}">
+				<img src="{{ main_userProfile.user | get_pic_link:1 }}">
 			</a>
 		</div>
 		<div>
-			
-			<h3>{{ main_user.username }}</h3>
+			<h3>{{ main_userProfile.user.username }}</h3>
+			<small>
+				{{ main_userProfile.followed_by.count }} Follower{{ main_userProfile.followed_by.count | pluralize }}
+				<br>
+				{{ main_userProfile.follows.count }} Following{{ main_userProfile.follows.count | pluralize }}
+			</small>
 		</div>
-	</div>
+	</div>	
 </div>

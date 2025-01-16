@@ -10,7 +10,9 @@
 					</div>
 				</a>
 				<div>
-					<h4>{{ comment.user.username }}</h4>
+					<a href="{{ comment.user.profile.get_absolute_url }}">
+						<h4>{{ comment.user.username }}</h4>
+					</a>
 					<small>{{ comment.comment_on }}</small>
 				</div>
 			</div>
