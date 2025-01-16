@@ -26,26 +26,3 @@
 	</div>
 {% endfor %}
 
-<script>
-    let page = 1;
-    let empty_page = false;
-    let block_request = false;
-	let post_id = '{{ post_id }}'
-
-    $(window).scroll(function() {
-        let margin = $(document).height() - $(window).height() - 200;
-        if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
-            block_request = true;
-            page += 1;
-            
-            $.get(post_id + '/comments?page=' + page, function(data) {
-                if (data == '') {
-                    empty_page = true;
-                } else {
-                    block_request = false;
-                    $('.comments').append(data);
-                }
-            })
-        }
-    });
-</script>

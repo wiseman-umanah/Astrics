@@ -386,6 +386,10 @@ button {
 	top: 100%;
 }
 
+.copy-btn {
+	cursor: pointer;
+}
+
 @media only screen and (min-width: 700px) {
 	
 	.profile-div {

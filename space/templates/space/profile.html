@@ -139,7 +139,7 @@
 						
 						<div class="posts">
 							<h3>Posts</h3>
-							{% include "posts/list_posts.html" with posts=posts username=user_profile.username %}
+							{% include "posts/list_posts.html" with posts=posts %}
 						</div>
 					</div>
 				</div>
@@ -153,5 +153,29 @@
 		<script src="{% static 'js/profile.js' %}"></script>
 	{% endif %}
 		<script src="{% static 'js/general.js' %}"></script>
+		<script>
+			let page = 1;
+			let empty_page = false;
+			let block_request = false;
+			let username = '{{ user.username }}';
+
+			$(window).scroll(function() {
+				let margin = $(document).height() - $(window).height() - 200;
+				if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+					block_request = true;
+					page += 1;
+					
+					$.get(username + '/posts/?page=' + page, function(data) {
+						if (data == '') {
+							empty_page = true;
+						} else {
+							block_request = false;
+							$('.posts').append(data);
+							hideShareLinks();
+						}
+					})
+				}
+			});
+		</script>
 {% endblock %}
 

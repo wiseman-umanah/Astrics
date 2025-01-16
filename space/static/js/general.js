@@ -1,3 +1,7 @@
+function hideShareLinks() {
+	$('.share-links').css('display', 'none')
+}
+
 $(document).ready(function () {
 	let options, share; 
 	
@@ -51,7 +55,6 @@ $(document).ready(function () {
 		e.preventDefault();
 
 		let post_id = $(this).parent(".options-dropdown").data('post_id');
-		console.log(post_id);
 
 		let save_btn = $(this)
 
@@ -102,7 +105,8 @@ $(document).ready(function () {
 				url: url,
 				method: 'GET',
 				success: function(data) {
-					$('.posts').html(data); 
+					$('.posts').html(data);
+					hideShareLinks();
 				},
 				error: function(xhr, status, error) {
 					console.error('Error fetching comments:', error);
@@ -171,5 +175,11 @@ $(document).ready(function () {
 		e.stopPropagation()
 	});
 
-	$('.share-links').css('display', 'none')
+	$(document).on('click', '.copy-btn', function(e){
+		let url = $(this).data('clipboard');
+		console.log(url);
+		navigator.clipboard.writeText(url);
+	})
+
+	hideShareLinks();
 })

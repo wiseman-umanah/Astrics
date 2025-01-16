@@ -74,8 +74,10 @@
 							<small>Share</small>
 							<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
 							<div class="share-links">
-								{% url 'view-post' post.user.username post.pk as share_url %}
-								{% copy_to_clipboard  share_url "<i class='bx bx-link' style='color:#ff0000'  ></i>" %}
+								{% url 'space:view-post' post.user.username post.pk as share_url %}
+								<div class="copy-btn" data-clipboard="{{ share_url }}">
+									<i class='bx bx-link' style='color:#ff0000'  ></i>
+								</div>
 								{% post_to_facebook share_url "<i class='bx bxl-facebook-circle' style='color:#0085ff'  ></i>" %}
 								{% post_to_twitter post.title share_url "<i class='bx bxl-twitter' style='color:#72afe6'  ></i>" %}
 								{% post_to_whatsapp share_url "<i class='bx bxl-whatsapp' style='color:#3cde2c'  ></i>" %}
@@ -99,7 +101,7 @@
 			</form>
 			
 			<div class="comments">
-				{% include 'posts/comments.html' with comments=comments username=post.user.username post_id=post.id %}
+				{% include 'posts/comments.html' with comments=comments %}
 			</div>
 		</div>
 	</div>
@@ -107,4 +109,28 @@
 
 {% block script %}
 	<script src="{% static 'js/general.js' %}"></script>
+	<script>
+		let page = 1;
+		let empty_page = false;
+		let block_request = false;
+		let post_id = {{ post.id }}
+
+		$(window).scroll(function() {
+			let margin = $(document).height() - $(window).height() - 200;
+			if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+				block_request = true;
+				page += 1;
+				
+				$.get(post_id + '/comments?page=' + page, function(data) {
+					if (data == '') {
+						empty_page = true;
+					} else {
+						block_request = false;
+						$('.comments').append(data);
+					}
+				})
+			}
+		});
+	</script>
+
 {% endblock %}
