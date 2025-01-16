@@ -214,6 +214,7 @@ button {
 .newpost_description::placeholder {
     color: white;
     opacity: 0.8;
+	font-size: 0.8rem;
 }
 
 

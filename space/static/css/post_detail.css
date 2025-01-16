@@ -50,3 +50,23 @@
 .comments .post-container:nth-child(even) {
 	background-color: unset;
 }
+
+@media only screen and (max-width: 900px) {
+	.reaction-btn small,
+	.share-btn small,
+	.profile-preview {
+		display: none;
+	}
+
+}
+
+@media only screen and (max-width: 760px) { 
+	.container {
+		flex-direction: column;
+		margin: 20px auto;
+	}
+
+	.post-cont {
+		width: 100%;
+	}
+}
