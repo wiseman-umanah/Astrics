@@ -32,7 +32,13 @@
 		<a href="{{ post.get_absolute_url }}">
 			{% if post.description %}
 				<div>
-					{{ post.description }}
+					<span class="description" id="description">
+					{{ post.description|slice:"0:30" }}...
+				</span>
+				<span class="more" id="more" style="display:none;">
+					{{ post.description }} 
+				</span><br>
+				<a href="javascript:void(0);" style="color: red; text-decoration: underline;" id="seeMore">See more</a>
 				</div>
 			{% endif %}
 		

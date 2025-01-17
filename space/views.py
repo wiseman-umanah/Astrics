@@ -18,6 +18,7 @@ from django.db.models import OuterRef, Exists
 from django.core.paginator import ( Paginator,
 								   EmptyPage,
 								   PageNotAnInteger )
+from system.models import AstricsModel
 
 
 
@@ -54,9 +55,16 @@ class Profile(View):
 
 		form = UserProfileEdit(instance=user, data=request.POST)
 		pic_form = UserProfileForm(data=request.POST, files=request.FILES)
+		
+		posts = Post.objects.filter(user=user).annotate(
+			is_liked=Exists(Like.objects.filter(
+				post=OuterRef('pk'), user=request.user))).annotate(
+					in_favorite=Exists(Favorite.objects.filter(
+						post=OuterRef('pk'), user=request.user)))[:3]
 
-		print("POST Data:", request.POST)
-		print("Files:", request.FILES)
+		favorites = Favorite.objects.filter(
+			user=user,
+			post__media_type="image")[:5]
 	
 		if form.is_valid() and pic_form.is_valid():
 			form.save()
@@ -70,7 +78,9 @@ class Profile(View):
 		return render(request, self.template_name, {
 			'form': form,
 			'pic_form': pic_form,
-			'user_profile': user
+			'user_profile': user,
+			'posts': posts,
+			'favorites': favorites
 		})
 
 
@@ -78,7 +88,7 @@ class Profile(View):
 
 @login_required
 @csrf_exempt
-def post_list(request, username):
+def user_posts(request, username):
 	user = get_object_or_404(User, username=username)
 	posts = Post.objects.filter(user=user).annotate(
 			is_liked=Exists(Like.objects.filter(post=OuterRef('pk'), user=request.user))).annotate(
@@ -109,7 +119,7 @@ def follow_unfollow(request, username):
 		return JsonResponse({'status': 'error',
 					   'message': 'The user to be followed does not exist'})
 	
-	user = request.user
+	user_profile = get_object_or_404(UserProfile, user=request.user)
 	
 	action = request.GET.get('action').lower()
 
@@ -121,13 +131,14 @@ def follow_unfollow(request, username):
 		return JsonResponse({'status': 'error',
 					   'message': 'Invalid action. Allowed action [unfollow, follow]'})
 	
-	if user.username != username:
+	if user_profile.user.username != username:
 		if action == "unfollow":
-			user.profile.follows.remove(other_user.profile)
+			user_profile.follows.remove(other_user.profile)
 		elif action == "follow":
-			user.profile.follows.add(other_user.profile)
+			user_profile.follows.add(other_user.profile)
 	
-	return JsonResponse({'status': 'success'})
+	return JsonResponse({'status': 'success', 'follows': other_user.profile.follows.count(),
+											'followers': other_user.profile.followed_by.count()})
 
 
 @login_required
@@ -244,3 +255,41 @@ def get_comments(request, username, post_id):
 		return render(request, 'posts/comments.html', {'comments': comments})
 	
 	return render(request, 'posts/comments.html', {'comments': comments})
+
+
+@login_required
+def home(request):
+	user = get_object_or_404(UserProfile, user=request.user)
+	latest_post = AstricsModel.objects.first()
+	posts = Post.objects.annotate(
+		is_liked=Exists(Like.objects.filter(post=OuterRef('pk'),
+									  user=request.user))).annotate(
+					in_favorite=Exists(Favorite.objects.filter(
+						post=OuterRef('pk'), user=request.user))).all()[:15]
+
+	return render(request, 'space/home.html', {'user': user,
+												'posts': posts,
+												'latest_post': latest_post})
+
+
+@login_required
+def get_allPosts(request):
+	posts = Post.objects.annotate(
+		is_liked=Exists(Like.objects.filter(post=OuterRef('pk'),
+									  user=request.user))).annotate(
+					in_favorite=Exists(Favorite.objects.filter(
+						post=OuterRef('pk'), user=request.user))).all()
+	paginator = Paginator(posts, 15)
+	page = request.GET.get('page')
+
+	try:
+		posts = paginator.page(page)
+	except PageNotAnInteger:
+		posts = paginator.page(1)
+	except EmptyPage:
+		posts = ""
+	
+	if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+		return render(request, 'posts/lists_posts.html', {'posts': posts})
+	
+	return render(request, 'posts/lists_posts.html', {'posts': posts})

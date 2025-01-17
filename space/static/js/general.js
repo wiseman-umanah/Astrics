@@ -109,7 +109,7 @@ $(document).ready(function () {
 					hideShareLinks();
 				},
 				error: function(xhr, status, error) {
-					console.error('Error fetching comments:', error);
+					console.error('Error fetching posts:', error);
 				}
 			});
 		}
@@ -180,6 +180,41 @@ $(document).ready(function () {
 		console.log(url);
 		navigator.clipboard.writeText(url);
 	})
+
+	$('.user-relationship').on('click', function (e) {
+		e.preventDefault();
+
+		const username = $(this).data('username');
+		let action = $(this).data('action');
+		let button = $(this);
+
+		$.ajax({
+			url: username + '/relationship/',
+			method: 'GET',
+			data: {action: action},
+			success: function(response) {
+				if (action == 'follow') {
+					button.text('Unfollow');
+					button.data('action', 'unfollow')
+				} else {
+					button.text('Follow');
+					button.data('action', 'follow');
+				}
+				const followers = response.followers;
+				const follows = response.follows;
+				$('.follow-update').text(`${followers} followers | ${follows} following`);
+			},
+			error: function() {
+				alert('An error occured. Please try again')
+			}
+		})
+	})
+
+	$('#seeMore').click(function() {
+        $(this).siblings('#description').slideToggle();
+        $(this).siblings('#more').slideToggle();
+        $(this).text($(this).text() === 'See more' ? 'See less' : 'See more');
+    });
 
 	hideShareLinks();
 })

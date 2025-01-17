@@ -34,7 +34,7 @@ def user_login(request):
 					else:
 						request.session.set_expiry(0)
 
-					return redirect('space:profile', username=user.username)
+					return redirect('space:home')
 				else:
 					messages.error(request, 'Your account is disabled.')
 			else:
@@ -56,7 +56,7 @@ def user_registration(request):
 			new_user.save()
 
 			UserProfile.objects.create(user=new_user)
-			return redirect('space:profile', username=new_user.username)
+			return redirect('space:home')
 	else:
 		user_form = RegisterForm()
 	return render(request,
@@ -71,7 +71,6 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 		return super().form_valid(form)
 
 	def form_invalid(self, form):
-		# Log form errors to help with debugging
 		print("Form Errors:", form.errors)
 		return self.render_to_response(self.get_context_data(form=form))
 
@@ -89,7 +88,6 @@ class CustomPasswordChangeView(PasswordChangeView):
 		return super().form_valid(password_form)
 
 	def form_invalid(self, password_form):
-		# Log form errors to help with debugging
 		print("Form Errors:", password_form.errors)
 		return self.render_to_response(self.get_context_data(password_form=password_form))
 
@@ -110,7 +108,6 @@ class CreatePostView(FormView):
 		return super().form_valid(post_form)
 
 	def form_invalid(self, post_form):
-		# Log form errors to help with debugging
 		print("Form Errors:", post_form.errors)
 		return self.render_to_response(self.get_context_data(post_form=post_form))
 	

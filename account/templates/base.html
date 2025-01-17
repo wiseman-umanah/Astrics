@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <header>
+    {% comment %} <header>
         <div class="header_logo">
             <a href="#">
                 <img src="{% static 'images/logo-no-background.png' %}">
@@ -31,18 +31,18 @@
                 </ul>
             </nav>
         {% endblock %}
-    </header>
+    </header> {% endcomment %}
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer>
+    {% comment %} <footer>
         <div class="author">Copyright &copy; <span id="year"></span> Wiseman Umanah</div>
         <ul class="socials">
             <li><a href="https://www.facebook.com/profile.php?id=61560236266196"><i class='bx bxl-facebook-circle'></i></a></li>
             <li><a href="https://www.instagram.com/astrics550/"><i class='bx bxl-instagram'></i></a></li>
             <li><a href="https://x.com/AstricsSpace"><i class='bx bxl-twitter'></i></a></li>
         </ul>
-    </footer>
+    </footer> {% endcomment %}
     <script src="{% static 'js/home-page.js' %}"></script>
     {% block script %}{% endblock %}
 </body>

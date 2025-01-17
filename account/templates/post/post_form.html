@@ -1,6 +1,6 @@
 <form method="POST" enctype="multipart/form-data" id="newpost-form" class="newpost" action="{% url 'space:create_post' %}">	
 	<div class="media-preview"></div>
-	<input type="hidden" name="post-url" id="post-url" value="{% url 'space:posts' username %}">
+	<input type="hidden" name="post-url" id="post-url" value="{% url 'space:user-posts' username %}">
 	<div class="input-box">
 		<input type="text" name="title" maxlength="255" placeholder="Title (optional)" id="id_title">
 	</div>

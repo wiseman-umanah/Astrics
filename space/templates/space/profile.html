@@ -18,7 +18,7 @@
 			{% include 'account/registration/password_change.html' with password_form=password_form %}
 			
 			<form class="edit-section" method="POST"
-				action="{% url 'space:profile' username=user.username %}"
+				action="{% url 'space:user-profile' username=user.username %}"
 				enctype='multipart/form-data'
 			>
 				{% csrf_token %}
@@ -95,19 +95,19 @@
 					<div class="user-data">
 						<div>
 							<h2>{{ user.first_name }} {{ user.last_name}}  ({{ user.username }})</h2>
-							{{ user.profile.followed_by.count }} follower{{ user.profile.followed_by.count | pluralize}} {{ user.profile.follows.count }} following
+							<small class="follow-update">{{ user.profile.followed_by.count }} follower{{ user.profile.followed_by.count | pluralize}} | {{ user.profile.follows.count }} following</small>
 						</div>
 						{% if request.user == user %}
 							<button id="editProfile">
 								Edit Profile
 							</button>
 						{% else %}
-							{% if request.user.profile in user_profile.profile.follows.all %}
-								<button class="user-relationship" data-username="{{ user_profile.username }}" data-action="unfollow">
+							{% if request.user.profile in user.profile.followed_by.all %}
+								<button class="user-relationship" data-username="{{ user.username }}" data-action="unfollow">
 									Unfollow
 								</button>
 							{% else %}
-								<button class="user-relationship" data-username="{{ user_profile.username }}" data-action="follow">
+								<button class="user-relationship" data-username="{{ user.username }}" data-action="follow">
 									Follow
 								</button>
 							{% endif %}
@@ -118,24 +118,27 @@
 					<div class="favorites fav">
 						<div class="fav-header">
 							<h3>Favorites</h3>
-							<span><a href="#"></a>See More</a></span>
+							{% if favorites %}
+								<span><a href="#"></a>See More</a></span>
+							{% endif %}
 						</div>
-						{% if favorites %}
-							<div class="user-favs">
-								{% for fav in favorites %}
-									<a href="{{ fav.post.get_absolute_url }}">
-										<div>
-											<img src="{{ fav.post.file_id | get_media }}">
-										</div>
-									</a>
-								{% endfor %}								
-							</div>
-						{% else %}
-							No favorites available, try saving some posts.
-						{% endif %}
+						
+						<div class="user-favs">
+							{% for fav in favorites %}
+								<a href="{{ fav.post.get_absolute_url }}">
+									<div>
+										<img src="{{ fav.post.file_id | get_media }}">
+									</div>
+								</a>
+							{% empty %}
+								No favorites available, try saving some posts.
+							{% endfor %}
+						</div>
 					</div>
 					<div class="section2">
-						{% include "post/post_form.html" with username=user_profile.username %}
+						{% if request.user.profile == user %}
+							{% include "post/post_form.html" with username=user_profile.username %}
+						{% endif %}
 						
 						<div class="posts">
 							<h3>Posts</h3>
@@ -147,17 +150,17 @@
 	{% endwith %}
 {% endblock %}
 
-{% comment %} refix this for user viewing another account  {% endcomment %}
 {% block script %}
-	{% if request.user == user %} 
+	{% if request.user == user_profile %} 
 		<script src="{% static 'js/profile.js' %}"></script>
 	{% endif %}
 		<script src="{% static 'js/general.js' %}"></script>
 		<script>
+		console.log('{{ user_profile.username }}')
 			let page = 1;
 			let empty_page = false;
 			let block_request = false;
-			let username = '{{ user.username }}';
+			let username = '{{ user_profile.username }}';
 
 			$(window).scroll(function() {
 				let margin = $(document).height() - $(window).height() - 200;

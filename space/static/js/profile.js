@@ -112,29 +112,4 @@ $(document).ready(function () {
 		}
 	});
 
-	$('.user-relationship').on('click', function (e) {
-		e.preventDefault();
-
-		const username = $(this).data('username');
-		let action = $(this).data('action');
-		let button = $(this);
-
-		$.ajax({
-			url: username + '/relationship/',
-			method: 'GET',
-			data: {action: action},
-			success: function(response) {
-				if (action == 'follow') {
-					button.text('Unfollow');
-					button.data('action', 'unfollow')
-				} else {
-					button.text('Follow');
-					button.data('action', 'follow');
-				}
-			},
-			error: function() {
-				alert('An error occured. Please try again')
-			}
-		})
-	})
 });

@@ -4,7 +4,6 @@ from space.models import FileModel
 from django.forms import forms
 from space.forms import AdminUserProfileForm
 from utils.files import ( upload_file_to_appwrite,
-						 cleanup_unnecessary_file,
 						 calculate_file_hash )
 
 

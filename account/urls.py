@@ -33,5 +33,4 @@ urlpatterns = [
              template_name='account/registration/password_reset_complete.html'
          ), 
          name='password_reset_complete'),
-	path('post/', views.CreatePostView.as_view(), name='post'),
 ]
