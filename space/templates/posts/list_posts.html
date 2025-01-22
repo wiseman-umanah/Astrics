@@ -5,7 +5,7 @@
 	<div class="post-container">
 		<div class="post-top">
 			<div class="post-details">
-				<a href="{{ post.user.profile.get_absolute_url }}">
+				<a href="{{ post.user.profile.get_absolute_url }}" title="{{ post.user.username }}">
 					<div class="profile-div-small">
 						<img src="{{ post.user|get_pic_link:1 }}" alt="Profile Picture">
 					</div>
@@ -14,7 +14,7 @@
 					{% if post.title %}
 						<h4>{{ post.title }}</h4>
 					{% endif %}
-					<small>{{ post.created_at }} | <a href="{{ post.user.get_absolute_url }}"> {{ post.user.username }} </a></small>
+					<small>{{ post.created_at }} | <a href="{{ post.user.get_absolute_url }}" title="{{ post.user.username }}"> {{ post.user.username }} </a></small>
 				</div>
 			</div>
 		
@@ -29,7 +29,7 @@
 				</div>
 			</div>
 		</div>
-		<a href="{{ post.get_absolute_url }}">
+		<a href="{{ post.get_absolute_url }}" title="Post Description">
 			{% if post.description %}
 				<div>
 					<span class="description" id="description">

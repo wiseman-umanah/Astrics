@@ -70,18 +70,18 @@
 
 	<ul>
 		<li>
-			<a href="#"><i class='bx bxl-google' style='color:#ff0000; font-size: 2.5rem;'  ></i></a>
+			<a href="#"><i class='bx bxl-google' style='color:#ff0000; font-size: 2.5rem;' title="Google Signup"></i></a>
 		</li>
 		<li>
-			<a href="#"><i class='bx bxl-facebook-circle' style='color:#006bff; font-size: 2.5rem;'  ></i></a>
+			<a href="#"><i class='bx bxl-facebook-circle' style='color:#006bff; font-size: 2.5rem;' title="Facebook Signup"></i></a>
 		</li>
 		<li>
-			<a href="#"><i class='bx bxl-twitter' style='color:#67beee; font-size: 2.5rem;'  ></i></a>
+			<a href="#"><i class='bx bxl-twitter' style='color:#67beee; font-size: 2.5rem;' title="Twitter Signup"></i></a>
 		</li>
 	</ul>
     <button type="submit" class="login-btn" id="submit-btn">Submit</button>
     <div class="register-link">
-        <p>Already have an account? <a href="{% url 'account:login' %}">Login</a></p>
+        <p>Already have an account? <a href="{% url 'account:login' %}" title="Login">Login</a></p>
     </div>
 </form>
 {% endblock %}

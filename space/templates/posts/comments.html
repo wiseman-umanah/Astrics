@@ -4,13 +4,13 @@
 	<div class="post-container">
 		<div class="post-top">
 			<div class="post-details">
-				<a href="{{ comment.user.profile.get_absolute_url }}">
+				<a href="{{ comment.user.profile.get_absolute_url }}" title="{{ comment.user.username }}">
 					<div class="profile-div-small">
 						<img src="{{ comment.user | get_pic_link:1 }}">
 					</div>
 				</a>
 				<div>
-					<a href="{{ comment.user.profile.get_absolute_url }}">
+					<a href="{{ comment.user.profile.get_absolute_url }}" title="{{ comment.user.username }}">
 						<h4>{{ comment.user.username }}</h4>
 					</a>
 					<small>{{ comment.comment_on }}</small>

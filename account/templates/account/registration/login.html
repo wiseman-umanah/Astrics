@@ -37,11 +37,11 @@
 
     <div class="rem-forget">
         <label><input type="checkbox" name="remember" {% if request.COOKIES.remember %}checked{% endif %}>Remember me</label>
-        <a href="{% url 'account:password_reset' %}" style="color: rgb(193, 30, 30);">Forgot Password?</a>
+        <a href="{% url 'account:password_reset' %}" style="color: rgb(193, 30, 30);" title="Password Reset">Forgot Password?</a>
     </div>
     <button type="submit" class="login-btn" id="submit-btn">Login</button>
     <div class="register-link">
-        <p>Don't have an account? <a href="{% url 'account:signup' %}">Register</a></p>
+        <p>Don't have an account? <a href="{% url 'account:signup' %}" title="Register">Register</a></p>
     </div>
 </form>
 {% endblock %}

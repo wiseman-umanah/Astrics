@@ -145,7 +145,7 @@
 						
 						<div class="user-favs">
 							{% for fav in favorites %}
-								<a href="{{ fav.post.get_absolute_url }}">
+								<a href="{{ fav.post.get_absolute_url }}" title="Favorite">
 									<div>
 										<img src="{{ fav.post.file_id | get_media }}">
 									</div>

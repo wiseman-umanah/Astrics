@@ -6,7 +6,7 @@
 	</figure>
 	<div class="profile-small-details">
 		<div class="profile-div-small">
-			<a href="{{ main_userProfile.get_absolute_url }}">
+			<a href="{{ main_userProfile.get_absolute_url }}" title="{{ main_userProfile.user.username }}">
 				<img src="{{ main_userProfile.user | get_pic_link:1 }}">
 			</a>
 		</div>
@@ -17,7 +17,7 @@
 				<br>
 				{{ main_userProfile.follows.count }} Following{{ main_userProfile.follows.count | pluralize }}
 				<br>
-				<a href="#">Settings</a>
+				<a href="#" title="Settings">Settings</a>
 			</small>
 		</div>
 	</div>	
