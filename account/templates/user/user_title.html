@@ -1,9 +1,9 @@
 {% load space_extras %}
 
 <div class="profile-pic-preview">
-	<div class="cover-pic">
+	<figure class="cover-pic">
 		<img src="{{ main_userProfile.user | get_pic_link:0 }}">
-	</div>
+	</figure>
 	<div class="profile-small-details">
 		<div class="profile-div-small">
 			<a href="{{ main_userProfile.get_absolute_url }}">
@@ -16,6 +16,8 @@
 				{{ main_userProfile.followed_by.count }} Follower{{ main_userProfile.followed_by.count | pluralize }}
 				<br>
 				{{ main_userProfile.follows.count }} Following{{ main_userProfile.follows.count | pluralize }}
+				<br>
+				<a href="#">Settings</a>
 			</small>
 		</div>
 	</div>	

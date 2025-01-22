@@ -63,10 +63,13 @@
 @media only screen and (max-width: 760px) { 
 	.container {
 		flex-direction: column;
-		margin: 20px auto;
+		margin: 70px auto 0;
 	}
 
 	.post-cont {
 		width: 100%;
+	}
+	.comments {
+		overflow: unset;
 	}
 }

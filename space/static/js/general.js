@@ -210,7 +210,9 @@ $(document).ready(function () {
 		})
 	})
 
-	$('#seeMore').click(function() {
+	$(document).on('click', '#seeMore', function() {
+		console.log(this);
+		console.log('hey')
         $(this).siblings('#description').slideToggle();
         $(this).siblings('#more').slideToggle();
         $(this).text($(this).text() === 'See more' ? 'See less' : 'See more');

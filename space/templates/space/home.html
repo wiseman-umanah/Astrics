@@ -1,0 +1,89 @@
+{% extends "base.html"%}
+
+{% load static %}
+{% load space_extras %}
+{% load social_share %}
+
+{% block title %} Astrics | Post {% endblock %}
+
+{% block css %}
+	<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+	<link href="{% static 'css/post_detail.css' %}" rel="stylesheet">
+	<link href="{% static 'css/home.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+	{% include 'user/header.html' %}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="profile-preview">
+			{% include 'user/user_title.html' with main_userProfile=user %}
+		</div>
+		
+		<div class="post-cont">
+			
+			{% include 'post/post_form.html' with username=user.user.username %}
+			{% include 'posts/list_posts.html' with posts=posts %}		
+		</div>
+		
+		<section class="right-section">
+			<div class="astrics-cont">
+				<h3>ASTRICS: PICTURE OF THE DAY</h3>
+				<div class="post-top">
+					<div class="post-details">
+						
+						<div>
+							<h4>{{ latest_post.title }}</h4>
+						</div>
+					</div>
+				</div>
+				<div class="astrics-post_description">
+					<span class="description" id="description">
+						{{ latest_post.description|slice:"0:30" }}...
+					</span>
+					<span class="more" id="more" style="display:none;">
+						{{ latest_post.description }} 
+					</span><br>
+					<a href="javascript:void(0);" style="color: red; text-decoration: underline;" id="seeMore">See more</a>
+				</div>
+				<div class="astrics-post_media">
+					{% if latest_post.media_type == "image" %}
+						<img src="{{ latest_post.url }}">
+					{% elif latest_post.media_type == "video" %}
+						<video src="{{ latest_post.url }}">
+					{% endif %}
+				</div>				
+			</div>
+			{% include "user/footer.html" %}
+		</section>
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script src="{% static 'js/general.js' %}"></script>
+	<script>
+		let page = 1;
+		let empty_page = false;
+		let block_request = false;
+
+		$('.post-cont').scroll(function() {
+			let margin = $(document).height() - $(this).height() - 200;
+			if ($(this).scrollTop() > margin && empty_page == false && block_request == false) {
+				block_request = true;
+				page += 1;
+				
+				$.get('?page=' + page, function(data) {
+					if (data == '') {
+						empty_page = true;
+					} else {
+						block_request = false;
+						$('.posts').append(data);
+						hideShareLinks();
+					}
+				})
+			}
+		});
+	</script>
+{% endblock %}

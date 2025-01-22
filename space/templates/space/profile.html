@@ -8,8 +8,27 @@
 	Astrics | {{ user_profile.username }}
 {% endblock %}
 
+{% block metadata %}
+	<meta name="author" content="{{ user_profile.username }}">
+	<meta name="description" content="Explore space and astronomy with {{ user_profile.username }}">
+	<meta name="og:url" content="{% url 'space:user-profile' user_profile.username %}">
+	<meta name="og:description" content="Explore space and astronomy with {{ user_profile.username }}">
+	<meta name="twitter:description" content="Explore space and astronomy with {{ user_profile.username }}">
+	<meta name="og:title" content="Explore space and astronomy with {{ user_profile.username }}">
+	<meta name="twitter:title" content="Explore space and astronomy with {{ user_profile.username }}">
+	<meta name="og:image" content="{{ user_profile | get_pic_link:1 }}">
+	<meta name="twitter:image" content="{{ user_profile | get_pic_link:1 }}">
+	<meta name="og:type" content="website">
+	<meta name="twitter:card" content="{{ 678bcba80023f63cc43f | get_media }}">
+{% endblock %}
+
+
 {% block css %}
 	<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+	{% include 'user/header.html' %}
 {% endblock %}
 
 {% block content %}
@@ -22,7 +41,7 @@
 				enctype='multipart/form-data'
 			>
 				{% csrf_token %}
-				<div class="edit-pic">
+				<section class="edit-pic">
 					<h4>Edit Cover Picture</h4>
 					<div class="edit">
 						<label for="id_cover_pic">
@@ -31,8 +50,8 @@
 						</label>
 						{{ pic_form.cover_pic }}
 					</div>
-				</div>
-				<div class="edit-pic">
+				</section>
+				<section class="edit-pic">
 					<h4>Edit Profile Picture</h4>
 					<div class="edit">
 						<label for="id_profile_pic">
@@ -41,7 +60,7 @@
 						</label>
 						{{ pic_form.profile_pic }}
 					</div>
-				</div>
+				</section>
 				<p class="error-messages" style="color: red;">
 					{% if pic_form.profile_pic.errors %}
 						{% for error in pic_form.profile_pic.errors %}
@@ -64,7 +83,7 @@
 						{% endfor %}
 					{% endif %}
 				</p>
-				<div class="edit-user-details">
+				<section class="edit-user-details">
 					<div class="input-box">
 						{{ form.first_name }}
 					</div>
@@ -77,13 +96,14 @@
 					<div class="input-box">
 						{{ form.email }}
 					</div>
-				</div>
+				</section>
 				<span id="change-password">Change your password</span>
 				<button type="submit">
 					Save Edit
 				</button>
 			</form>
 		{% endif %}
+
 			<div class="image-div">
 				<img src="{{ user|get_pic_link:0 }}" alt="Cover Picture">
 			</div>
@@ -154,31 +174,71 @@
 	{% if request.user == user_profile %} 
 		<script src="{% static 'js/profile.js' %}"></script>
 	{% endif %}
-		<script src="{% static 'js/general.js' %}"></script>
-		<script>
-		console.log('{{ user_profile.username }}')
-			let page = 1;
-			let empty_page = false;
-			let block_request = false;
-			let username = '{{ user_profile.username }}';
+	<script src="{% static 'js/general.js' %}"></script>
+	<script>
+	console.log('{{ user_profile.username }}')
+		let page = 1;
+		let empty_page = false;
+		let block_request = false;
+		let username = '{{ user_profile.username }}';
 
-			$(window).scroll(function() {
-				let margin = $(document).height() - $(window).height() - 200;
-				if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
-					block_request = true;
-					page += 1;
-					
-					$.get(username + '/posts/?page=' + page, function(data) {
-						if (data == '') {
-							empty_page = true;
-						} else {
-							block_request = false;
-							$('.posts').append(data);
-							hideShareLinks();
-						}
-					})
+		$(window).scroll(function() {
+			let margin = $(document).height() - $(window).height() - 200;
+			if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+				block_request = true;
+				page += 1;
+				
+				$.get(username + '/posts/?page=' + page, function(data) {
+					if (data == '') {
+						empty_page = true;
+					} else {
+						block_request = false;
+						$('.posts').append(data);
+						hideShareLinks();
+					}
+				})
+			}
+		});
+	</script>
+
+	<script type="application/ld+json">
+		{
+		"@context": "https://schema.org",
+		"@type":"ProfilePage",
+		"dateCreated": "{{ user_profile.date_joined }}",
+		"mainEntity": {
+			"@type": "Person",
+			"additionalName": "{{ user_profile.username }}",
+			"description": "Explore space and astronomy with {{ user_profile.username }}",
+			"givenName": "{{ user_profile.first_name }} {{ user_profile.last_name }}",
+			"identifier": "{{ user_profile.id }}",
+			"image":{
+				"@type": "ImageObject",
+				"contentUrl": "{{ user_profile | get_pic_link:1 }}",
+				"thumbnailUrl":"{{ user_profile | get_pic_link:1 }}"
+			},
+			"interactionStatistic": [
+				{
+					"@type": "InteractionCounter",
+					"interactionType": "https://schema.org/FollowAction",
+					"name": "Follows",
+					"userInteractionCount": {{ user_profile.profile.followed_by.count }}
+				},
+				{
+					"@type": "InteractionCounter",
+					"interactionType": "https://schema.org/SubscribeAction",
+					"name":"Followers",
+					"userInteractionCount": {{ user_profile.profile.follows.count }}
+				},
+				{
+					"@type": "InteractionCounter",
+					"interactionType": "https://schema.org/WriteAction",
+					"name": "Posts",
+					"userInteractionCount": {{ user_profile.posts.count }}
 				}
-			});
-		</script>
-{% endblock %}
+			],
+			"url": "{% url 'space:user-profile' user_profile.username %}"
+		}
+	</script>
 
+{% endblock %}

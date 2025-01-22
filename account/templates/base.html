@@ -12,37 +12,18 @@
     <link href="{% static 'css/general.css' %}" rel="stylesheet">
     <link href="{% static 'css/header.css' %}" rel="stylesheet">
     <link href="{% static 'css/footer.css' %}" rel="stylesheet">
+	<meta name="keywords" content="astronomy, space, astrophotography, cosmos, universe">
+	<meta name="og:site_name" content="Astrics">
+	{% comment %} <link rel="canonical" href="localhost.com"> will be updated after launch {% endcomment %}
+	{% block metadata %}{% endblock %}
     {% block css %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    {% comment %} <header>
-        <div class="header_logo">
-            <a href="#">
-                <img src="{% static 'images/logo-no-background.png' %}">
-            </a>
-        </div>
-        {% block note %}
-            <nav>
-                <ul class="nav_icons">
-                    <li><a href="#"><i class='bx bxs-home'></i><p>Home</p></a></li>
-                    <li><a href="#"><i class='bx bxs-user-circle'></i><p>Profile</p></a></li>
-                    <li><a href="#"><i class='bx bxs-phone'></i><p>Contact</p></a></li>
-                </ul>
-            </nav>
-        {% endblock %}
-    </header> {% endcomment %}
+	{% block header %}{% endblock %}
     <main>
         {% block content %}{% endblock %}
     </main>
-    {% comment %} <footer>
-        <div class="author">Copyright &copy; <span id="year"></span> Wiseman Umanah</div>
-        <ul class="socials">
-            <li><a href="https://www.facebook.com/profile.php?id=61560236266196"><i class='bx bxl-facebook-circle'></i></a></li>
-            <li><a href="https://www.instagram.com/astrics550/"><i class='bx bxl-instagram'></i></a></li>
-            <li><a href="https://x.com/AstricsSpace"><i class='bx bxl-twitter'></i></a></li>
-        </ul>
-    </footer> {% endcomment %}
     <script src="{% static 'js/home-page.js' %}"></script>
     {% block script %}{% endblock %}
 </body>

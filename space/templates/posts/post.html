@@ -4,6 +4,35 @@
 {% load space_extras %}
 {% load social_share %}
 
+{% block header %}
+	{% include 'user/header.html' %}
+{% endblock %}
+
+{% block metadata %}
+	<meta name="author" content="{{ post.user.username }}">
+	<meta name="description" content="{{ post.description | truncatewords:40 }}">
+	<meta name="og:url" content="{{ post.get_absolute_url }}">
+	{% if post.description %}
+		<meta name="og:description" content="{{ post.description | truncatewords:40 }}">
+		<meta name="twitter:description" content="{{ post.description | truncatewords:40 }}">
+	{% endif %}
+	{% if post.title %}
+		<meta name="og:title" content="{{ post.title }}">
+		<meta name="twitter:title" content="{{ post.title }}">
+	{% endif %}
+	{% if post.media_type == "image" %}
+		<meta name="og:image" content="{{ post.file_id | get_media }}">
+		<meta name="twitter:image" content="{{ post.file_id | get_media }}">
+		<meta name="og:type" content="image">
+	{% elif post.media_type == "video" %}
+		<meta name="og:video" content="{{ post.file_id | get_media }}">
+		<meta name="og:type" content="video">
+	{% else %}
+		<meta name="og:type" content="article">
+	{% endif %}
+	<meta name="twitter:card" content="{{ 678bcba80023f63cc43f | get_media }}">
+{% endblock %}
+
 {% block title %} Astrics | {{ post.user.username }} Post {% endblock %}
 
 {% block css %}
@@ -13,11 +42,11 @@
 
 {% block content %}
 	<div class="container">
-		<div class="profile-preview">
+		<section class="profile-preview">
 			{% include 'user/user_title.html' with main_userProfile=main_userProfile %}
-		</div>
-		<div class="post-cont">
-			<div class="post-container">
+		</section>
+		<section class="post-cont">
+			<article class="post-container">
 				<div class="post-top">
 					<div class="post-details">
 						<a href="{{ post.user.profile.get_absolute_url }}">
@@ -44,30 +73,28 @@
 					</div>
 				</div>
 				{% if post.description %}
-					<div>
-						{{ post.description }}
-					</div>
+					<section>
+						<p>{{ post.description }}</p>
+					</section>
 				{% endif %}
 				{% if post.media_type == "image" %}
-					<div class="post-media">
+					<figure class="post-media">
 						<img src="{{ post.file_id|get_media }}">
-					</div>	
+					</figure>	
 				{% elif post.media_type == "video" %}
-					<div class="post-media">
-						<video src="{{ post.file_id|get_media }}" controls muted>
-					</div>	
+					<figure class="post-media">
+						<video src="{{ post.file_id|get_media }}" controls muted></video>
+					</figure>	
 				{% endif %}
 
-				<div class="interactions">
+				<section class="interactions">
 					<div>
+						<button class="reaction-btn" data-post_id="{{ post.id }}" data-like_url="{% url 'space:like-post' post.id %}">
+						<small>Love</small>
 						{% if post.is_liked %}
-							<button class="reaction-btn" data-post_id="{{ post.id }}" data-like_url="{% url 'space:like-post' post.id %}">
-								<small>Love</small>
 								<i class='bx bxs-heart'></i>
 						{% else %}
-							<button class="reaction-btn" data-post_id="{{ post.id }}" data-like_url="{% url 'space:like-post' post.id %}">
-								<small>Love</small>
-								<i class='bx bx-heart'></i>
+							<i class='bx bx-heart'></i>
 						{% endif %}
 						</button>
 						<div class="share-btn">
@@ -79,7 +106,7 @@
 									<i class='bx bx-link' style='color:#ff0000'  ></i>
 								</div>
 								{% post_to_facebook share_url "<i class='bx bxl-facebook-circle' style='color:#0085ff'  ></i>" %}
-								{% post_to_twitter post.title share_url "<i class='bx bxl-twitter' style='color:#72afe6'  ></i>" %}
+								{% post_to_twitter post.title|default:"Check out this post on Astrics!" share_url "<i class='bx bxl-twitter' style='color:#72afe6'  ></i>" %}
 								{% post_to_whatsapp share_url "<i class='bx bxl-whatsapp' style='color:#3cde2c'  ></i>" %}
 							</div>
 						</div>
@@ -87,23 +114,25 @@
 					<div class="reaction-count">
 						<small>{{ post.likes.count }} love{{ post.likes.count | pluralize }} . {{ post.comments.count }} comment{{ post.comments.count | pluralize }}</small>
 					</div>
-				</div>
-			</div>
-		</div>
+				</section>
+			</article>
+		</section>
 		
-		<div>
-			<form class="new-comment" action="{% url 'space:create_comment' post.id %}">
-				<div class="input-box">	
-					<textarea name="content" id="id_content" cols="40" rows="1" placeholder="Share your thought here" class="newpost_description" required></textarea>
+		<aside>
+			<section>
+				<form class="new-comment" action="{% url 'space:create_comment' post.id %}">
+					<div class="input-box">	
+						<textarea name="content" id="id_content" cols="40" rows="1" placeholder="Share your thought here" class="newpost_description" required></textarea>
+					</div>
+					<input type="hidden" name="url"  id="url" value="{% url 'space:view-comments' post.user.username post.id %}">
+					<button class="comment-btn" data-post_id="{{ post.id }}">Comment</button>
+				</form>
+				
+				<div class="comments">
+					{% include 'posts/comments.html' with comments=comments %}
 				</div>
-				<input type="hidden" name="url"  id="url" value="{% url 'space:view-comments' post.user.username post.id %}">
-				<button class="comment-btn" data-post_id="{{ post.id }}">Comment</button>
-			</form>
-			
-			<div class="comments">
-				{% include 'posts/comments.html' with comments=comments %}
-			</div>
-		</div>
+			</section>
+		</aside>
 	</div>
 {% endblock %}
 
@@ -131,6 +160,35 @@
 				})
 			}
 		});
+	</script>
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "BlogPosting",
+			"@id": "{% url 'space:view-post' post.user.username post.id %}",
+			"name": "{{ post.title }}"
+			"headline": "{{ post.title|default:'Astronomy Post' }}",
+			"author": {
+				"@type": "Person",
+				"name": "{{ post.user.first_name }} {{ post.user.last_name }}",
+				"url": "{% url 'space:user-profile' post.user.username %}",
+				"image": {
+					"@type": "ImageObject",
+					"@id": "{{ post.user | get_pic_link:1 }}",
+					"@url": "{{ post.user | get_pic_link:1 }}",
+					"height": "100",
+					"width": "100"
+				}
+			},
+			"datePublished": "{{ post.created_at|date:'Y-m-d' }}",
+			"description": "{{ post.description|truncatewords:100 }}",
+			{% if post.media_type == "image" %}
+				"image": "{{ post.file_id|get_media }}"
+			{% elif post.media_type == "video" %}
+				"video": "{{ post.fille_id | get_media }}"
+			{% endif %}
+		}
 	</script>
 
 {% endblock %}
