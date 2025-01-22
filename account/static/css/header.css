@@ -42,11 +42,6 @@ header {
     position: relative;
 }
 
-
-.header-mid-section .input-box input:focus {
-    border-color: #000;
-}
-
 .header-mid-section .input-box i {
     position: absolute;
     right: 10px;
