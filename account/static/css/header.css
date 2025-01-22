@@ -81,7 +81,9 @@ header {
     margin-bottom: 3px;
 }
 
-
+.current-page {
+	color: var(--primary);
+}
 
 .profile-section {
 	position: relative;

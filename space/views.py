@@ -269,6 +269,7 @@ def home(request):
 
 	return render(request, 'space/home.html', {'user': user,
 												'posts': posts,
+												'section': 'home',
 												'latest_post': latest_post})
 
 
