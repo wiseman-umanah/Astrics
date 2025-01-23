@@ -23,11 +23,11 @@
     {% csrf_token %}
     <div class="input-box">
         {{ form.username }}
-        <i class="bx bxs-envelope"></i>
+        <i role="img" aria-hidden="true" class="bx bxs-envelope"></i>
     </div>
     <div class="input-box">
         {{ form.password}}
-        <i class="bx bxs-lock-alt"></i>
+        <i role="img" aria-hidden="true" class="bx bxs-lock-alt"></i>
     </div>
 	{% if messages %}
 		{% for message in messages %}

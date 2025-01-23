@@ -2,18 +2,18 @@
 	<div class="media-preview"></div>
 	<input type="hidden" name="post-url" id="post-url" value="{% url 'space:user-posts' username %}">
 	<div class="input-box">
-		<input type="text" name="title" maxlength="255" placeholder="Title (optional)" id="id_title">
+		<input type="text" name="title" aria-label="Post title" maxlength="255" placeholder="Title (optional)" id="id_title">
 	</div>
 	<div class="input-box">	
-		<textarea name="description" cols="40" rows="1" placeholder="Write your post here" class="newpost_description" id="id_description"></textarea>
+		<textarea name="description" cols="40" rows="1" aria-label="Post Description" placeholder="Write your post here" class="newpost_description" id="id_description"></textarea>
 	</div>
 	<div class="media-section">
 		<div style="position: relative;">
 			<label class="media" for="id_media_file">
-				<i class="bx bxs-movie-play" style="color:#c61212"></i>
+				<i class="bx bxs-movie-play" style="color:#c61212" role="img" aria-hidden="true"></i>
 				<span>Picture/Video</span>
 			</label>
-			<input type="file" name="media_file" id="id_media_file" style="display: none;"
+			<input type="file" name="media_file" id="id_media_file" aria-label="Post media" style="display: none;"
 			accept="image/*, video/*">
 		</div>
 		<div>

@@ -18,17 +18,27 @@ class UserProfileEdit(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields['first_name'].widget.attrs.update({
 			'placeholder': "Edit your firstname",
+			'aria-invalid': 'true',
+			'aria-label': 'First Name'
 		})
 		self.fields['last_name'].widget.attrs.update({
 			'placeholder': "Edit your lastname",
+			'aria-invalid': 'true',
+			'aria-label': 'Last Name'
 		})
 		self.fields['email'].widget.attrs.update({
 			'placeholder': "Edit your email",
 			'required': 'True',
+			'aria-invalid': 'true',
+			'aria-required': 'true',
+			'aria-label': 'Email Address'
 		})
 		self.fields['username'].widget.attrs.update({
 			'placeholder': "Edit your spacename",
 			'required': 'True',
+			'aria-invalid': 'true',
+			'aria-required': 'true',
+			'aria-label': 'Username'
 		})
 
 	def clean_email(self):
@@ -136,10 +146,12 @@ class UserPostForm(forms.ModelForm):
 		self.fields['description'].widget.attrs.update({
 			'placeholder': 'Write your post here',
 			'class': 'newpost_description',
-			'rows': "1"
+			'rows': "1",
+			'aria-label': 'Post description',
 		})
 		self.fields['title'].widget.attrs.update({
 			'placeholder': 'Title (optional)',
+			'aria-label': 'Post Title',
 		})
 	
 	def clean_media_file(self):

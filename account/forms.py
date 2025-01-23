@@ -6,19 +6,32 @@ from django.contrib.auth.forms import SetPasswordForm
 class LoginForm(forms.Form):
 	username = forms.CharField(min_length=2, required=True,
 							widget=forms.TextInput(attrs={
-								'placeholder': 'Enter your Username or Email'
+								'placeholder': 'Enter your Username or Email',
+								'aria-label': 'Username',
+								'aria-invalid': 'true',
+								'aria-required': 'true'
 							}))
 	password = forms.CharField(widget=forms.PasswordInput(attrs={
-		'placeholder': 'Enter your password'}), required=True)
+		'placeholder': 'Enter your password',
+		'aria-label': 'Password',
+		'aria-invalid': 'true',
+		'aria-required': 'true'}), required=True)
 		
 
 
 class RegisterForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput(attrs={
-		'placeholder': 'Password'
+		'placeholder': 'Password',
+		'aria-label': 'Password',
+		'aria-invalid': 'true',
+		'aria-required': 'true'
 	}), max_length=16, min_length=8, required=True)
+
 	password2 = forms.CharField(widget=forms.PasswordInput(attrs={
-		'placeholder': 'Confirm password'
+		'placeholder': 'Confirm password',
+		'aria-label': 'Confirm Password',
+		'aria-invalid': 'true',
+		'aria-required': 'true'
 	}), required=True)
 
 	class Meta:
@@ -29,15 +42,25 @@ class RegisterForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 		self.fields['username'].widget.attrs.update({
 			'placeholder': 'Username',
+			'aria-label': 'Username',
+			'aria-invalid': 'true',
+			'aria-required': 'true'
 		})
 		self.fields['first_name'].widget.attrs.update({
 			'placeholder': 'First name',
+			'aria-label': 'First Name',
+			'aria-invalid': 'true',
+			'aria-required': 'true'
 		})
 		self.fields['last_name'].widget.attrs.update({
 			'placeholder': 'Last name (optional)',
+			'aria-label': 'Last Name Optional'
 		})
 		self.fields['email'].widget.attrs.update({
 			'placeholder': 'Email',
+			'aria-label': 'Email Address',
+			'aria-invalid': 'true',
+			'aria-required': 'true'
 		})
 
 	def clean_password2(self):
@@ -57,6 +80,7 @@ class RegisterForm(forms.ModelForm):
 		if User.objects.filter(username=username).exists():
 			raise forms.ValidationError("A user with this username already exist")
 		return username
+
 
 class CustomPasswordForm(SetPasswordForm):
 	def __init__(self, *args, **kwargs):

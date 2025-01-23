@@ -62,7 +62,7 @@
 						</div>
 					</div>
 					<div class="options">
-						<i class='bx bx-dots-vertical-rounded' style='color:#ffffff'  ></i>
+						<i class='bx bx-dots-vertical-rounded' style='color:#ffffff' role="img" aria-label="Post Option" ></i>
 						<div class="options-dropdown" data-post_id="{{ post.id }}">
 							{% if post.in_favorite %}
 								<div class="save-btn">Remove from Favorite</div>
@@ -94,22 +94,22 @@
 						<button class="reaction-btn" data-post_id="{{ post.id }}" data-like_url="{% url 'space:like-post' post.id %}">
 						<small>Love</small>
 						{% if post.is_liked %}
-								<i class='bx bxs-heart'></i>
+								<i class='bx bxs-heart' role="img" aria-hidden="true"></i>
 						{% else %}
-							<i class='bx bx-heart'></i>
+							<i class='bx bx-heart' role="img" aria-hidden="true"></i>
 						{% endif %}
 						</button>
-						<div class="share-btn">
+						<div class="share-btn" role="button" label="Share button" aria-label="Share Post">
 							<small>Share</small>
-							<i class='bx bxs-share-alt' style='color:#f80000'  ></i>
+							<i class='bx bxs-share-alt' style='color:#f80000' role="img" aria-hidden="true" ></i>
 							<div class="share-links">
 								{% url 'space:view-post' post.user.username post.pk as share_url %}
-								<div class="copy-btn" data-clipboard="{{ share_url }}">
-									<i class='bx bx-link' style='color:#ff0000'  ></i>
+								<div class="copy-btn" role="button" data-clipboard="{{ share_url }}" aria-label="Copy to Clipboard" label="Copy To Clipboard">
+									<i class='bx bx-link' style='color:#ff0000' role="img" aria-hidden="true"></i>
 								</div>
-								{% post_to_facebook share_url "<i class='bx bxl-facebook-circle' style='color:#0085ff'  ></i>" %}
-								{% post_to_twitter post.title|default:"Check out this post on Astrics!" share_url "<i class='bx bxl-twitter' style='color:#72afe6'  ></i>" %}
-								{% post_to_whatsapp share_url "<i class='bx bxl-whatsapp' style='color:#3cde2c'  ></i>" %}
+								{% post_to_facebook share_url "<i class='bx bxl-facebook-circle' style='color:#0085ff' role='img' aria-label='Share to Facebook' ></i>" %}
+								{% post_to_twitter post.title|default:"Check out this post on Astrics!" share_url "<i class='bx bxl-twitter' style='color:#72afe6' role='img' aria-label='Share to Twitter (Known as X)' ></i>" %}
+								{% post_to_whatsapp share_url "<i class='bx bxl-whatsapp' style='color:#3cde2c' role='img' aria-label='Share to Whatsapp'></i>" %}
 							</div>
 						</div>
 					</div>
@@ -125,7 +125,7 @@
 			<section>
 				<form class="new-comment" action="{% url 'space:create_comment' post.id %}">
 					<div class="input-box">	
-						<textarea name="content" id="id_content" cols="40" rows="1" placeholder="Share your thought here" class="newpost_description" required></textarea>
+						<textarea name="content" id="id_content" cols="40" rows="1" aria-label="Comment" placeholder="Share your thought here" class="newpost_description" required></textarea>
 					</div>
 					<input type="hidden" name="url"  id="url" value="{% url 'space:view-comments' post.user.username post.id %}">
 					<button class="comment-btn" data-post_id="{{ post.id }}">Comment</button>

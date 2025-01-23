@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.urls import reverse
 from django.http import JsonResponse, Http404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -19,6 +18,7 @@ from django.core.paginator import ( Paginator,
 								   EmptyPage,
 								   PageNotAnInteger )
 from system.models import AstricsModel
+from account.forms import CustomPasswordForm
 
 
 
@@ -31,6 +31,7 @@ class Profile(View):
 
 		form = UserProfileEdit(instance=user)  
 		pic_form = UserProfileForm()
+		password_form = CustomPasswordForm(user=user)
 		
 		posts = Post.objects.filter(user=user).annotate(
 			is_liked=Exists(Like.objects.filter(
@@ -46,6 +47,7 @@ class Profile(View):
 			'form': form,
 			'pic_form': pic_form,
 			'user_profile': user,
+			'password_form': password_form,
 			'posts': posts,
 			'favorites': favorites
 		})
@@ -55,7 +57,8 @@ class Profile(View):
 
 		form = UserProfileEdit(instance=user, data=request.POST)
 		pic_form = UserProfileForm(data=request.POST, files=request.FILES)
-		
+		password_form = CustomPasswordForm(user=user, data=request.POST)
+
 		posts = Post.objects.filter(user=user).annotate(
 			is_liked=Exists(Like.objects.filter(
 				post=OuterRef('pk'), user=request.user))).annotate(
@@ -66,18 +69,21 @@ class Profile(View):
 			user=user,
 			post__media_type="image")[:5]
 	
-		if form.is_valid() and pic_form.is_valid():
+		if form.is_valid() and pic_form.is_valid() and password_form.is_valid():
 			form.save()
 			pic_form.save(request.user)
+			password_form.save()
 			messages.success(request, 'Profile updated successfully')
 		else:
 			print("form", form.errors)
 			print("pic", pic_form.errors)
+			print("passowrd", password_form.errors)
 			messages.error(request, 'Error updating your profile')
 
 		return render(request, self.template_name, {
 			'form': form,
 			'pic_form': pic_form,
+			'password_form': password_form,
 			'user_profile': user,
 			'posts': posts,
 			'favorites': favorites

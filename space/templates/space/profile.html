@@ -45,7 +45,7 @@
 					<h4>Edit Cover Picture</h4>
 					<div class="edit">
 						<label for="id_cover_pic">
-							<i class="bx bx-edit" style="color:#ffffff"></i>
+							<i class="bx bx-edit" style="color:#ffffff" role="img" aria-hidden="true"></i>
 							<img src="{{ user|get_pic_link:0 }}" alt="The cover picture of {{ user.username }}" id="cover-tag">
 						</label>
 						{{ pic_form.cover_pic }}
@@ -55,13 +55,13 @@
 					<h4>Edit Profile Picture</h4>
 					<div class="edit">
 						<label for="id_profile_pic">
-							<i class="bx bx-edit" style="color:#ffffff"></i>
+							<i class="bx bx-edit" style="color:#ffffff" role="img" aria-hidden="true"></i>
 							<img src="{{ user|get_pic_link:1 }}" alt="The profile picture of {{ user.username }}" id="profile-tag">
 						</label>
 						{{ pic_form.profile_pic }}
 					</div>
 				</section>
-				<p class="error-messages" style="color: red;">
+				<p class="error-messages" style="color: red;" role="alert">
 					{% if pic_form.profile_pic.errors %}
 						{% for error in pic_form.profile_pic.errors %}
 							{{ error }}<br/>
@@ -97,7 +97,7 @@
 						{{ form.email }}
 					</div>
 				</section>
-				<span id="change-password">Change your password</span>
+				<span id="change-password" role="button" aria-label="Password Change">Change your password</span>
 				<button type="submit">
 					Save Edit
 				</button>
