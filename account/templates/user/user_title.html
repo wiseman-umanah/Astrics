@@ -2,12 +2,12 @@
 
 <div class="profile-pic-preview">
 	<figure class="cover-pic">
-		<img src="{{ main_userProfile.user | get_pic_link:0 }}">
+		<img src="{{ main_userProfile.user | get_pic_link:0 }}" alt="The cover picture of {{ main_userProfile.user.username }}">
 	</figure>
 	<div class="profile-small-details">
 		<div class="profile-div-small">
 			<a href="{{ main_userProfile.get_absolute_url }}" title="{{ main_userProfile.user.username }}">
-				<img src="{{ main_userProfile.user | get_pic_link:1 }}">
+				<img src="{{ main_userProfile.user | get_pic_link:1 }}" alt="The profile picture of {{ main_userProfile.user.username }}">
 			</a>
 		</div>
 		<div>

@@ -7,7 +7,7 @@
 			<div class="post-details">
 				<a href="{{ post.user.profile.get_absolute_url }}" title="{{ post.user.username }}">
 					<div class="profile-div-small">
-						<img src="{{ post.user|get_pic_link:1 }}" alt="Profile Picture">
+						<img src="{{ post.user|get_pic_link:1 }}" alt="The profile picture of {{ post.user.username }}">
 					</div>
 				</a>
 				<div>
@@ -43,13 +43,15 @@
 			{% endif %}
 		
 			{% if post.media_type == "image" %}
-				<div class="post-media">
-					<img src="{{ post.file_id|get_media }}">
-				</div>	
+				<figure class="post-media">
+					<img src="{{ post.file_id|get_media }}" alt="{{ post.description|default: 'No post description provided' ">
+				</figure>	
 			{% elif post.media_type == "video" %}
-				<div class="post-media">
+				<figure class="post-media">
 					<video src="{{ post.file_id|get_media }}" controls muted>
-				</div>	
+						Your browser does not support the video 
+					</video>
+				</figure>	
 			{% endif %}
 		</a>
 			

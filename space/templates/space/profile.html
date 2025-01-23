@@ -46,7 +46,7 @@
 					<div class="edit">
 						<label for="id_cover_pic">
 							<i class="bx bx-edit" style="color:#ffffff"></i>
-							<img src="{{ user|get_pic_link:0 }}" alt="Cover Picture" id="cover-tag">
+							<img src="{{ user|get_pic_link:0 }}" alt="The cover picture of {{ user.username }}" id="cover-tag">
 						</label>
 						{{ pic_form.cover_pic }}
 					</div>
@@ -56,7 +56,7 @@
 					<div class="edit">
 						<label for="id_profile_pic">
 							<i class="bx bx-edit" style="color:#ffffff"></i>
-							<img src="{{ user|get_pic_link:1 }}" alt="Profile Picture" id="profile-tag">
+							<img src="{{ user|get_pic_link:1 }}" alt="The profile picture of {{ user.username }}" id="profile-tag">
 						</label>
 						{{ pic_form.profile_pic }}
 					</div>
@@ -105,12 +105,12 @@
 		{% endif %}
 
 			<div class="image-div">
-				<img src="{{ user|get_pic_link:0 }}" alt="Cover Picture">
+				<img src="{{ user|get_pic_link:0 }}" alt="The cover picture of {{ user.username }}">
 			</div>
 			<div class="container">
 				<div class="user-details">
 					<div class="profile-div">
-						<img src="{{ user|get_pic_link:1 }}" alt="Profile Picture">
+						<img src="{{ user|get_pic_link:1 }}" alt="The profile picture of {{ user.username }}">
 					</div>
 					<div class="user-data">
 						<div>
@@ -147,7 +147,7 @@
 							{% for fav in favorites %}
 								<a href="{{ fav.post.get_absolute_url }}" title="Favorite">
 									<div>
-										<img src="{{ fav.post.file_id | get_media }}">
+										<img src="{{ fav.post.file_id | get_media }}" alt="Favorite Picture Preview with id {{ fav.post.id }}">
 									</div>
 								</a>
 							{% empty %}

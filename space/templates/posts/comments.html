@@ -6,7 +6,7 @@
 			<div class="post-details">
 				<a href="{{ comment.user.profile.get_absolute_url }}" title="{{ comment.user.username }}">
 					<div class="profile-div-small">
-						<img src="{{ comment.user | get_pic_link:1 }}">
+						<img src="{{ comment.user | get_pic_link:1 }}" alt="The profile picture of {{ main_userProfile.user.username }}">
 					</div>
 				</a>
 				<div>

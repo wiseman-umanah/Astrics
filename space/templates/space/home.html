@@ -50,9 +50,11 @@
 				</div>
 				<div class="astrics-post_media">
 					{% if latest_post.media_type == "image" %}
-						<img src="{{ latest_post.url }}">
+						<img src="{{ latest_post.url }}" alt="{{ latest_post.title }}">
 					{% elif latest_post.media_type == "video" %}
 						<video src="{{ latest_post.url }}">
+							Your browser does not support the video 
+						</video>
 					{% endif %}
 				</div>				
 			</div>

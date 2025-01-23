@@ -230,6 +230,7 @@ def get_post(request, username, post_id):
 	comments = post.comments.all()[:5]
 
 	return render(request, 'posts/post.html', {'post': post,
+											'section': 'home',
 											'user': user,
 											'main_userProfile': main_userProfile,
 											'comments': comments})
