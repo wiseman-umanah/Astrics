@@ -211,12 +211,71 @@ $(document).ready(function () {
 	})
 
 	$(document).on('click', '#seeMore', function() {
-		console.log(this);
-		console.log('hey')
         $(this).siblings('#description').slideToggle();
         $(this).siblings('#more').slideToggle();
         $(this).text($(this).text() === 'See more' ? 'See less' : 'See more');
     });
 
 	hideShareLinks();
+
+	$(document).on('input', '#search-input', function() {
+		let query = $(this).val();
+
+		console.log(query);
+		if (query.length > 2) {
+			$.ajax({
+				url: '/space/search/',
+				data: {
+					'query': query
+				},
+				dataType: 'json',
+				method: 'GET',
+				success: function(response) {
+					let resultsDiv = $('#search-results');
+					resultsDiv.empty();
+					resultsDiv.css('display', 'flex');
+	
+					response.results.accounts.forEach(function(account) {
+						let item = $(`
+								<div class="user-result">	
+									<div class="profile-div-small">
+										<a href="${account.url}"><img src="${account.pic_url}" alt="Profile picture of ${account.first_name} ${account.last_name}"></a>
+									</div>
+									<div>
+										<a href="${account.url}"><p>${account.first_name} ${account.last_name} (${account.username})</p></a>
+									</div>
+								</div>
+							
+						`);
+						resultsDiv.append(item);
+					});
+					
+					response.results.posts.forEach(function(post) {
+						let item = $(`
+							<a href="${post.url}">
+								<div class="post-result">
+									<p>${post.title}</p>
+								</div>
+							</a>
+						`);
+						resultsDiv.append(item);
+					});
+				},
+				error: function() {
+					alert('An error occured. Please try again')
+				}
+			})
+		}
+	})
+
+	$(document).on('click', '.profile-section', function() {
+		$('.dropdown-menu').toggle();
+	})
+
+	$(document).on('click', function (e) {
+		if (!$(e.target).is('#search-input'))
+			$('#search-results').css('display', 'none')
+	});
+
+	
 })

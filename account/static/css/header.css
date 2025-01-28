@@ -34,12 +34,13 @@ header {
     display: flex;
     justify-content: center;
     padding: 0 10px;
+	position: relative;
 }
 
 .header-mid-section .input-box {
     width: 80%;
     max-width: 500px;
-    position: relative;
+	position: relative;
 }
 
 .header-mid-section .input-box i {
@@ -49,6 +50,26 @@ header {
     transform: translateY(-50%);
     font-size: 20px;
     color: #999;
+}
+.user-result {	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5%;
+}
+
+#search-results {
+	position: absolute;
+    top: calc(100% + 12px);
+    background: black;
+    width: 80%;
+	left: calc(50% - 40%);
+    border: 1px var(--primary) solid;
+    border-radius: 5px;
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Right Section */
@@ -87,11 +108,6 @@ header {
 
 .profile-section {
 	position: relative;
-}
-
-/* Dropdown Menu */
-.header-right-section .profile-section:hover .dropdown-menu {
-    display: block;
 }
 
 .dropdown-menu {

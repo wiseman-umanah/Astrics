@@ -19,6 +19,8 @@ from django.core.paginator import ( Paginator,
 								   PageNotAnInteger )
 from system.models import AstricsModel
 from account.forms import CustomPasswordForm
+from django.contrib.postgres.search import SearchVector
+from space.templatetags.space_extras import get_pic_link
 
 
 
@@ -301,3 +303,28 @@ def get_allPosts(request):
 		return render(request, 'posts/lists_posts.html', {'posts': posts})
 	
 	return render(request, 'posts/lists_posts.html', {'posts': posts})
+
+
+def search(request):
+	query = request.GET.get('query', '')
+	
+	if query:
+		posts = Post.objects.annotate(search=SearchVector('title',)).filter(search=query)[:5]
+		accounts = UserProfile.objects.annotate(search=SearchVector('user__username', 'user__first_name', 'user__last_name')).filter(search=query)[:3]
+
+		results = {
+			'posts': [{'title': post.title, 'url': post.get_absolute_url()} for post in posts],
+			'accounts': [
+				{
+					'first_name': profile.user.first_name,
+					'last_name': profile.user.last_name,
+					'username': profile.user.username,
+					'pic_url': get_pic_link(profile.user, 1),
+					'url': profile.get_absolute_url()
+				} for profile in accounts
+			],
+		}
+	else:
+		results = {'posts': [], 'accounts': []}
+
+	return JsonResponse({'results': results})

@@ -6,6 +6,7 @@ app_name  = 'space'
 
 urlpatterns = [
 	path('', views.home, name='home'),
+	path('search/', views.search, name='search'),
 	path('posts/', views.get_allPosts, name='posts'),
 	path('<str:username>', views.Profile.as_view(), name='user-profile'),
 	path('<str:username>/posts/', views.user_posts, name='user-posts'),

@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import date
+from django.contrib.postgres.search import SearchVectorField
+
 
 # Create your models here.
 class AstricsModel(models.Model):
@@ -13,6 +15,7 @@ class AstricsModel(models.Model):
 	url = models.URLField()
 	media_type = models.CharField(max_length=10, choices=MEDIA_CHOICES)
 	created_at = models.DateTimeField(auto_now_add=True)
+	search_vector = SearchVectorField(null=True)
 	
 	def __str__(self):
 		return f'{self.title}: {self.url}'

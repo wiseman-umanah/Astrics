@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.postgres.search import SearchVectorField
+
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -12,6 +14,7 @@ class UserProfile(models.Model):
 		symmetrical=False,
 		blank=True
 	)
+	search_vector = SearchVectorField(null=True)
 
 	def __str__(self):
 		return self.user.username
@@ -33,6 +36,7 @@ class Post(models.Model):
 	media_type = models.CharField(max_length=10, choices=MEDIA_CHOICES)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
+	search_vector = SearchVectorField(null=True)
 
 	class Meta:
 		ordering = ['-created_at']
@@ -63,7 +67,6 @@ class Comment(models.Model):
 	comment_on = models.DateTimeField(auto_now_add=True)
 
 	class Meta:
-		unique_together = ('post', 'user')
 		ordering = ('-comment_on',)
 
 

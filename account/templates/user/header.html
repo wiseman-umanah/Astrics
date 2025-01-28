@@ -1,4 +1,5 @@
 {% load static %}
+{% load space_extras %}
 
 <header>
     <div class="header-container">
@@ -11,9 +12,10 @@
 		</div>
 
 		<div class="header-mid-section">
-			<div class="input-box">
-				<input type="text" name="search" maxlength="255" placeholder="Search">
+			<div class="input-box" style="position:relative;">
+				<input type="text" id="search-input" name="search" maxlength="255" placeholder="Search">
 				<i class='bx bx-search' id="search-icon" role="img" aria-hidden="true"></i>
+				<div id="search-results"></div>
 			</div>
 		</div>
 
@@ -46,7 +48,7 @@
 			</nav>
 			<div class="profile-section" label="profile options">
 				<div class="img-container profile-div-small">
-					<img src="{% static 'images/skysearch.jpg' %}" alt="Profile Picture">
+					<img src="{{ user | get_pic_link:1 }}" alt="Profile Picture">
 				</div>
 				<div class="dropdown-menu">
 					<a href="#" title="View Profile" role="button">View Profile</a>
