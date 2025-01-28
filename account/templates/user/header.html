@@ -51,8 +51,11 @@
 					<img src="{{ user | get_pic_link:1 }}" alt="Profile Picture">
 				</div>
 				<div class="dropdown-menu">
-					<a href="#" title="View Profile" role="button">View Profile</a>
-					<a href="#" title="Logout" role="button">Logout</a>
+					<a href="{% url 'space:user-profile' user.username %}" title="View Profile" role="button">View Profile</a>
+					<form action="{% url 'account:logout' %}" method="post">
+						{% csrf_token %}
+						<button type="submit" title="Logout" role="button">Logout</a>
+					</form>
 				</div>
 			</div>
 		</div>

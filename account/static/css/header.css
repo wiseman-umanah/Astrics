@@ -129,10 +129,17 @@ header {
     transition: background 0.3s;
 }
 
-.dropdown-menu a:hover {
-    background: #f0f0f0;
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+    background: #d66a6a;
 }
 
+.dropdown-menu button {
+	background: none;
+	border: none;
+	box-shadow: none;
+	border-radius: 0px;
+}
 
 @media only screen and (max-width: 760px) {
     .nav_icons span {

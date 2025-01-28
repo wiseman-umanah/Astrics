@@ -211,7 +211,7 @@ $(document).ready(function () {
 	})
 
 	$(document).on('click', '#seeMore', function() {
-        $(this).siblings('#description').slideToggle();
+        $(this).siblings('#description').toggle();
         $(this).siblings('#more').slideToggle();
         $(this).text($(this).text() === 'See more' ? 'See less' : 'See more');
     });
