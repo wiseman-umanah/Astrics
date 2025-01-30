@@ -52,7 +52,7 @@
 				</div>
 				<div class="dropdown-menu">
 					<a href="{% url 'space:user-profile' user.username %}" title="View Profile" role="button">View Profile</a>
-					<form action="{% url 'account:logout' %}" method="post">
+					<form action="{% url 'logout' %}" method="post">
 						{% csrf_token %}
 						<button type="submit" title="Logout" role="button">Logout</a>
 					</form>

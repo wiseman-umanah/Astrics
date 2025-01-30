@@ -18,7 +18,7 @@
 
 {% block content %}
 <h3>Astrics Signup</h3>
-<form method="POST" action="{% url 'account:signup' %}">
+<form method="POST" action="{% url 'signup' %}">
     {% csrf_token %}
     <div class="input-container">
         <div class="input-box">
@@ -81,7 +81,7 @@
 	</ul>
     <button type="submit" class="login-btn" id="submit-btn">Submit</button>
     <div class="register-link">
-        <p>Already have an account? <a href="{% url 'account:login' %}" title="Login">Login</a></p>
+        <p>Already have an account? <a href="{% url 'login' %}" title="Login">Login</a></p>
     </div>
 </form>
 {% endblock %}

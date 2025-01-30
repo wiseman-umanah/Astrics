@@ -36,15 +36,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+	'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'account.apps.AccountConfig',
-	'space.apps.SpaceConfig',
-	'system.apps.SystemConfig',
+	'space',
+	'system',
 	'social_django',
 	'django_social_share',
 ]

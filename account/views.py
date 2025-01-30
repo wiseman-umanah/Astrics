@@ -79,7 +79,7 @@ class CustomPasswordChangeView(PasswordChangeView):
 	template_name = 'account/registration/password_change.html'
 	
 	def get_success_url(self):
-		return reverse_lazy("profile", args=[self.request.user.username])
+		return reverse_lazy("space:user-profile", args=[self.request.user.username])
 
 	def form_valid(self, password_form):
 		password_form.save()
