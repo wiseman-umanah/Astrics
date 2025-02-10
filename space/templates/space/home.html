@@ -40,13 +40,13 @@
 					</div>
 				</div>
 				<div class="astrics-post_description">
-					<span class="description" id="description">
+					<span class="description">
 						{{ latest_post.description|slice:"0:30" }}...
 					</span>
-					<span class="more" id="more" style="display:none;">
+					<span class="more" style="display:none;">
 						{{ latest_post.description }} 
 					</span><br>
-					<a href="javascript:void(0);" style="color: red; text-decoration: underline;" id="seeMore">See more</a>
+					<a href="javascript:void(0);" style="color: red; text-decoration: underline;" class="seeMore">See more</a>
 				</div>
 				<div class="astrics-post_media">
 					{% if latest_post.media_type == "image" %}
@@ -64,7 +64,6 @@
 {% endblock %}
 
 {% block script %}
-	<script src="{% static 'js/general.js' %}"></script>
 	<script>
 		let page = 1;
 		let empty_page = false;

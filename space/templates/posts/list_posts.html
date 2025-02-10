@@ -32,19 +32,20 @@
 		<a href="{{ post.get_absolute_url }}" title="Post Description">
 			{% if post.description %}
 				<div>
-					<span class="description" id="description">
-					{{ post.description|slice:"0:30" }}...
-				</span>
-				<span class="more" id="more" style="display:none;">
-					{{ post.description }} 
-				</span><br>
-				<a href="javascript:void(0);" style="color: red; text-decoration: underline;" id="seeMore">See more</a>
+					<span class="description">
+						{{ post.description|slice:"0:30" }}
+					</span>
+					<span class="more" style="display:none;">
+						{{ post.description }} 
+					</span><br>
+					<a href="javascript:void(0);" style="color: red; text-decoration: underline;" class="seeMore">See more</a>
 				</div>
+
 			{% endif %}
 		
 			{% if post.media_type == "image" %}
 				<figure class="post-media">
-					<img src="{{ post.file_id|get_media }}" alt="{{ post.description|default: 'No post description provided' ">
+					<img src="{{ post.file_id|get_media }}" alt="{{ post.description|default:'No post description provided' ">
 				</figure>	
 			{% elif post.media_type == "video" %}
 				<figure class="post-media">

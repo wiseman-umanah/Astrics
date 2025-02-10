@@ -7,17 +7,25 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+	cursor: url('../images/rocket1.ico'), auto ;
 }
 body {
     background: rgb(10, 10, 10);
     color: var(--white);
-    font-family: "Jaro", sans-serif;
+	font-family: 'D-DIN', sans-serif;
+	/* font-family: 'D-DIN Condensed', sans-serif;
+	font-family: 'D-DIN Exp', sans-serif; */
 }
 a {
     text-decoration: none;
     color: var(--white);
+	font-weight: bold;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.visual {
+	visibility: hidden;
 }

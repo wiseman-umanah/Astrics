@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Astrics | Landing Page{% endblock %}
+{% block css %}
+	<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+	<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block header %}
+	<header>
+		<div class="header-container">
+			<div class="header-left-section">
+				<div class="img-container">
+					<a href="{% url 'space:home' %}" title="Home" role="button">
+						<img src="{% static 'images/logo-no-background.png' %}" alt="The Logo of Astrics Co.">
+					</a>
+				</div>
+			</div>
+
+			<div class="header-mid-section"></div>
+
+			
+			<div class="header-right-section">
+				<nav>
+					<ul class="nav_icons">
+						<li>
+							<a href="#features" title="Features">
+								<i class='bx bx-list-plus' role="img" aria-hidden="true"></i>
+								<span>Features</span>
+							</a>
+						</li>
+						<li>
+							<a href="#" title="About">
+								<i class='bx bx-info-circle'></i>
+								<span>About</span>
+							</a>
+						</li>
+						<li>
+							<a href="#" title="Contact">
+								<i class='bx bx-user-voice' role="img" aria-hidden="true"></i>
+								<span>Contact</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<a href="{% url 'login' %}">
+					<button>Login</button>
+				</a>
+			</div>
+		</div>
+	</header>
+{% endblock %}
+
+{% block content %}
+	<section class="hero">
+		<div class="hero-container">
+			<h1 id="startup-title">Discover the Wonders of the Universe</h1>
+			<p>Your daily dose of astronomical wonders and space insights.</p>
+			<a href="{% url 'signup' %}">
+				<button>Get Started</button>
+			</a>
+			<blockquote>
+				<p>"Space is for everybody. It’s not just for a few people in science or math, or for a select group of astronauts. That’s our new frontier out there, and it’s everybody’s business to know about space."</p>
+				<cite>- Christa McAuliffe</cite>
+			</blockquote>
+		</div>
+	</section>
+
+	<section class="hero2">
+		<h2>NASA Picture of The Day</h2>
+		<div class="new-update">
+			<div class="desc">		
+				<h3>The Twisted Disk of NGC 4753</h3>
+				<p>
+					What do you think this is? Here’s a clue: it's bigger than a bread box. Much bigger. The answer is that pictured NGC 4753 is a twisted disk galaxy, where unusual dark dust filaments provide clues about its history. No one is sure what happened, but a leading model holds that a relatively normal disk galaxy gravitationally ripped apart a dusty satellite galaxy while its precession distorted the plane of the accreted debris as it rotated. The cosmic collision is hypothesized to have started about a billion years ago. NGC 4753 is seen from the side, and possibly would look like a normal spiral galaxy from the top. The bright orange halo is composed of many older stars that might trace dark matter. The featured Hubble image was recently reprocessed to highlight ultraviolet and red-light emissions. APOD Year in Review: NASA Night Sky Network Presentation for 2024
+				</p>
+			</div>
+			<div class="post-media">
+				<img src="/static/images/skysearch.jpg">
+			<div>
+		</div>
+	</section>
+	<section id="features">
+        <h2>Why Astrics?</h2>
+        <div class="features-container">
+            <div class="feature-box">
+                <i class='bx bx-planet'></i>
+                <h3>Daily Astronomy</h3>
+                <p>Get daily updates from NASA and explore celestial wonders.</p>
+				<div class="fill"></div>
+            </div>
+            <div class="feature-box">
+                <i class='bx bx-camera'></i>
+                <h3>Upload & Share</h3>
+                <p>Share your own space photos and videos with the world.</p>
+            </div>
+            <div class="feature-box">
+                <i class='bx bx-heart'></i>
+                <h3>Community Interaction</h3>
+                <p>Like, comment, and engage with other space enthusiasts.</p>
+            </div>
+        </div>
+    </section>
+
+	
+	{% include "user/footer.html" %}
+{% endblock %}
+
+{% block script %}
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+	<script src="{% static 'js/landing.js' %}"></script>
+{% endblock %}

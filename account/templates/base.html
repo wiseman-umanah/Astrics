@@ -9,10 +9,11 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" href="{% static 'images/logo-no-background.png' %}" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://fonts.cdnfonts.com/css/d-din" rel="stylesheet">
     <link href="{% static 'css/general.css' %}" rel="stylesheet">
     <link href="{% static 'css/header.css' %}" rel="stylesheet">
     <link href="{% static 'css/footer.css' %}" rel="stylesheet">
-	<meta name="keywords" content="astronomy, space, astrophotography, cosmos, universe">
+	<meta name="keywords" content="astronomy, space, astrophotography, cosmos, universe, astrics, wiseman">
 	<meta name="og:site_name" content="Astrics">
 	{% comment %} <link rel="canonical" href="localhost.com"> will be updated after launch {% endcomment %}
 	{% block metadata %}{% endblock %}
@@ -24,7 +25,7 @@
     <main>
         {% block content %}{% endblock %}
     </main>
-    <script src="{% static 'js/home-page.js' %}"></script>
+    <script src="{% static 'js/general.js' %}"></script>
     {% block script %}{% endblock %}
 </body>
 </html>

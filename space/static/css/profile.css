@@ -162,7 +162,8 @@ button {
 	background: var(--primary);
 	border-radius: 10px;
 	border: none;
-	cursor: pointer;
+	font-weight: bold;
+	font-family: 'D-DIN', sans-serif;
 }
 
 
@@ -272,7 +273,6 @@ button {
 #change-password {
 	color: rgb(193, 30, 30);
 	text-decoration: underline;
-	cursor: pointer;
 }
 
 .section1 {
@@ -318,7 +318,7 @@ button {
 
 .options {
 	position: relative;
-	cursor: pointer;
+
 }
 
 .options-dropdown {
@@ -387,9 +387,7 @@ button {
 	top: 100%;
 }
 
-.copy-btn {
-	cursor: pointer;
-}
+
 
 @media only screen and (min-width: 700px) {
 	

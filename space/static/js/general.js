@@ -210,12 +210,26 @@ $(document).ready(function () {
 		})
 	})
 
-	$(document).on('click', '#seeMore', function() {
-        $(this).siblings('#description').toggle();
-        $(this).siblings('#more').slideToggle();
-        $(this).text($(this).text() === 'See more' ? 'See less' : 'See more');
+	$('.more').each(function() {
+        let descriptionText = $(this).text();
+
+        if (descriptionText.length > 50) {
+            $(this).closest('div').find('.seeMore').show();
+			$(this).closest('div').find('.description').text(function(i, oldText) {
+				return oldText + "...";
+			});			
+        } else {
+            $(this).closest('div').find('.seeMore').hide();
+        }
     });
 
+	$(document).on('click', '.seeMore', function() {
+		let seeBtn = $(this);
+		seeBtn.closest('div').find('.description').toggle();
+		seeBtn.closest('div').find('.more').toggle();
+		seeBtn.text(seeBtn.text() === 'See more' ? 'See less' : 'See more');
+	});
+	
 	hideShareLinks();
 
 	$(document).on('input', '#search-input', function() {
@@ -277,5 +291,53 @@ $(document).ready(function () {
 			$('#search-results').css('display', 'none')
 	});
 
+	$('#year').text(new Date().getFullYear());
+
+	const spacePhrases = [
+		"Unveil the Secrets of the Stars",
+		"Journey Through the Galaxies",
+		"Embrace the Mysteries of the Cosmos",
+		"Venture Beyond Our World",
+		"Unlock the Wonders of the Universe",
+		"Navigate the Infinite Expanse",
+		"Experience the Beauty of the Night Sky",
+		"Chart the Path of Celestial Bodies",
+		"Discover the Marvels of Space Exploration",
+		"Awaken Your Curiosity About the Universe",
+		"Explore The Cosmos"
+	];
+
+    let currentPhrase = '';
+	let currentIndex = 0;
+
+	function getRandomPhrase() {
+		const randomIndex = Math.floor(Math.random() * spacePhrases.length);
+		return spacePhrases[randomIndex];
+	}
+
+	function displayPhrase() {
+		currentPhrase = getRandomPhrase();
+		currentIndex = 0;
+		$('#startup-title').text(''); // Clear the title before starting
 	
+		appendNextWord();
+	}
+
+	function appendNextWord() {
+		const words = [...currentPhrase];
+
+		if (currentIndex < words.length) {
+			$('#startup-title').append(words[currentIndex]);
+			currentIndex++;
+			setTimeout(appendNextWord, 100);
+		} else {			
+			setTimeout(() => {
+				$('#startup-title').text('');
+				displayPhrase();
+			}, 6000);
+		}
+	}
+
+
+	displayPhrase();
 })
