@@ -7,7 +7,7 @@
 .profile-preview{
 	width: 200px;
 	height: 200px;
-	background-color: rgb(24, 23, 23);
+	background-color: var(--tile-color);
 	border-radius: 10px;
 }
 .profile-pic-preview {

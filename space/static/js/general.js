@@ -344,4 +344,44 @@ $(document).ready(function () {
 
 
 	displayPhrase();
+
+	const currentTheme = localStorage.getItem('theme');
+	if (currentTheme) {
+		$(':root').css('--back-color', currentTheme === 'dark' ? 'black' : 'white');
+	}
+	
+	function applyTheme(theme) {
+		if (theme === 'dark') {
+			$(":root").css('--back-color', 'black');
+			$(":root").css('--text-color', 'white');
+			$(":root").css('--tile-color', 'rgb(24, 23, 23)');
+			$(":root").css('--tile-back', '#0b0b0b');
+		} else {
+			$(":root").css('--back-color', 'white');
+			$(":root").css('--text-color', 'black');
+			$(":root").css('--tile-color', 'rgb(231, 232, 232)');
+			$(":root").css('--tile-back', '#ece0e0');		
+		}
+	}
+	
+	
+	function mode() {
+		const currentTheme = localStorage.getItem('theme') || 'dark';
+		let newTheme;
+	
+		if (currentTheme === 'dark') {
+			newTheme = 'light';
+		} else {
+			newTheme = 'dark';
+		}
+	
+		applyTheme(newTheme);
+	
+		localStorage.setItem('theme', newTheme);
+	}
+	
+	const savedTheme = localStorage.getItem('theme') || 'dark';
+	applyTheme(savedTheme);
+	
+	$('.mode-toggle').on('click', mode);
 })

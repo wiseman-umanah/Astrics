@@ -61,7 +61,7 @@ header {
 #search-results {
 	position: absolute;
     top: calc(100% + 12px);
-    background: black;
+    background: var(--back-color);
     width: 80%;
 	left: calc(50% - 40%);
     border: 1px var(--primary) solid;
@@ -115,7 +115,7 @@ header {
 	margin-top: 10px;
 	top: 100%;
     right: 0;
-    background: black;
+    background: var(--back-color);
     border: 1px solid var(--primary);
     border-radius: 5px;
     display: none;
@@ -140,6 +140,7 @@ header {
 	border: none;
 	box-shadow: none;
 	border-radius: 0px;
+	color: var(--text-color);
 }
 
 @media only screen and (max-width: 760px) {
@@ -154,8 +155,8 @@ header {
         left: 50%;
         transform: translateX(-50%);
         font-size: 12px;
-        color: #000;
-        background: #fff;
+        color: var(--text-color);
+        background: var(--back-color);
         border: 1px solid #ccc;
         padding: 5px 10px;
         border-radius: 5px;
