@@ -45,7 +45,7 @@
 		
 			{% if post.media_type == "image" %}
 				<figure class="post-media">
-					<img src="{{ post.file_id|get_media }}" alt="{{ post.description|default:'No post description provided' ">
+					<img src="{{ post.file_id|get_media }}" alt="{{ post.description|default:'No post description provided' }}">
 				</figure>	
 			{% elif post.media_type == "video" %}
 				<figure class="post-media">

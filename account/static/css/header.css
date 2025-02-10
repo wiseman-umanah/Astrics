@@ -6,7 +6,7 @@ header {
     display: flex;
     height: 60px;
     border-bottom: 1px solid var(--primary);
-	background: black;
+	background: var(--back-color);
 	z-index: 11;
 }
 
@@ -126,6 +126,7 @@ header {
     display: block;
     padding: 10px 20px;
     font-size: 14px;
+	text-align: center;
     transition: background 0.3s;
 }
 

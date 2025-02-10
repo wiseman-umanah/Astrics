@@ -210,19 +210,23 @@ $(document).ready(function () {
 		})
 	})
 
-	$('.more').each(function() {
-        let descriptionText = $(this).text();
+	function hideLongText() {
+		$('.more').each(function() {
+			let descriptionText = $(this).text();
+	
+			if (descriptionText.length > 50) {
+				$(this).closest('div').find('.seeMore').show();
+				$(this).closest('div').find('.description').text(function(i, oldText) {
+					return oldText + "...";
+				});			
+			} else {
+				$(this).closest('div').find('.seeMore').hide();
+			}
+		});
+	}
 
-        if (descriptionText.length > 50) {
-            $(this).closest('div').find('.seeMore').show();
-			$(this).closest('div').find('.description').text(function(i, oldText) {
-				return oldText + "...";
-			});			
-        } else {
-            $(this).closest('div').find('.seeMore').hide();
-        }
-    });
-
+	hideLongText(); 
+	
 	$(document).on('click', '.seeMore', function() {
 		let seeBtn = $(this);
 		seeBtn.closest('div').find('.description').toggle();
