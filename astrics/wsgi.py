@@ -14,3 +14,5 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'astrics.settings')
 
 application = get_wsgi_application()
+
+port = 5000
