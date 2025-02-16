@@ -41,7 +41,9 @@ def user_login(request):
 				messages.error(request, 'Invalid username or password.')
 	else:
 		form = LoginForm()
-	return render(request, 'account/registration/login.html', {'form': form})
+	return render(request, 'account/registration/login.html',
+			   {'form': form,
+	   			'mode': 1})
 
 
 def user_registration(request):
@@ -61,7 +63,8 @@ def user_registration(request):
 		user_form = RegisterForm()
 	return render(request,
 			   'account/registration/register.html',
-			   {'form': user_form})
+			   {'form': user_form,
+	   			'mode': 1})
 
 
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
