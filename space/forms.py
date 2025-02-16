@@ -158,7 +158,6 @@ class UserPostForm(forms.ModelForm):
 		media_file = self.cleaned_data.get("media_file")
 
 		if media_file:
-			print(media_file.size)
 			if media_file.size > 10 * 1024 * 1024:
 				raise forms.ValidationError("Media File must less than 10MB")
 		

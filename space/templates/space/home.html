@@ -30,7 +30,11 @@
 		
 		<section class="right-section">
 			<div class="astrics-cont">
-				<h3>ASTRICS: PICTURE OF THE DAY</h3>
+				{% if latest_post.media_type == "video" %}
+					<h3>ASTRICS: VIDEO OF THE DAY</h3>
+				{% else %}
+					<h3>ASTRICS: PICTURE OF THE DAY</h3>
+				{% endif %}
 				<div class="post-top">
 					<div class="post-details">
 						
@@ -52,9 +56,12 @@
 					{% if latest_post.media_type == "image" %}
 						<img src="{{ latest_post.url }}" alt="{{ latest_post.title }}">
 					{% elif latest_post.media_type == "video" %}
-						<video src="{{ latest_post.url }}">
-							Your browser does not support the video 
-						</video>
+						<iframe width="600" height="250" src="{{ latest_post.url }}" 
+							title="YouTube video player" frameborder="0" 
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+						>
+						</iframe>
 					{% endif %}
 				</div>				
 			</div>
