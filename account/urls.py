@@ -1,8 +1,14 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from django.contrib.sitemaps.views import sitemap
+from . sitemaps import PostSitemap, StaticViewSitemap
 
 
+sitemaps = {
+	"static": StaticViewSitemap(),
+	"post": PostSitemap(),
+}
 
 urlpatterns = [
 	path('', views.landing_page, name='landing-page'),
@@ -33,4 +39,7 @@ urlpatterns = [
              template_name='account/registration/password_reset_complete.html'
          ), 
          name='password_reset_complete'),
+	path("sitemap.xml", sitemap, 
+	  {"sitemaps": sitemaps},
+	  name="django.contrib.sitemaps.views.sitemap"),
 ]

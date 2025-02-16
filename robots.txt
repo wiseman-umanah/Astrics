@@ -1,0 +1,10 @@
+Sitemap: http://127.0.0.1:8000/sitemaps.xml
+User-agent: *
+Disallow: /login
+Disallow: /register
+Disallow: /account
+Disallow: /logout
+Disallow: /password_change
+Disallow: /password_reset
+Disallow: /password_reset/done/
+Disallow: /reset/*

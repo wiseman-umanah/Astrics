@@ -100,7 +100,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'astrics.wsgi.application'
 
-
+SITE_ID = 1
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
