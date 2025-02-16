@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import FormView
 from space.forms import UserPostForm
-
+from system.models import AstricsModel
 
 
 def user_login(request):
@@ -114,3 +114,11 @@ class CreatePostView(FormView):
 		print("Form Errors:", post_form.errors)
 		return self.render_to_response(self.get_context_data(post_form=post_form))
 	
+
+
+def landing_page(request):
+	latest_post = AstricsModel.objects.first()
+	return render(request, 'account/landing-page.html',
+			   {
+				   'latest_post': latest_post
+			   })

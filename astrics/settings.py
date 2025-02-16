@@ -158,12 +158,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 # for authentication
-LOGIN_URL = '/account/login/'
-LOGOUT_URL = '/account/logout/'
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
 
 # redirection
-LOGIN_REDIRECT_URL = '/account/login'
-LOGOUT_REDIRECT_URL = '/account/login'
+LOGIN_REDIRECT_URL = '/login'
+LOGOUT_REDIRECT_URL = '/login'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
