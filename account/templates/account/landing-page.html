@@ -68,16 +68,29 @@
 	</section>
 
 	<section class="hero2">
-		<h2>NASA Picture of The Day</h2>
+		{% if latest_post.media_type == 'video' %}
+			<h2>ASTRICS: VIDEO OF THE DAY</h2>
+		{% else %}
+			<h2>ASTRICS: IMAGE OF THE DAY</h2>
+		{% endif %}
 		<div class="new-update">
 			<div class="desc">		
-				<h3>The Twisted Disk of NGC 4753</h3>
+				<h3>{{ latest_post.title }}</h3>
 				<p>
-					What do you think this is? Here’s a clue: it's bigger than a bread box. Much bigger. The answer is that pictured NGC 4753 is a twisted disk galaxy, where unusual dark dust filaments provide clues about its history. No one is sure what happened, but a leading model holds that a relatively normal disk galaxy gravitationally ripped apart a dusty satellite galaxy while its precession distorted the plane of the accreted debris as it rotated. The cosmic collision is hypothesized to have started about a billion years ago. NGC 4753 is seen from the side, and possibly would look like a normal spiral galaxy from the top. The bright orange halo is composed of many older stars that might trace dark matter. The featured Hubble image was recently reprocessed to highlight ultraviolet and red-light emissions. APOD Year in Review: NASA Night Sky Network Presentation for 2024
+					{{ latest_post.description }}
 				</p>
 			</div>
 			<div class="post-media">
-				<img src="/static/images/skysearch.jpg">
+				{% if latest_post.media_type == 'video' %}
+					<iframe width="100%" height="400" src="{{ latest_post.url }}" 
+							title="YouTube video player" frameborder="0" 
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+					>
+					</iframe>
+				{% else %}
+					<img src="{{ latest_post.url }}">
+				{% endif %}
 			<div>
 		</div>
 	</section>

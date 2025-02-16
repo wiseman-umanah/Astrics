@@ -53,15 +53,15 @@
 					<a href="javascript:void(0);" style="color: red; text-decoration: underline;" class="seeMore">See more</a>
 				</div>
 				<div class="astrics-post_media">
-					{% if latest_post.media_type == "image" %}
-						<img src="{{ latest_post.url }}" alt="{{ latest_post.title }}">
-					{% elif latest_post.media_type == "video" %}
+					{% if latest_post.media_type == "video" %}
 						<iframe width="600" height="250" src="{{ latest_post.url }}" 
 							title="YouTube video player" frameborder="0" 
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"
 							allowfullscreen
 						>
 						</iframe>
+					{% else %}
+						<img src="{{ latest_post.url }}" alt="{{ latest_post.title }}">
 					{% endif %}
 				</div>				
 			</div>
