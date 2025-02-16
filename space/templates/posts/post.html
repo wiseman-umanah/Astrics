@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block metadata %}
-	<meta name="author" content="{{ post.user.username }}">
 	<meta name="description" content="{{ post.description | truncatewords:40 }}">
 	<meta name="og:url" content="{{ post.get_absolute_url }}">
 	{% if post.description %}

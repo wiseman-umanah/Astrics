@@ -12,6 +12,18 @@
 	<link href="{% static 'css/home.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block metadata %}
+	<meta name="description" content="Unveil the Secrets of the Stars">
+	<meta name="og:url" content="{% url 'landing-page' %}">
+	<meta name="twitter:description" content="Unveil the Secrets of the Stars">
+	<meta name="og:title" content="Unveil the Secrets of the Stars">
+	<meta name="twitter:title" content="Unveil the Secrets of the Stars">
+	<meta name="og:image" content="{{ 678bcba80023f63cc43f | get_media }}">
+	<meta name="twitter:image" content="{{ 678bcba80023f63cc43f | get_media }}">
+	<meta name="og:type" content="website">
+	<meta name="twitter:card" content="{{ 678bcba80023f63cc43f | get_media }}">
+{% endblock %}
+
 {% block header %}
 	{% include 'user/header.html' with user=user.user %}
 {% endblock %}

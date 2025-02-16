@@ -1,10 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
+{% load space_extras %}
 
 {% block title %}Astrics | Landing Page{% endblock %}
 {% block css %}
 	<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 	<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block metadata %}
+	<meta name="description" content="Unveil the Secrets of the Stars">
+	<meta name="og:url" content="{% url 'landing-page' %}">
+	<meta name="twitter:description" content="Unveil the Secrets of the Stars">
+	<meta name="og:title" content="Unveil the Secrets of the Stars">
+	<meta name="twitter:title" content="Unveil the Secrets of the Stars">
+	<meta name="og:image" content="{{ 678bcba80023f63cc43f | get_media }}">
+	<meta name="twitter:image" content="{{ 678bcba80023f63cc43f | get_media }}">
+	<meta name="og:type" content="website">
+	<meta name="twitter:card" content="{{ 678bcba80023f63cc43f | get_media }}">
 {% endblock %}
 
 {% block header %}
@@ -25,26 +38,26 @@
 				<nav>
 					<ul class="nav_icons">
 						<li>
-							<a href="#features" title="Features">
+							<a href="#features" title="Explore what we have for you">
 								<i class='bx bx-list-plus' role="img" aria-hidden="true"></i>
 								<span>Features</span>
 							</a>
 						</li>
 						<li>
-							<a href="#" title="About">
+							<a href="#" title="Learn more about Astrics and our mission">
 								<i class='bx bx-info-circle'></i>
 								<span>About</span>
 							</a>
 						</li>
 						<li>
-							<a href="#" title="Contact">
+							<a href="#" title="Get in touch with us">
 								<i class='bx bx-user-voice' role="img" aria-hidden="true"></i>
 								<span>Contact</span>
 							</a>
 						</li>
 					</ul>
 				</nav>
-				<a href="{% url 'login' %}">
+				<a href="{% url 'login' %}" title="Login to your account">
 					<button>Login</button>
 				</a>
 			</div>
@@ -57,7 +70,7 @@
 		<div class="hero-container">
 			<h1 id="startup-title">Discover the Wonders of the Universe</h1>
 			<p>Your daily dose of astronomical wonders and space insights.</p>
-			<a href="{% url 'signup' %}">
+			<a href="{% url 'signup' %}" title="Register to Astrics">
 				<button>Get Started</button>
 			</a>
 			<blockquote>
@@ -89,7 +102,7 @@
 					>
 					</iframe>
 				{% else %}
-					<img src="{{ latest_post.url }}">
+					<img src="{{ latest_post.url }}" alt="{{ latest_post.title }}>
 				{% endif %}
 			<div>
 		</div>
@@ -98,18 +111,18 @@
         <h2>Why Astrics?</h2>
         <div class="features-container">
             <div class="feature-box">
-                <i class='bx bx-planet'></i>
+                <i class='bx bx-planet' role="img" aria-hidden="true"></i>
                 <h3>Daily Astronomy</h3>
                 <p>Get daily updates from NASA and explore celestial wonders.</p>
 				<div class="fill"></div>
             </div>
             <div class="feature-box">
-                <i class='bx bx-camera'></i>
+                <i class='bx bx-camera' role="img" aria-hidden="true"></i>
                 <h3>Upload & Share</h3>
                 <p>Share your own space photos and videos with the world.</p>
             </div>
             <div class="feature-box">
-                <i class='bx bx-heart'></i>
+                <i class='bx bx-heart' role="img" aria-hidden="true"></i>
                 <h3>Community Interaction</h3>
                 <p>Like, comment, and engage with other space enthusiasts.</p>
             </div>

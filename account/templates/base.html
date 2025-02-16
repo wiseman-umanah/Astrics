@@ -13,7 +13,8 @@
     <link href="{% static 'css/general.css' %}" rel="stylesheet">
     <link href="{% static 'css/header.css' %}" rel="stylesheet">
     <link href="{% static 'css/footer.css' %}" rel="stylesheet">
-	<meta name="keywords" content="astronomy, space, astrophotography, cosmos, universe, astrics, wiseman">
+	<meta name="keywords" content="astronomy, space, astrophotography, community, celestial wonders, space photos, space videos, cosmos, universe, astrics, wiseman">
+	<meta name="author" content="Astrics, Wiseman">
 	<meta name="og:site_name" content="Astrics">
 	{% comment %} <link rel="canonical" href="localhost.com"> will be updated after launch {% endcomment %}
 	{% block metadata %}{% endblock %}
@@ -22,8 +23,8 @@
 </head>
 <body>
 	{% if not mode %}
-		<div class="mode-toggle">
-			<i class='bx bxs-sun' ></i>
+		<div class="mode-toggle" label="Mode Toggle" title="Mode Toggle">
+			<i class='bx bxs-sun' role="img" aria-hidden="true"></i>
 		</div>
 	{% endif %}
 	
