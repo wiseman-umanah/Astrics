@@ -12,10 +12,6 @@
     <link href="{% static 'css/register.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block script %}
-    <script src="{% static 'js/home-page.js' %}"></script>
-{% endblock %}
-
 {% block content %}
 <h3>Astrics Signup</h3>
 <form method="POST" action="{% url 'signup' %}">
