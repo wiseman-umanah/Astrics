@@ -1,0 +1,58 @@
+{% autoescape off %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.cdnfonts.com/css/d-din" rel="stylesheet">
+    <title>{{ content.title }}</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			font-family: 'D-DIN', sans-serif;
+		}
+	</style>
+</head>
+<body style="padding: 0 10px; height: 1000px; background-color: black; color: white;">
+	 <header style="background: black; height: 50px; border-top: 2px solid rgb(193, 30, 30); border-bottom: 2px solid rgb(193, 30, 30); display: flex; justify-content: space-between; align-items: center; padding: 5px 20px;">
+        <div class="header_logo" style="display: flex; align-items: center;">
+            <a href="{{ protocol }}://{{ domain }}{% url 'space:home' %}" style="text-decoration: none;" title="Home">
+                <img src="{{ protocol }}://{{ domain }}/static/images/logo-no-background.png" style="width: 40px; cursor: pointer;" alt="The Logo of Astrics Co.">
+            </a>
+        </div>
+    </header>
+	 <div style="padding: 20px; font-size: 16px; line-height: 1.6; width: 50%; margin: 0 auto;">
+		<h1 style="margin: 20px 0; font-size: 24px; color: rgb(193, 30, 30);">
+			{{ content.title }}
+		</h1>
+
+		<p>Hello, {{ username }}</p>
+		<p style="margin: 20px 0;">Today's new astronomical content is here!</p>
+		<h2 style="font-size: 20px; color: rgb(193, 30, 30);">{{ content.title }}</h2>
+		<p style="margin: 20px 0;">{{ content.description }}</p>
+		<div style="width:600px; height:250px;">
+			{% if content.media_type == "image" %}
+				<img src="{{ content.url }}" alt="{{ content.title }}" style="width:100%;height:100%; object-fit:cover;">
+			{% elif content.media_type == "video" %}
+				<iframe width="600" height="250" src="{{ content.url }}"
+				title="YouTube video player" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+				</iframe>
+				<p>
+					<a href="{{ content.url }}"
+						style="padding: 10px 20px; background-color: rgb(193, 30, 30); color: white; text-decoration: none; border-radius: 5px; font-size: 14px;"
+					>
+						Watch the video
+					</a>
+				</p>
+			{% endif %}
+		</div>
+
+		<p>Regards,<br>Astrics</p>
+	</div>
+</body>
+</html>
+
+{% endautoescape %}
+

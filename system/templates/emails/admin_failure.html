@@ -1,0 +1,36 @@
+{% autoescape %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admins Update</title>
+	<link href="https://fonts.cdnfonts.com/css/d-din" rel="stylesheet">
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			font-family: 'D-DIN', sans-serif;
+		}
+	</style>
+</head>
+<body style="padding: 0 10px; height: 1000px; background-color: black; color: white;">
+	 <header style="background: black; height: 50px; border-top: 2px solid rgb(193, 30, 30); border-bottom: 2px solid rgb(193, 30, 30); display: flex; justify-content: space-between; align-items: center; padding: 5px 20px;">
+        <div class="header_logo" style="display: flex; align-items: center;">
+            <a href="{{ protocol }}://{{ domain }}{% url 'space:home' %}" style="text-decoration: none;" title="Home">
+                <img src="{{ protocol }}://{{ domain }}/static/images/logo-no-background.png" style="width: 40px; cursor: pointer;" alt="The Logo of Astrics Co.">
+            </a>
+        </div>
+    </header>
+
+    <h1 style="margin: 20px 0; font-size: 24px; color: rgb(193, 30, 30);">
+		Important Notice to Admins
+	</h1>
+    <p>Dear Admin,</p>
+    <p style="margin: 20px 0;"><strong>Details, Please Take Note:</strong></p>
+    <pre>{{ message }}</pre>
+    <p style="margin: 20px 0;">Please review the issue and take the necessary actions.</p>
+    <p>Regards,<br>Astrics</p>
+</body>
+</html>
+{% endautoescape %}
