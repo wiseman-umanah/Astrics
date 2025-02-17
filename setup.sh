@@ -3,6 +3,9 @@
 # expected to exit on error
 set -o errexit
 
+# collect all static assets and resources
+python manage.py collectstatic
+
 # start Django server
 gunicorn astrics.wsgi:application --bind 0.0.0.0:8000 &
 
