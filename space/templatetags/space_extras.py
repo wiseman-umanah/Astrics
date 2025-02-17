@@ -11,7 +11,7 @@ def get_pic_link(user, type=0):
 	if type == 0:
 		if user.profile.cover_pic_id:
 			return f'{url}/files/{user.profile.cover_pic_id}/view?project={getenv("PROJECT_ID")}'
-		return f'{url}/files/676f9e31001d36cc6d4d/view?project={getenv("PROJECT_ID")}'
+		return f'{url}/files/6770ed94a34e18e08a49/view?project={getenv("PROJECT_ID")}'
 	
 	if user.profile.profile_pic_id:
 		return f'{url}/files/{user.profile.profile_pic_id}/view?project={getenv("PROJECT_ID")}'
