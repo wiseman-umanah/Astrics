@@ -3,11 +3,8 @@
 # expected to exit on error
 set -o errexit
 
-# download all necessary files
-pip3 install -r requirements.txt &
-
 # start Django server
-python manage.py runserver &
+python manage.py runserver 5000 &
 
 # start celery task worker
 celery -A astrics worker --loglevel=info &
