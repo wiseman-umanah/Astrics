@@ -1,0 +1,50 @@
+.astrics-cont {
+	background: var(--tile-back);
+  	padding: 20px;
+  	border-radius: 10px;
+}
+
+.astrics-cont h3 {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.post-cont {
+	height: 100vh;
+	overflow-y: auto;
+	width: 50%;
+}
+
+.container {
+	margin: 80px auto 0;
+}
+
+.right-section {
+	width: 50%;
+}
+
+.astrics-post_description {
+	font-size: 0.8rem;
+}
+
+.astrics-post_media{
+	border-radius: 20px;
+	height: 250px;
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+@media only screen and (max-width: 760px) {
+	.container {
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+	.post-cont,
+	.right-section {
+		width: 100%;
+	}
+	.post-cont {
+		overflow: unset;
+		height: unset;
+	}
+}

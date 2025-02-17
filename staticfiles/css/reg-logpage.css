@@ -1,0 +1,153 @@
+body {    
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('../images/spaceman.jpg') no-repeat center center / cover;
+    background-attachment: fixed;
+    color: var(--primary);
+}
+
+body,
+main,
+main .rem-forget  {
+	display: flex;
+}
+
+main {
+    width: 420px;
+    padding: 30px 40px;
+    border: 2px solid white;
+    backdrop-filter: blur(5px);
+	flex-direction: column;
+    box-shadow: 0 0 10px var(--primary);
+    border-radius: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+main h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: white;
+}
+
+main .input-box {
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+    position: relative;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 10px 50px 10px 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.input-box input::placeholder {
+    color: white;
+    opacity: 0.8;
+}
+
+
+.input-box input:focus {
+    border-color: rgb(193, 30, 30);
+    box-shadow: 0 0 5px rgb(193, 30, 30);
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+}
+
+main .rem-forget {
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+}
+
+.rem-forget label input {
+    accent-color: rgb(193, 30, 30);
+    margin-right: 5px;
+}
+
+.rem-forget a {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease, color 0.3s ease;
+}
+
+.rem-forget a:hover {
+    text-decoration: underline;
+    color: rgb(193, 30, 30);
+}
+
+main .login-btn {
+    width: 100%;
+    height: 45px;
+    background: var(--primary);
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgb(193, 30, 30);
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+main .login-btn:hover {
+    background: #ff4b4b;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+main .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.register-link p a,
+.login {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.register-link p a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    main {
+        width: 90%;
+        padding: 20px;
+    }
+    main h3 {
+        font-size: 1.2rem;
+    }
+    .input-box input {
+        font-size: 14px;
+        padding: 8px 50px 8px 15px;
+    }
+    main .login-btn {
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
