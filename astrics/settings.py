@@ -39,7 +39,7 @@ if RENDER_EXTERNAL_HOSTNAME:
 	ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 SECURE_SSL_REDIRECT = True
 
