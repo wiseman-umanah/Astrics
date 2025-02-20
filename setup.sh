@@ -7,7 +7,7 @@ set -o errexit
 python manage.py collectstatic --noinput
 
 # start Django server
-gunicorn astrics.wsgi:application --bind 127.0.0.1:8000 --access-logfile access.log --error-logfile error.log &
+gunicorn astrics.wsgi:application --bind localhost:8000 &
 
 # start celery task worker
 celery -A astrics worker --loglevel=info &
