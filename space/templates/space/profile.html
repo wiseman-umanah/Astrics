@@ -201,41 +201,42 @@
 
 	<script type="application/ld+json">
 		{
-		"@context": "https://schema.org",
-		"@type":"ProfilePage",
-		"dateCreated": "{{ user_profile.date_joined }}",
-		"mainEntity": {
-			"@type": "Person",
-			"additionalName": "{{ user_profile.username }}",
-			"description": "Explore space and astronomy with {{ user_profile.username }}",
-			"givenName": "{{ user_profile.first_name }} {{ user_profile.last_name }}",
-			"identifier": "{{ user_profile.id }}",
-			"image":{
-				"@type": "ImageObject",
-				"contentUrl": "{{ user_profile | get_pic_link:1 }}",
-				"thumbnailUrl":"{{ user_profile | get_pic_link:1 }}"
-			},
-			"interactionStatistic": [
-				{
-					"@type": "InteractionCounter",
-					"interactionType": "https://schema.org/FollowAction",
-					"name": "Follows",
-					"userInteractionCount": {{ user_profile.profile.followed_by.count }}
+			"@context": "https://schema.org",
+			"@type":"ProfilePage",
+			"dateCreated": "{{ user_profile.date_joined }}",
+			"mainEntity": {
+				"@type": "Person",
+				"additionalName": "{{ user_profile.username }}",
+				"description": "Explore space and astronomy with {{ user_profile.username }}",
+				"givenName": "{{ user_profile.first_name }} {{ user_profile.last_name }}",
+				"identifier": "{{ user_profile.id }}",
+				"image":{
+					"@type": "ImageObject",
+					"contentUrl": "{{ user_profile | get_pic_link:1 }}",
+					"thumbnailUrl":"{{ user_profile | get_pic_link:1 }}"
 				},
-				{
-					"@type": "InteractionCounter",
-					"interactionType": "https://schema.org/SubscribeAction",
-					"name":"Followers",
-					"userInteractionCount": {{ user_profile.profile.follows.count }}
-				},
-				{
-					"@type": "InteractionCounter",
-					"interactionType": "https://schema.org/WriteAction",
-					"name": "Posts",
-					"userInteractionCount": {{ user_profile.posts.count }}
-				}
-			],
-			"url": "{% url 'space:user-profile' user_profile.username %}"
+				"interactionStatistic": [
+					{
+						"@type": "InteractionCounter",
+						"interactionType": "https://schema.org/FollowAction",
+						"name": "Follows",
+						"userInteractionCount": {{ user_profile.profile.followed_by.count }}
+					},
+					{
+						"@type": "InteractionCounter",
+						"interactionType": "https://schema.org/SubscribeAction",
+						"name":"Followers",
+						"userInteractionCount": {{ user_profile.profile.follows.count }}
+					},
+					{
+						"@type": "InteractionCounter",
+						"interactionType": "https://schema.org/WriteAction",
+						"name": "Posts",
+						"userInteractionCount": {{ user_profile.posts.count }}
+					}
+				],
+				"url": "{% url 'space:user-profile' user_profile.username %}"
+			}
 		}
 	</script>
 
