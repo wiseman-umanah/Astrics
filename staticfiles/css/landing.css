@@ -2,6 +2,7 @@
 .hero2
 .new-update {
 	display: flex;
+	gap: 50px;
 }
 main {
 	all: revert;
@@ -31,8 +32,9 @@ main {
 }
 
 .hero p {
-	margin-bottom: 30px;
-	font-size: 1.4rem;
+	margin: 30px auto;
+	font-size: 1.2rem;
+	max-width: 600px;
 }
 
 .hero2 {
@@ -68,6 +70,7 @@ blockquote cite {
 
 .desc p {
 	word-spacing: 5px;
+	font-size: .9rem;
 }
 
 #features {
@@ -127,6 +130,10 @@ blockquote cite {
 @media only screen and (max-width: 760px) {
     footer {
 		display: flex;
+	}
+
+	#startup-title {
+		font-size: 2.5rem;
 	}
 }
 

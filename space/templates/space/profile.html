@@ -155,8 +155,8 @@
 						</div>
 					</div>
 					<div class="section2">
-						{% if request.user.profile == user %}
-							{% include "post/post_form.html" with username=user_profile.username %}
+						{% if request.user == user %}
+							{% include "post/post_form.html" with username=user.username %}
 						{% endif %}
 						
 						<div class="posts">
